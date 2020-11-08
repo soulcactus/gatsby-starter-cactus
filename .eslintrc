@@ -1,0 +1,15 @@
+{
+  "extends": ["google", "prettier", "prettier/@typescript-eslint"],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module"
+  },
+  "plugins": ["@typescript-eslint"],
+  "rules": {
+    "camelcase": [0, {"properties": "always"}],
+    "new-cap": 0,
+    "no-unused-vars": "off",
+    "require-jsdoc" : 0
+  }
+}
