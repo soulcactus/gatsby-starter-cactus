@@ -1,11 +1,11 @@
 {
-  "name": "blog",
+  "name": "gatsby-starter-cactus",
   "private": true,
   "description": "",
   "version": "0.1.0",
   "author": "Soulcactus <sunhyejin@mensakorea.org>",
   "bugs": {
-    "url": "https://github.com/soulcactus/blog/issues"
+    "url": "https://github.com/soulcactus/gatsby-starter-cactus/issues"
   },
   "dependencies": {
     "@types/react-helmet": "^6.1.0",
@@ -48,7 +48,7 @@
   "devDependencies": {
     "prettier": "^1.19.1"
   },
-  "homepage": "https://github.com/soulcactus/blog/issues#readme",
+  "homepage": "https://github.com/soulcactus/gatsby-starter-cactus/issues#readme",
   "keywords": [
     "blog"
   ],
@@ -56,7 +56,7 @@
   "main": "n/a",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com//soulcactus/blog.git"
+    "url": "git+https://github.com//soulcactus/gatsby-starter-cactus.git"
   },
   "scripts": {
     "build": "gatsby build",
