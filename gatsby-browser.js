@@ -1,3 +1,2 @@
-import 'typeface-montserrat';
-import 'typeface-merriweather';
+import 'typeface-spoqa-han-sans2';
 import 'prismjs/themes/prism.css';
