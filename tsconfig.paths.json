@@ -11,6 +11,9 @@
       "@pages/*": [
         "./src/pages/*"
       ],
+      "@styles/*": [
+        "./src/styles/*"
+      ],
       "@templates/*": [
         "./src/templates/*"
       ],
