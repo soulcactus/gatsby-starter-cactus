@@ -2583,6 +2583,7 @@ export type SitePageFieldsEnum =
   | 'pluginCreator___pluginOptions___plugins___pluginFilepath'
   | 'pluginCreator___pluginOptions___root'
   | 'pluginCreator___pluginOptions___aliases____components'
+  | 'pluginCreator___pluginOptions___aliases____interfaces'
   | 'pluginCreator___pluginOptions___aliases____pages'
   | 'pluginCreator___pluginOptions___aliases____styles'
   | 'pluginCreator___pluginOptions___aliases____templates'
@@ -2840,6 +2841,7 @@ export type SitePluginFieldsEnum =
   | 'pluginOptions___plugins___pluginFilepath'
   | 'pluginOptions___root'
   | 'pluginOptions___aliases____components'
+  | 'pluginOptions___aliases____interfaces'
   | 'pluginOptions___aliases____pages'
   | 'pluginOptions___aliases____styles'
   | 'pluginOptions___aliases____templates'
@@ -3052,6 +3054,7 @@ export type SitePluginPluginOptions = {
 
 export type SitePluginPluginOptionsAliases = {
   _components?: Maybe<Scalars['String']>;
+  _interfaces?: Maybe<Scalars['String']>;
   _pages?: Maybe<Scalars['String']>;
   _styles?: Maybe<Scalars['String']>;
   _templates?: Maybe<Scalars['String']>;
@@ -3062,6 +3065,7 @@ export type SitePluginPluginOptionsAliases = {
 
 export type SitePluginPluginOptionsAliasesFilterInput = {
   _components?: Maybe<StringQueryOperatorInput>;
+  _interfaces?: Maybe<StringQueryOperatorInput>;
   _pages?: Maybe<StringQueryOperatorInput>;
   _styles?: Maybe<StringQueryOperatorInput>;
   _templates?: Maybe<StringQueryOperatorInput>;

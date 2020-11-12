@@ -16,6 +16,15 @@ const GlobalStyles = createGlobalStyle`
         font-family: 'Spoqa Han Sans', sans-serif;
         font-size: 1.6rem;
     }
+    
+    a {
+        text-decoration: none;
+        color: inherit;
+        
+        a:active {
+            color: inherit;
+        }
+    }
 `;
 
 export default GlobalStyles;
