@@ -7,6 +7,7 @@ module.exports = {
                 root: './src',
                 aliases: {
                     '@components': './components',
+                    '@interfaces': './interfaces',
                     '@pages': './pages',
                     '@styles': './styles',
                     '@templates': './templates',
@@ -90,6 +91,6 @@ module.exports = {
         social: {
             twitter: `kylemathews`,
         },
-        title: `Gatsby Starter Blog`,
+        title: `Gatsby Starter Cactus`,
     },
 };
