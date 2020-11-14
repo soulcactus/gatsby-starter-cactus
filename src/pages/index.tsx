@@ -1,7 +1,7 @@
 import { Link, graphql } from 'gatsby';
 import React from 'react';
 
-import Bio from '@components/bio';
+import Bio from '@components/Bio';
 import Layout from '@components/Layout';
 import SEO from '@components/seo';
 
@@ -15,6 +15,7 @@ const BlogIndex = ({ data, location }: any) => {
             <Bio />
             {posts.map(({ node }: any) => {
                 const title = node.frontmatter.title || node.fields.slug;
+
                 return (
                     <article key={node.fields.slug}>
                         <header>

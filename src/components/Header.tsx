@@ -3,18 +3,15 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { HeaderProps } from '@interfaces/components/header';
-import { StyledWrapper } from '@styles/common';
 
 export default function Header(props: HeaderProps) {
     const { title } = props;
 
     return (
         <StyledHeader>
-            <StyledWrapper>
-                <h1>
-                    <Link to="/">{title}</Link>
-                </h1>
-            </StyledWrapper>
+            <h1>
+                <Link to="/">{title}</Link>
+            </h1>
         </StyledHeader>
     );
 }

@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 
 import Header from '@components/Header';
 import GlobalStyles from '@styles/global';
@@ -8,14 +9,17 @@ export default function Layout({ title, children }: any) {
         <>
             <GlobalStyles />
             <div>
-                <Header title={title} />
-                <main>{children}</main>
-                <footer>
-                    © {new Date().getFullYear()}, Built with
-                    {` `}
-                    <a href="https://www.gatsbyjs.org">Gatsby</a>
-                </footer>
+                <StyledWrapper>
+                    <Header title={title} />
+                    <main>{children}</main>
+                    <footer>©Soulcactus</footer>
+                </StyledWrapper>
             </div>
         </>
     );
 }
+
+export const StyledWrapper = styled.div`
+    max-width: 90rem;
+    margin: 0 auto;
+`;
