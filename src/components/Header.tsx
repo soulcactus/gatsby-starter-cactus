@@ -1,6 +1,6 @@
 import { Link } from 'gatsby';
-import React from 'react';
 import styled from 'styled-components';
+import React from 'react';
 
 import { HeaderProps } from '@interfaces/components/header';
 
@@ -12,6 +12,7 @@ export default function Header(props: HeaderProps) {
             <h1>
                 <Link to="/">{title}</Link>
             </h1>
+            <button type="button">switch</button>
         </StyledHeader>
     );
 }
@@ -19,6 +20,7 @@ export default function Header(props: HeaderProps) {
 const StyledHeader = styled.header`
     display: flex;
     align-items: center;
+    justify-content: space-between;
     width: 100%;
     height: 10rem;
 

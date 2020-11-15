@@ -6,7 +6,7 @@ import styled from 'styled-components';
 export default function Bio() {
     const data = useStaticQuery(graphql`
         query BioQuery {
-            avatar: file(absolutePath: { regex: "/profile-pic.jpg/" }) {
+            avatar: file(absolutePath: { regex: "/profile.png/" }) {
                 childImageSharp {
                     fixed(width: 75, height: 75) {
                         ...GatsbyImageSharpFixed
@@ -20,7 +20,10 @@ export default function Bio() {
                         summary
                     }
                     social {
+                        github
+                        facebook
                         twitter
+                        instagram
                     }
                 }
             }
@@ -29,12 +32,15 @@ export default function Bio() {
 
     const { author, social } = data.site.siteMetadata;
 
+    console.log(social);
+
     return (
         <StyledBio>
             <Image
                 alt={author.name}
                 fixed={data.avatar.childImageSharp.fixed}
                 imgStyle={{
+                    border: '0.1rem solid #ddd',
                     borderRadius: '100%',
                 }}
             />
@@ -43,6 +49,14 @@ export default function Bio() {
                     <Link to="/about">{author.name}</Link>
                 </h2>
                 <span>{author.summary}</span>
+                {!!Object.values(social).length && (
+                    <ul>
+                        {!!social.github && <li>github</li>}
+                        {!!social.facebook && <li>facebook</li>}
+                        {!!social.twitter && <li>twitter</li>}
+                        {!!social.instagram && <li>instagram</li>}
+                    </ul>
+                )}
             </StyledProfile>
         </StyledBio>
     );
@@ -55,12 +69,14 @@ const StyledBio = styled.div`
 `;
 
 const StyledProfile = styled.div`
-    flex-basis: calc(100% - 10rem);
+    flex-basis: calc(100% - 9rem);
 
     h2 {
         margin: 0 0 0.5rem;
+        font-family: 'ubuntu', sans-serif;
         font-size: 2rem;
         font-weight: bold;
+        letter-spacing: -0.1rem;
     }
 
     span {

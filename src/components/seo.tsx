@@ -11,7 +11,10 @@ const SEO = ({ description = '', lang = 'ko', meta = [], title }: any) => {
                         title
                         description
                         social {
+                            github
+                            facebook
                             twitter
+                            instagram
                         }
                     }
                 }

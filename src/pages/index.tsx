@@ -1,7 +1,6 @@
 import { Link, graphql } from 'gatsby';
 import React from 'react';
 
-import Bio from '@components/Bio';
 import Layout from '@components/Layout';
 import SEO from '@components/seo';
 
@@ -9,10 +8,14 @@ const BlogIndex = ({ data, location }: any) => {
     const siteTitle = data.site.siteMetadata.title;
     const posts = data.allMarkdownRemark.edges;
 
+    const categories = Array.from(
+        new Set(posts.map(({ node }: any) => node.frontmatter.category).sort()),
+    );
+
     return (
-        <Layout location={location} title={siteTitle}>
+        <Layout categories={categories} location={location} title={siteTitle}>
             <SEO title="All posts" />
-            <Bio />
+
             {posts.map(({ node }: any) => {
                 const title = node.frontmatter.title || node.fields.slug;
 
@@ -60,6 +63,7 @@ export const pageQuery = graphql`
                         date(formatString: "MMMM DD, YYYY")
                         title
                         description
+                        category
                     }
                 }
             }
