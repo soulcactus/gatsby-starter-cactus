@@ -2,43 +2,47 @@ import { Link, graphql } from 'gatsby';
 import React from 'react';
 
 import Layout from '@components/Layout';
-import SEO from '@components/seo';
+import SEO from '@components/SEO';
+import { BlogIndexProps } from '@interfaces/pages/blogIndex';
 
-const BlogIndex = ({ data, location }: any) => {
+const BlogIndex = (props: BlogIndexProps) => {
+    const { data } = props;
     const siteTitle = data.site.siteMetadata.title;
     const posts = data.allMarkdownRemark.edges;
 
     const categories = Array.from(
-        new Set(posts.map(({ node }: any) => node.frontmatter.category).sort()),
+        new Set(posts.map((item) => item.node.frontmatter.category).sort()),
     );
 
     return (
-        <Layout categories={categories} location={location} title={siteTitle}>
+        <Layout categories={categories} title={siteTitle}>
             <SEO title="All posts" />
+            <>
+                {posts.map((item) => {
+                    const node = item.node;
+                    const { excerpt, frontmatter } = node;
+                    const { slug } = node.fields;
+                    const { date, description, title } = frontmatter;
 
-            {posts.map(({ node }: any) => {
-                const title = node.frontmatter.title || node.fields.slug;
-
-                return (
-                    <article key={node.fields.slug}>
-                        <header>
-                            <h3>
-                                <Link to={node.fields.slug}>{title}</Link>
-                            </h3>
-                            <small>{node.frontmatter.date}</small>
-                        </header>
-                        <section>
-                            <p
-                                dangerouslySetInnerHTML={{
-                                    __html:
-                                        node.frontmatter.description ||
-                                        node.excerpt,
-                                }}
-                            />
-                        </section>
-                    </article>
-                );
-            })}
+                    return (
+                        <article key={slug}>
+                            <header>
+                                <h3>
+                                    <Link to={slug}>{title ?? slug}</Link>
+                                </h3>
+                                <small>{date}</small>
+                            </header>
+                            <section>
+                                <p
+                                    dangerouslySetInnerHTML={{
+                                        __html: description || excerpt,
+                                    }}
+                                />
+                            </section>
+                        </article>
+                    );
+                })}
+            </>
         </Layout>
     );
 };

@@ -3,25 +3,27 @@ import React from 'react';
 
 import Bio from '@components/Bio';
 import Layout from '@components/Layout';
-import SEO from '@components/seo';
+import SEO from '@components/SEO';
 
-const BlogPostTemplate = ({ data, pageContext, location }: any) => {
+// TODO: replace type any
+export default function BlogPost({ data, pageContext }: any) {
     const post = data.markdownRemark;
     const siteTitle = data.site.siteMetadata.title;
     const { previous, next } = pageContext;
+    const { excerpt, html } = post;
+    const { date, description, title } = post.frontmatter;
+    const { slug: previousSlug, title: previousTitle } = previous.fields;
+    const { slug: nextSlug, title: nextTitle } = next.fields;
 
     return (
-        <Layout location={location} title={siteTitle}>
-            <SEO
-                title={post.frontmatter.title}
-                description={post.frontmatter.description || post.excerpt}
-            />
+        <Layout title={siteTitle}>
+            <SEO description={description || excerpt} title={title} />
             <article>
                 <header>
-                    <h1>{post.frontmatter.title}</h1>
-                    <p>{post.frontmatter.date}</p>
+                    <h1>{title}</h1>
+                    <p>{date}</p>
                 </header>
-                <section dangerouslySetInnerHTML={{ __html: post.html }} />
+                <section dangerouslySetInnerHTML={{ __html: html }} />
                 <hr />
                 <footer>
                     <Bio />
@@ -30,16 +32,16 @@ const BlogPostTemplate = ({ data, pageContext, location }: any) => {
             <nav>
                 <ul>
                     <li>
-                        {previous && (
-                            <Link to={previous.fields.slug} rel="prev">
-                                ← {previous.frontmatter.title}
+                        {!!previous && (
+                            <Link to={previousSlug} rel="prev">
+                                ← {previousTitle}
                             </Link>
                         )}
                     </li>
                     <li>
-                        {next && (
-                            <Link to={next.fields.slug} rel="next">
-                                {next.frontmatter.title} →
+                        {!!next && (
+                            <Link to={nextSlug} rel="next">
+                                {nextTitle} →
                             </Link>
                         )}
                     </li>
@@ -47,9 +49,7 @@ const BlogPostTemplate = ({ data, pageContext, location }: any) => {
             </nav>
         </Layout>
     );
-};
-
-export default BlogPostTemplate;
+}
 
 export const pageQuery = graphql`
     query BlogPostBySlug($slug: String!) {

@@ -1,12 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export default function Category({ categories }: any) {
+import { CategoryProps } from '@interfaces/components/category';
+
+export default function Category(props: CategoryProps) {
+    const { categories } = props;
+
     return (
         <StyledCategory>
             <button type="button">prev</button>
             <ul>
-                {categories.map((item: string, index: number) => (
+                {categories.map((item, index) => (
                     <li key={index}>{item}</li>
                 ))}
             </ul>

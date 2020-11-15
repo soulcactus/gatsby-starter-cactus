@@ -31,13 +31,13 @@ export default function Bio() {
     `);
 
     const { author, social } = data.site.siteMetadata;
-
-    console.log(social);
+    const { name, summary } = author;
+    const { facebook, github, instagram, twitter } = social;
 
     return (
         <StyledBio>
             <Image
-                alt={author.name}
+                alt={name}
                 fixed={data.avatar.childImageSharp.fixed}
                 imgStyle={{
                     border: '0.1rem solid #ddd',
@@ -46,15 +46,15 @@ export default function Bio() {
             />
             <StyledProfile>
                 <h2>
-                    <Link to="/about">{author.name}</Link>
+                    <Link to="/about">{name}</Link>
                 </h2>
-                <span>{author.summary}</span>
+                <span>{summary}</span>
                 {!!Object.values(social).length && (
                     <ul>
-                        {!!social.github && <li>github</li>}
-                        {!!social.facebook && <li>facebook</li>}
-                        {!!social.twitter && <li>twitter</li>}
-                        {!!social.instagram && <li>instagram</li>}
+                        {!!github && <li>github</li>}
+                        {!!facebook && <li>facebook</li>}
+                        {!!twitter && <li>twitter</li>}
+                        {!!instagram && <li>instagram</li>}
                     </ul>
                 )}
             </StyledProfile>

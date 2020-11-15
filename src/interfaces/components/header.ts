@@ -1,3 +1,3 @@
-export interface HeaderProps {
-    title: string;
-}
+import { Title } from '@interfaces/commons';
+
+export interface HeaderProps extends Title {}
