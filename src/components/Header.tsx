@@ -1,6 +1,5 @@
 import { Link } from 'gatsby';
 import styled from 'styled-components';
-import React from 'react';
 
 import { HeaderProps } from '@interfaces/components/header';
 

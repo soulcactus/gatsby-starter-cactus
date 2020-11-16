@@ -1,5 +1,4 @@
 import { Link, graphql } from 'gatsby';
-import React from 'react';
 
 import Bio from '@components/Bio';
 import Layout from '@components/Layout';
