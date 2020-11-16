@@ -28,13 +28,13 @@ const StyledCategory = styled.nav`
     background: #ddd;
 
     button {
+        position: absolute;
+            
         &:first-child {
-            position: absolute;
             left: -2rem;
         }
 
         &:last-child {
-            position: absolute;
             right: -2rem;
         }
     }
