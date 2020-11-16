@@ -72,7 +72,6 @@ const StyledProfile = styled.div`
 
     h2 {
         margin: 0 0 0.5rem;
-        font-family: 'ubuntu', sans-serif;
         font-size: 2rem;
         font-weight: bold;
         letter-spacing: -0.1rem;

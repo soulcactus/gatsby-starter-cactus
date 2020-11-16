@@ -24,9 +24,9 @@ const StyledHeader = styled.header`
     height: 10rem;
 
     h1 {
-        font-family: 'ubuntu', sans-serif;
-        font-size: 4rem;
+        font-family: 'Sorts Mill Goudy', sans-serif;
+        font-size: 3rem;
         font-weight: bold;
-        letter-spacing: -0.2rem;
+        letter-spacing: -0.1rem;
     }
 `;

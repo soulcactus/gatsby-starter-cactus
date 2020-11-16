@@ -42,10 +42,10 @@ const StyledCategory = styled.nav`
     ul {
         display: flex;
         margin: 0 5rem;
-
-        li {
-            padding: 1rem 2rem;
-            background: white;
-        }
+    }
+    
+    li {
+        padding: 1rem 2rem;
+        background: white;
     }
 `;
