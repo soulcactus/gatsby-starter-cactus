@@ -13,9 +13,15 @@ const GlobalStyles = createGlobalStyle`
     }
 
     body {
+        background: white;
         font-family: ${(props) => props.theme.fontFamily.normal};
         font-size: ${(props) => props.theme.fontSize.normal};
         color: ${(props) => props.theme.colors.normal};
+        transition: background .4s ease;
+        
+        &.dark {
+            background: #171C28;
+        }
     }
     
     a {
