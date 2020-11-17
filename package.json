@@ -44,9 +44,8 @@
     "react-helmet": "^5.2.1",
     "styled-components": "^5.2.1",
     "styled-reset": "^4.3.0",
-    "typeface-sorts-mill-goudy": "^1.1.13",
+    "typeface-lobster": "^1.1.13",
     "typeface-spoqa-han-sans2": "^2.1.2",
-    "typeface-ubuntu": "^1.1.13",
     "typescript": "^4.1.0-beta"
   },
   "devDependencies": {
