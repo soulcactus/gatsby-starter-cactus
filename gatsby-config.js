@@ -93,6 +93,6 @@ module.exports = {
             twitter: '_soulcactus',
             instagram: '',
         },
-        title: 'Soulcactus',
+        title: 'Gatsby Starter Cactus',
     },
 };
