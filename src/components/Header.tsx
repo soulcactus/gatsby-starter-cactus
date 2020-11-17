@@ -2,6 +2,7 @@ import { Link } from 'gatsby';
 import styled from 'styled-components';
 
 import { HeaderProps } from '@interfaces/components/header';
+import { justifiedBoxStyles } from '@styles/mixins';
 
 export default function Header(props: HeaderProps) {
     const { title } = props;
@@ -17,16 +18,13 @@ export default function Header(props: HeaderProps) {
 }
 
 const StyledHeader = styled.header`
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    ${justifiedBoxStyles}
     width: 100%;
     height: 10rem;
+    margin: 0 0 5rem;
 
     h1 {
-        font-family: 'Sorts Mill Goudy', sans-serif;
-        font-size: 3rem;
-        font-weight: bold;
-        letter-spacing: -0.1rem;
+        font-family: ${(props) => props.theme.fontFamily.title};
+        font-size: ${(props) => props.theme.fontSize.title};
     }
 `;

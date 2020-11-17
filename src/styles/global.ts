@@ -5,7 +5,7 @@ const GlobalStyles = createGlobalStyle`
     ${reset}
 
     * {
-        box-sizing:border-box;
+        box-sizing: border-box;
     }
 
     html {
@@ -13,8 +13,9 @@ const GlobalStyles = createGlobalStyle`
     }
 
     body {
-        font-family: 'Spoqa Han Sans', sans-serif;
-        font-size: 1.6rem;
+        font-family: ${(props) => props.theme.fontFamily.normal};
+        font-size: ${(props) => props.theme.fontSize.normal};
+        color: ${(props) => props.theme.colors.normal};
     }
     
     a {

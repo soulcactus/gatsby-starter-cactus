@@ -1,16 +1,17 @@
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 
 import Bio from '@components/Bio';
 import Category from '@components/Category';
 import Header from '@components/Header';
 import { LayoutProps } from '@interfaces/components/layout';
 import GlobalStyles from '@styles/global';
+import theme from '@styles/theme';
 
 export default function Layout(props: LayoutProps) {
     const { categories, children, title } = props;
 
     return (
-        <>
+        <ThemeProvider theme={theme}>
             <GlobalStyles />
             <div>
                 <StyledWrapper>
@@ -21,7 +22,7 @@ export default function Layout(props: LayoutProps) {
                     <footer>©Soulcactus</footer>
                 </StyledWrapper>
             </div>
-        </>
+        </ThemeProvider>
     );
 }
 

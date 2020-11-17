@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 import { CategoryProps } from '@interfaces/components/category';
+import { normalBoxStyles } from '@styles/mixins';
 
 export default function Category(props: CategoryProps) {
     const { categories } = props;
@@ -19,8 +20,7 @@ export default function Category(props: CategoryProps) {
 }
 
 const StyledCategory = styled.nav`
-    display: flex;
-    align-items: center;
+    ${normalBoxStyles};
     position: relative;
     width: 100%;
     height: 5rem;
@@ -29,7 +29,7 @@ const StyledCategory = styled.nav`
 
     button {
         position: absolute;
-            
+
         &:first-child {
             left: -2rem;
         }
@@ -43,7 +43,7 @@ const StyledCategory = styled.nav`
         display: flex;
         margin: 0 5rem;
     }
-    
+
     li {
         padding: 1rem 2rem;
         background: white;

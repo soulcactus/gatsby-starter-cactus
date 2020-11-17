@@ -2,6 +2,8 @@ import { useStaticQuery, graphql, Link } from 'gatsby';
 import Image from 'gatsby-image';
 import styled from 'styled-components';
 
+import { justifiedBoxStyles } from '@styles/mixins';
+
 export default function Bio() {
     const data = useStaticQuery(graphql`
         query BioQuery {
@@ -62,9 +64,7 @@ export default function Bio() {
 }
 
 const StyledBio = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    ${justifiedBoxStyles};
 `;
 
 const StyledProfile = styled.div`
