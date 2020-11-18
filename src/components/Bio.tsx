@@ -2,14 +2,20 @@ import { useStaticQuery, graphql, Link } from 'gatsby';
 import Image from 'gatsby-image';
 import styled from 'styled-components';
 
+import FacebookIcon from '@components/icons/Facebook';
+import GithubIcon from '@components/icons/Github';
+import TwitterIcon from '@components/icons/Twitter';
+import { BioProps } from '@interfaces/components/bio';
 import { justifiedBoxStyles } from '@styles/mixins';
 
-export default function Bio() {
+export default function Bio(props: BioProps) {
+    const { darkTheme } = props;
+
     const data = useStaticQuery(graphql`
         query BioQuery {
             avatar: file(absolutePath: { regex: "/profile.png/" }) {
                 childImageSharp {
-                    fixed(width: 75, height: 75) {
+                    fixed(width: 50, height: 50) {
                         ...GatsbyImageSharpFixed
                     }
                 }
@@ -24,7 +30,6 @@ export default function Bio() {
                         github
                         facebook
                         twitter
-                        instagram
                     }
                 }
             }
@@ -33,7 +38,7 @@ export default function Bio() {
 
     const { author, social } = data.site.siteMetadata;
     const { name, summary } = author;
-    const { facebook, github, instagram, twitter } = social;
+    const { facebook, github, twitter } = social;
 
     return (
         <StyledBio>
@@ -46,16 +51,35 @@ export default function Bio() {
                 }}
             />
             <StyledProfile>
-                <h2>
-                    <Link to="/about">{name}</Link>
-                </h2>
-                <span>{summary}</span>
+                <div>
+                    <h2>
+                        <Link to="/about">{name}</Link>
+                    </h2>
+                    <span>{summary}</span>
+                </div>
                 {!!Object.values(social).length && (
                     <ul>
-                        {!!github && <li>github</li>}
-                        {!!facebook && <li>facebook</li>}
-                        {!!twitter && <li>twitter</li>}
-                        {!!instagram && <li>instagram</li>}
+                        {!!github && (
+                            <li>
+                                <Link to="/">
+                                    <GithubIcon darkTheme={darkTheme} />
+                                </Link>
+                            </li>
+                        )}
+                        {!!facebook && (
+                            <li>
+                                <Link to="/">
+                                    <FacebookIcon />
+                                </Link>
+                            </li>
+                        )}
+                        {!!twitter && (
+                            <li>
+                                <Link to="/">
+                                    <TwitterIcon />
+                                </Link>
+                            </li>
+                        )}
                     </ul>
                 )}
             </StyledProfile>
@@ -68,16 +92,30 @@ const StyledBio = styled.div`
 `;
 
 const StyledProfile = styled.div`
-    flex-basis: calc(100% - 9rem);
+    ${justifiedBoxStyles};
+    flex-basis: calc(100% - 6rem);
+    margin: -0.4rem 0 0;
 
     h2 {
-        margin: 0 0 0.5rem;
-        font-size: 2rem;
+        margin: 0 0 0.4rem;
+        font-size: 1.8rem;
         font-weight: bold;
         letter-spacing: -0.1rem;
     }
 
     span {
-        font-size: 1.4rem;
+        font-size: 1.2rem;
+    }
+
+    ul {
+        margin: 0.5rem 0 0;
+    }
+
+    li {
+        display: inline-block;
+
+        &:not(:last-child) {
+            margin: 0 0.7rem 0 0;
+        }
     }
 `;
