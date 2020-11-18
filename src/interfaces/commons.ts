@@ -1,3 +1,7 @@
+export interface DarkTheme {
+    darkTheme: boolean;
+}
+
 export interface SiteMetaData {
     siteMetadata: Title;
 }

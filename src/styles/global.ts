@@ -17,10 +17,10 @@ const GlobalStyles = createGlobalStyle`
         font-family: ${(props) => props.theme.fontFamily.normal};
         font-size: ${(props) => props.theme.fontSize.normal};
         color: ${(props) => props.theme.colors.normal};
-        transition: background .4s ease;
+        transition: background 0.3s ease;
         
         &.dark {
-            background: #171C28;
+            background: #171c28;
         }
     }
     

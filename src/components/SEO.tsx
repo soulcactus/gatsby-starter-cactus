@@ -15,7 +15,6 @@ export default function SEO(props: SEOProps) {
                             github
                             facebook
                             twitter
-                            instagram
                         }
                     }
                 }

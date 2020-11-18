@@ -24,7 +24,7 @@ const StyledCategory = styled.nav`
     position: relative;
     width: 100%;
     height: 5rem;
-    margin: 3rem 0 0;
+    margin: 1.5rem 0 0;
     background: #ddd;
 
     button {

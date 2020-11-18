@@ -1,6 +1,6 @@
 const theme = {
     colors: {
-        normal: '#212F3D',
+        normal: '#212f3d',
     },
     fontFamily: {
         normal: 'Spoqa Han Sans, sans-serif',
