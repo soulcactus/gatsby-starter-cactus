@@ -2,9 +2,7 @@ import { useStaticQuery, graphql, Link } from 'gatsby';
 import Image from 'gatsby-image';
 import styled from 'styled-components';
 
-import FacebookIcon from '@components/icons/Facebook';
-import GithubIcon from '@components/icons/Github';
-import TwitterIcon from '@components/icons/Twitter';
+import SocialLinks from '@components/SocialLinks';
 import { BioProps } from '@interfaces/components/bio';
 import { justifiedBoxStyles } from '@styles/mixins';
 
@@ -38,7 +36,6 @@ export default function Bio(props: BioProps) {
 
     const { author, social } = data.site.siteMetadata;
     const { name, summary } = author;
-    const { facebook, github, twitter } = social;
 
     return (
         <StyledBio>
@@ -58,29 +55,7 @@ export default function Bio(props: BioProps) {
                     <span>{summary}</span>
                 </div>
                 {!!Object.values(social).length && (
-                    <ul>
-                        {!!github && (
-                            <li>
-                                <Link to="/">
-                                    <GithubIcon darkTheme={darkTheme} />
-                                </Link>
-                            </li>
-                        )}
-                        {!!facebook && (
-                            <li>
-                                <Link to="/">
-                                    <FacebookIcon />
-                                </Link>
-                            </li>
-                        )}
-                        {!!twitter && (
-                            <li>
-                                <Link to="/">
-                                    <TwitterIcon />
-                                </Link>
-                            </li>
-                        )}
-                    </ul>
+                    <SocialLinks darkTheme={darkTheme} list={social} />
                 )}
             </StyledProfile>
         </StyledBio>
@@ -105,17 +80,5 @@ const StyledProfile = styled.div`
 
     span {
         font-size: 1.2rem;
-    }
-
-    ul {
-        margin: 0.5rem 0 0;
-    }
-
-    li {
-        display: inline-block;
-
-        &:not(:last-child) {
-            margin: 0 0.7rem 0 0;
-        }
     }
 `;
