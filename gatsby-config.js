@@ -94,6 +94,6 @@ module.exports = {
             facebook: '/',
             twitter: '_soulcactus',
         },
-        title: 'Gatsby Starter Cactus',
+        title: 'Gatsby Starter',
     },
 };
