@@ -2,7 +2,7 @@ import { Link } from 'gatsby';
 import styled from 'styled-components';
 
 import { HeaderProps } from '@interfaces/components/header';
-import { justifiedBoxStyles } from '@styles/mixins';
+import { justifiedBoxStyles, size } from '@styles/mixins';
 
 export default function Header(props: HeaderProps) {
     const { children, title } = props;
@@ -10,7 +10,9 @@ export default function Header(props: HeaderProps) {
     return (
         <StyledHeader>
             <h1>
-                <Link to="/">{title}</Link>
+                <Link aria-label="Go to Home" to="/">
+                    {title}
+                </Link>
             </h1>
             {children}
         </StyledHeader>
@@ -19,8 +21,7 @@ export default function Header(props: HeaderProps) {
 
 const StyledHeader = styled.header`
     ${justifiedBoxStyles};
-    width: 100%;
-    height: 10rem;
+    ${size('100%', '10rem')};
     margin: 0 0 5rem;
     border-bottom: 0.1rem solid #ddd;
     padding: 0 0 0.8rem;

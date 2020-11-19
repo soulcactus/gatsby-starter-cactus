@@ -23,7 +23,9 @@ export default function Github(props: GithubIconProps) {
 const StyledGithub = styled.g<DarkTheme>`
     path {
         fill-rule: evenodd;
+        fill: ${(props) =>
+            props.darkTheme ? 'white' : props.theme.colors.github};
         clip-rule: evenodd;
-        fill: ${(props) => (props.darkTheme ? 'white' : '#191313')};
+        transition: fill 0.175s ease-in-out 0.05s;
     }
 `;

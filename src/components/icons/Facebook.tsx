@@ -19,11 +19,11 @@ export default function Facebook() {
 const StyledFacebook = styled.g`
     path {
         &:first-child {
-            fill: #1877f2;
+            fill: ${(props) => props.theme.colors.facebook};
         }
 
         &:last-child {
-            fill: white;
+            fill: ${(props) => props.theme.colors.white};
         }
     }
 `;

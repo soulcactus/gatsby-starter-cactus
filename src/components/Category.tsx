@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 import { CategoryProps } from '@interfaces/components/category';
-import { normalBoxStyles } from '@styles/mixins';
+import { normalBoxStyles, size } from '@styles/mixins';
 
 export default function Category(props: CategoryProps) {
     const { categories } = props;
@@ -22,8 +22,7 @@ export default function Category(props: CategoryProps) {
 const StyledCategory = styled.nav`
     ${normalBoxStyles};
     position: relative;
-    width: 100%;
-    height: 5rem;
+    ${size('100%', '5rem')};
     margin: 1.5rem 0 0;
     background: #ddd;
 

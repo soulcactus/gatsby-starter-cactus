@@ -18,10 +18,10 @@ export default function Twitter() {
 
 const StyledTwitter = styled.g`
     circle {
-        fill: #1da1f2;
+        fill: ${(props) => props.theme.colors.twitter};
     }
 
     path {
-        fill: white;
+        fill: ${(props) => props.theme.colors.white};
     }
 `;

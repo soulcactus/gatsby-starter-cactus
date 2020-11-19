@@ -1,6 +1,10 @@
 const theme = {
     colors: {
+        facebook: '#1877f2',
+        github: '#191313',
         normal: '#212f3d',
+        twitter: '#1da1f2',
+        white: 'white',
     },
     fontFamily: {
         normal: 'Spoqa Han Sans, sans-serif',

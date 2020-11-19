@@ -1,10 +1,13 @@
 import Helmet from 'react-helmet';
 import styled from 'styled-components';
 
+import { THEME } from '@constants/enums';
 import { ThemeSwitchProps } from '@interfaces/components/themeSwitch';
+import { size } from '@styles/mixins';
 
 export default function ThemeSwitch(props: ThemeSwitchProps) {
     const { darkTheme, handleChange } = props;
+    const switchTitle = `Active ${darkTheme ? THEME.LIGHT : THEME.DARK} Theme`;
 
     return (
         <>
@@ -15,7 +18,11 @@ export default function ThemeSwitch(props: ThemeSwitchProps) {
                     }}
                 />
             )}
-            <StyledSwitch>
+            <StyledSwitch
+                aria-label={switchTitle}
+                title={switchTitle}
+                type="button"
+            >
                 <label>
                     <input onChange={handleChange} type="checkbox" />
                     <div />
@@ -25,7 +32,7 @@ export default function ThemeSwitch(props: ThemeSwitchProps) {
     );
 }
 
-const StyledSwitch = styled.div`
+const StyledSwitch = styled.button`
     label {
         cursor: pointer;
 
@@ -33,54 +40,54 @@ const StyledSwitch = styled.div`
             display: none;
 
             & + div {
+                ${size('2.52rem')};
+                position: relative;
                 border-radius: 50%;
-                width: 36px;
-                height: 36px;
-                box-shadow: inset 14px -14px 0 0 #212f3d;
+                box-shadow: inset 1.12rem -1.12rem 0 0 #212f3d;
                 transform: scale(1) rotate(-2deg);
-                transition: box-shadow 0.4s ease 0s, transform 0.3s ease 0.1s;
+                transition: box-shadow 0.15s ease-out 0.125s,
+                    transform 0.3s ease 0.1s;
 
-                &:before {
+                &::before {
                     content: '';
-                    width: inherit;
-                    height: inherit;
-                    border-radius: inherit;
+                    ${size('inherit')};
                     position: absolute;
-                    left: 0;
                     top: 0;
-                    transition: background 0.2s ease;
+                    left: 0;
+                    border-radius: inherit;
+                    transition: background 0.3s ease;
                 }
 
-                &:after {
+                &::after {
                     content: '';
-                    width: 8px;
-                    height: 8px;
-                    border-radius: 50%;
-                    margin: -4px 0 0 -4px;
+                    ${size('0.56rem')};
                     position: absolute;
                     top: 50%;
                     left: 50%;
-                    box-shadow: 0 -23px 0 white, 0 23px 0 white, 23px 0 0 white,
-                        -23px 0 0 white, 15px 15px 0 white, -15px 15px 0 white,
-                        15px -15px 0 white, -15px -15px 0 white;
+                    margin: -0.28rem 0 0 -0.28rem;
+                    border-radius: 50%;
+                    box-shadow: 0 -1.61rem 0 white, 0 1.61rem 0 white,
+                        1.61rem 0 0 white, -1.61rem 0 0 white,
+                        1.05rem 1.05rem 0 white, -1.05rem 1.05rem 0 white,
+                        1.05rem -1.05rem 0 white, -1.05rem -1.05rem 0 white;
                     transform: scale(0);
-                    transition: all 0.2s ease;
                 }
             }
 
             &:checked + div {
-                box-shadow: inset 28px -28px 0 0 #212f3d;
+                box-shadow: inset 2.24rem -2.24rem 0 0 #212f3d;
                 transform: scale(0.5) rotate(0deg);
-                transition: transform 0.2s ease 0.1s, box-shadow 0.1s ease 0s;
+                transition: transform 0.3s ease 0.1s,
+                    box-shadow 0.15s ease-in-out 0.02s;
 
-                &:before {
+                &::before {
                     background: white;
-                    transition: background 0.2s ease 0.05s;
+                    transition: background 0.3s ease 0.1s;
                 }
 
-                &:after {
+                &::after {
                     transform: scale(1.5);
-                    transition: transform 0.4s ease 0.1s;
+                    transition: transform 0.4s ease-in-out 0.1s;
                 }
             }
         }

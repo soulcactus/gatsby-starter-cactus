@@ -17,7 +17,7 @@ const GlobalStyles = createGlobalStyle`
         font-family: ${(props) => props.theme.fontFamily.normal};
         font-size: ${(props) => props.theme.fontSize.normal};
         color: ${(props) => props.theme.colors.normal};
-        transition: background 0.3s ease;
+        transition: background 0.45s ease-in-out 0.095s;
         
         &.dark {
             background: #171c28;
@@ -28,8 +28,19 @@ const GlobalStyles = createGlobalStyle`
         text-decoration: none;
         color: inherit;
         
-        a:active {
+        &:active {
             color: inherit;
+        }
+    }
+    
+    button {
+        border: 0;
+        outline: 0;
+        padding: 0;
+        background: transparent;
+      
+        &:active {
+            border: 0;
         }
     }
 `;

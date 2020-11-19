@@ -21,7 +21,7 @@ export default function Layout(props: LayoutProps) {
         <ThemeProvider theme={theme}>
             <GlobalStyles />
             <div>
-                <StyledWrapper>
+                <StyledLayout>
                     <Header title={title}>
                         <ThemeSwitch
                             darkTheme={darkThemeState}
@@ -32,13 +32,13 @@ export default function Layout(props: LayoutProps) {
                     <Category categories={categories as string[]} />
                     <main>{children}</main>
                     <footer>©Soulcactus</footer>
-                </StyledWrapper>
+                </StyledLayout>
             </div>
         </ThemeProvider>
     );
 }
 
-export const StyledWrapper = styled.div`
+export const StyledLayout = styled.div`
     max-width: 90rem;
     margin: 0 auto;
 `;
