@@ -6,6 +6,7 @@ module.exports = {
                 root: './src',
                 aliases: {
                     '@components': './components',
+                    '@constants': './constants',
                     '@interfaces': './interfaces',
                     '@pages': './pages',
                     '@styles': './styles',
