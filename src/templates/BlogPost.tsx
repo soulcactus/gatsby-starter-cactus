@@ -11,8 +11,8 @@ export default function BlogPost({ data, pageContext }: any) {
     const { previous, next } = pageContext;
     const { excerpt, html } = post;
     const { date, description, title } = post.frontmatter;
-    const { slug: previousSlug, title: previousTitle } = previous.fields;
-    const { slug: nextSlug, title: nextTitle } = next.fields;
+    const { slug: previousSlug, title: previousTitle } = previous?.fields ?? {};
+    const { slug: nextSlug, title: nextTitle } = next?.fields ?? {};
 
     return (
         <Layout title={siteTitle}>
