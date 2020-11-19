@@ -43,9 +43,9 @@ const StyledSwitch = styled.button`
                 ${size('2.52rem')};
                 position: relative;
                 border-radius: 50%;
-                box-shadow: inset 1.12rem -1.12rem 0 0 #212f3d;
+                box-shadow: inset 0.8rem -0.8rem 0 0 #212f3d;
                 transform: scale(1) rotate(-2deg);
-                transition: box-shadow 0.15s ease-out 0.125s,
+                transition: box-shadow 0.125s ease-in-out 0.2s,
                     transform 0.3s ease 0.1s;
 
                 &::before {
@@ -75,10 +75,10 @@ const StyledSwitch = styled.button`
             }
 
             &:checked + div {
-                box-shadow: inset 2.24rem -2.24rem 0 0 #212f3d;
+                box-shadow: inset 1.6rem -1.6rem 0 0 #212f3d;
                 transform: scale(0.5) rotate(0deg);
                 transition: transform 0.3s ease 0.1s,
-                    box-shadow 0.15s ease-in-out 0.02s;
+                    box-shadow 0.15s ease-in-out 0.1s;
 
                 &::before {
                     background: white;
@@ -87,7 +87,7 @@ const StyledSwitch = styled.button`
 
                 &::after {
                     transform: scale(1.5);
-                    transition: transform 0.4s ease-in-out 0.1s;
+                    transition: transform 0.5s ease-in-out 0.1s;
                 }
             }
         }

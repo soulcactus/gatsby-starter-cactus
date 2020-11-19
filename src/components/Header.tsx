@@ -23,7 +23,6 @@ const StyledHeader = styled.header`
     ${justifiedBoxStyles};
     ${size('100%', '10rem')};
     margin: 0 0 5rem;
-    border-bottom: 0.1rem solid #ddd;
     padding: 0 0 0.8rem;
 
     h1 {

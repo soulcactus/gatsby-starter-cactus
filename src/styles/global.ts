@@ -38,6 +38,7 @@ const GlobalStyles = createGlobalStyle`
         outline: 0;
         padding: 0;
         background: transparent;
+        cursor: pointer;
       
         &:active {
             border: 0;

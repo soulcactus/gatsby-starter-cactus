@@ -11,6 +11,7 @@ import theme from '@styles/theme';
 
 export default function Layout(props: LayoutProps) {
     const { categories, children, title } = props;
+    const rootPath = `${__PATH_PREFIX__}/`;
     const [darkThemeState, setDarkTheme] = useState(false);
 
     const handleDarkTheme = useCallback((e) => {
@@ -28,8 +29,12 @@ export default function Layout(props: LayoutProps) {
                             handleChange={handleDarkTheme}
                         />
                     </Header>
-                    <Bio darkTheme={darkThemeState} />
-                    <Category categories={categories as string[]} />
+                    {location.pathname === rootPath && (
+                        <>
+                            <Bio darkTheme={darkThemeState} />
+                            <Category categories={categories as string[]} />
+                        </>
+                    )}
                     <main>{children}</main>
                     <footer>©Soulcactus</footer>
                 </StyledLayout>
@@ -39,6 +44,6 @@ export default function Layout(props: LayoutProps) {
 }
 
 export const StyledLayout = styled.div`
-    max-width: 90rem;
+    max-width: 78rem;
     margin: 0 auto;
 `;
