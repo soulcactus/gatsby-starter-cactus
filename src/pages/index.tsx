@@ -1,7 +1,7 @@
-import { Link, graphql } from 'gatsby';
-import React from 'react';
+import { graphql } from 'gatsby';
 
 import Layout from '@components/Layout';
+import PostPreview from '@components/PostPreview';
 import SEO from '@components/SEO';
 import { BlogIndexProps } from '@interfaces/pages/blogIndex';
 
@@ -17,32 +17,7 @@ const BlogIndex = (props: BlogIndexProps) => {
     return (
         <Layout categories={categories} title={siteTitle}>
             <SEO title="All posts" />
-            <>
-                {posts.map((item) => {
-                    const node = item.node;
-                    const { excerpt, frontmatter } = node;
-                    const { slug } = node.fields;
-                    const { date, description, title } = frontmatter;
-
-                    return (
-                        <article key={slug}>
-                            <header>
-                                <h3>
-                                    <Link to={slug}>{title ?? slug}</Link>
-                                </h3>
-                                <small>{date}</small>
-                            </header>
-                            <section>
-                                <p
-                                    dangerouslySetInnerHTML={{
-                                        __html: description || excerpt,
-                                    }}
-                                />
-                            </section>
-                        </article>
-                    );
-                })}
-            </>
+            <PostPreview posts={posts} />
         </Layout>
     );
 };
@@ -59,15 +34,22 @@ export const pageQuery = graphql`
         allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
             edges {
                 node {
-                    excerpt
+                    excerpt(pruneLength: 300)
                     fields {
                         slug
                     }
                     frontmatter {
-                        date(formatString: "MMMM DD, YYYY")
-                        title
-                        description
                         category
+                        date(formatString: "MMMM DD, YYYY")
+                        description
+                        thumbnail {
+                            childImageSharp {
+                                fixed(width: 125, height: 125) {
+                                    ...GatsbyImageSharpFixed
+                                }
+                            }
+                        }
+                        title
                     }
                 }
             }

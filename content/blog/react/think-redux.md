@@ -2,6 +2,7 @@
 title: 'Redux 사용기(Feat. Anti-Redux)'
 date: 2020-7-22 01:00:10
 category: 'react'
+thumbnail: ./images/redux-react.png
 ---
 
 ![](./images/redux-react.png)
