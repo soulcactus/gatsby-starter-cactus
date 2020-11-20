@@ -4,6 +4,7 @@ import styled, { ThemeProvider } from 'styled-components';
 import Bio from '@components/Bio';
 import Category from '@components/Category';
 import Header from '@components/Header';
+import Search from '@components/Search';
 import ThemeSwitch from '@components/ThemeSwitch';
 import { LayoutProps } from '@interfaces/components/layout';
 import GlobalStyles from '@styles/global';
@@ -33,6 +34,7 @@ export default function Layout(props: LayoutProps) {
                         <>
                             <Bio darkTheme={darkThemeState} />
                             <Category categories={categories as string[]} />
+                            <Search />
                         </>
                     )}
                     <main>{children}</main>

@@ -60,13 +60,18 @@ export default function Category(props: CategoryProps) {
 
     return (
         <StyledCategory id="categoryContainer" ref={containerRef}>
-            <button onClick={handlePrevious} type="button">
+            <button
+                aria-label="Show Previous Category Posts"
+                onClick={handlePrevious}
+                type="button"
+            >
                 <FiChevronLeft />
             </button>
             <ul role="tablist">
-                <li>
+                <li role="tab">
                     <StyledElement name={!!categoryState ? null : 'on'}>
                         <button
+                            aria-label="Show All Category Posts"
                             className={!!categoryState ? null : 'on'}
                             onClick={() => handleCategory(0)}
                             type="button"
@@ -76,9 +81,10 @@ export default function Category(props: CategoryProps) {
                     </StyledElement>
                 </li>
                 {categories?.map((item, index) => (
-                    <li key={index}>
+                    <li key={index} role="tab">
                         <StyledElement name={!!categoryState ? null : 'on'}>
                             <button
+                                aria-label={`Show ${item} Category Posts`}
                                 className={
                                     categoryState === index + 1 ? 'on' : null
                                 }
@@ -91,7 +97,11 @@ export default function Category(props: CategoryProps) {
                     </li>
                 ))}
             </ul>
-            <button onClick={handleNext} type="button">
+            <button
+                aria-label="Show Next Category Posts"
+                onClick={handleNext}
+                type="button"
+            >
                 <FiChevronRight />
             </button>
         </StyledCategory>
@@ -102,7 +112,7 @@ const StyledCategory = styled.nav`
     ${normalBoxStyles};
     position: relative;
     ${size('100%', '5rem')};
-    margin: 1.5rem 0 6rem;
+    margin: 1.5rem 0 2.7rem;
     border-top: 0.1rem solid #ddd;
     border-bottom: 0.1rem solid #ddd;
     background: #fdfdfd;

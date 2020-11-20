@@ -49,9 +49,9 @@ export default function Bio(props: BioProps) {
             />
             <StyledProfile>
                 <div>
-                    <h2>
+                    <span>
                         <Link to="/about">{name}</Link>
-                    </h2>
+                    </span>
                     <span>{summary}</span>
                 </div>
                 {!!Object.values(social).length && (
@@ -71,14 +71,22 @@ const StyledProfile = styled.div`
     flex-basis: calc(100% - 6rem);
     margin: -0.4rem 0 0;
 
-    h2 {
-        margin: 0 0 0.4rem;
-        font-size: 1.8rem;
-        font-weight: bold;
-        letter-spacing: -0.1rem;
+    div {
+        max-width: 50rem;
     }
 
     span {
-        font-size: 1.2rem;
+        display: block;
+
+        &:first-child {
+            margin: 0 0 0.4rem;
+            font-size: 1.8rem;
+            font-weight: bold;
+            letter-spacing: -0.1rem;
+        }
+
+        &:last-child {
+            font-size: 1.2rem;
+        }
     }
 `;

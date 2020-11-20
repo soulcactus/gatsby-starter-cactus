@@ -17,7 +17,7 @@ const GlobalStyles = createGlobalStyle`
         font-family: ${(props) => props.theme.fontFamily.normal};
         font-size: ${(props) => props.theme.fontSize.normal};
         color: ${(props) => props.theme.colors.normal};
-        transition: background 0.45s ease-in-out 0.095s;
+        transition: background 0.15s ease-in-out 0.05s;
         
         &.dark {
             background: #171c28;
@@ -43,6 +43,19 @@ const GlobalStyles = createGlobalStyle`
         &:active {
             border: 0;
         }
+        
+        &:focus-visible {
+            outline: 0.2rem solid black;
+        }
+        
+        &:-moz-focusring {
+            outline: 0.1rem dotted black;
+        }
+    }
+    
+    input {
+        border: 0;
+        outline: 0;
     }
 `;
 
