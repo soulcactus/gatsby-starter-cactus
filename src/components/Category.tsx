@@ -4,7 +4,7 @@ import * as Scroll from 'react-scroll';
 import styled from 'styled-components';
 
 import { CategoryProps } from '@interfaces/components/category';
-import { normalBoxStyles, size } from '@styles/mixins';
+import { $size, normalBoxStyles } from '@styles/mixins';
 
 const scroller = Scroll.scroller;
 const Element = Scroll.Element;
@@ -50,7 +50,8 @@ export default function Category(props: CategoryProps) {
                 -container.scrollWidth +
                 previousWidth -
                 (200 -
-                    Math.floor(categoryItems[categoryState].clientWidth / 2)),
+                    Math.floor(categoryItems[categoryState].clientWidth / 2)) +
+                (780 - container.clientWidth) / 2,
             horizontal: true,
             ignoreCancelEvents: true,
             smooth: 'linear',
@@ -111,7 +112,7 @@ export default function Category(props: CategoryProps) {
 const StyledCategory = styled.nav`
     ${normalBoxStyles};
     position: relative;
-    ${size('100%', '5rem')};
+    ${$size('100%', '5rem')};
     margin: 1.5rem 0 2.7rem;
     border-top: 0.1rem solid #ddd;
     border-bottom: 0.1rem solid #ddd;
@@ -162,7 +163,7 @@ const StyledCategory = styled.nav`
         height: 100%;
 
         button {
-            ${size('100%')};
+            ${$size('100%')};
             padding: 0 2rem;
             font-size: 1.4rem;
 
