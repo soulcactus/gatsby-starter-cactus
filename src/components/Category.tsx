@@ -49,7 +49,7 @@ export default function Category(props: CategoryProps) {
             offset:
                 -container.scrollWidth +
                 previousWidth -
-                (200 -
+                (220 -
                     Math.floor(categoryItems[categoryState].clientWidth / 2)) +
                 (780 - container.clientWidth) / 2,
             horizontal: true,
@@ -113,7 +113,7 @@ const StyledCategory = styled.nav`
     ${normalBoxStyles};
     position: relative;
     ${$size('100%', '5rem')};
-    margin: 1.5rem 0 2.7rem;
+    margin: 1.5rem 0 2rem;
     border-top: 0.1rem solid #ddd;
     border-bottom: 0.1rem solid #ddd;
     background: #fdfdfd;
@@ -156,7 +156,7 @@ const StyledCategory = styled.nav`
     ul {
         display: flex;
         height: 100%;
-        margin: 0 3rem;
+        margin: 0 2rem;
     }
 
     li {

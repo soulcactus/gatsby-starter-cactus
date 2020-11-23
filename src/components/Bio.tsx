@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 import SocialLinks from '@components/SocialLinks';
 import { BioProps } from '@interfaces/components/bio';
+import mediaQuery from '@styles/mediaQuery';
 import { justifiedBoxStyles } from '@styles/mixins';
 
 export default function Bio(props: BioProps) {
@@ -13,7 +14,7 @@ export default function Bio(props: BioProps) {
         query BioQuery {
             avatar: file(absolutePath: { regex: "/profile.png/" }) {
                 childImageSharp {
-                    fixed(width: 50, height: 50) {
+                    fixed(width: 70, height: 70) {
                         ...GatsbyImageSharpFixed
                     }
                 }
@@ -46,6 +47,9 @@ export default function Bio(props: BioProps) {
                     border: '0.1rem solid #ddd',
                     borderRadius: '100%',
                 }}
+                style={{
+                    minWidth: '7rem',
+                }}
             />
             <StyledProfile>
                 <div>
@@ -67,26 +71,52 @@ const StyledBio = styled.div`
 `;
 
 const StyledProfile = styled.div`
-    ${justifiedBoxStyles};
-    flex-basis: calc(100% - 6rem);
+    display: flex;
+    flex-basis: calc(100% - 8.5rem);
     margin: -0.4rem 0 0;
 
     div {
-        max-width: 50rem;
+        ${mediaQuery('xs')`
+           max-width: 100%;
+        `}
+
+        ${mediaQuery('md')`
+           max-width: 50rem;
+        `}
     }
 
     span {
         display: block;
 
         &:first-child {
-            margin: 0 0 0.4rem;
             font-size: 1.8rem;
             font-weight: bold;
             letter-spacing: -0.1rem;
+
+            ${mediaQuery('xs')`
+                margin: 0 0 0.2rem;
+            `}
+
+            ${mediaQuery('md')`
+                margin: 0 0 0.4rem;
+            `}
         }
 
         &:last-child {
+            line-height: 1.8rem;
             font-size: 1.2rem;
         }
     }
+
+    ${mediaQuery('xs')`
+        align-items: flex-start;
+        flex-direction: column;
+        justify-content: flex-start;
+    `}
+
+    ${mediaQuery('md')`
+        align-items: center;
+        flex-direction: row;
+        justify-content: space-between;
+    `}
 `;

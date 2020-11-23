@@ -9,11 +9,14 @@ const GlobalStyles = createGlobalStyle`
     }
 
     html {
+        scroll-behavior: smooth;
         font-size: 62.5%;
     }
 
     body {
         background: white;
+        word-wrap: break-word;
+        word-break: keep-all;
         font-family: ${(props) => props.theme.fontFamily.normal};
         font-size: ${(props) => props.theme.fontSize.normal};
         color: ${(props) => props.theme.colors.normal};

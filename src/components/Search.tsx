@@ -3,6 +3,7 @@ import { CgClose } from 'react-icons/cg';
 import { FiSearch } from 'react-icons/fi';
 import styled from 'styled-components';
 
+import mediaQuery from '@styles/mediaQuery';
 import { $size } from '@styles/mixins';
 
 export default function Search() {
@@ -75,9 +76,7 @@ const StyledSearch = styled.div`
     text-align: right;
 
     div {
-        position: absolute;
-        right: 0;
-        min-width: 2.5rem;
+        width: 100%;
     }
 
     button {
@@ -85,7 +84,7 @@ const StyledSearch = styled.div`
         ${$size('2.5rem')};
 
         &:first-child {
-            left: 0;
+            right: 0;
             border-radius: 50%;
             padding: 0 0 0 0.1rem;
             background: #171c28;
@@ -97,6 +96,15 @@ const StyledSearch = styled.div`
                 padding: 0;
                 background: inherit;
                 color: #171c28;
+                transition: right 100ms ease-in;
+
+                ${mediaQuery('xs')`
+                     right: calc(100% - 2.5rem);
+                `}
+
+                ${mediaQuery('md')`
+                     right: calc(18rem - 2.5rem);
+                `}
             }
         }
 
@@ -114,9 +122,16 @@ const StyledSearch = styled.div`
         font-size: 1.4rem;
 
         &.opened {
-            width: 18rem;
             border-bottom: 0.1rem solid #171c28;
-            transition: width 200ms ease-in;
+            transition: width 100ms ease-in;
+
+            ${mediaQuery('xs')`
+                width: 100%;
+            `}
+
+            ${mediaQuery('md')`
+                width: 18rem;
+            `}
         }
     }
 `;

@@ -3,6 +3,7 @@ import Img from 'gatsby-image';
 import styled from 'styled-components';
 
 import { PostPreviewProps } from '@interfaces/components/postPreview';
+import mediaQuery from '@styles/mediaQuery';
 import { justifiedBoxStyles } from '@styles/mixins';
 
 export default function PostPreview(props: PostPreviewProps) {
@@ -35,15 +36,22 @@ export default function PostPreview(props: PostPreviewProps) {
                                 <section>
                                     <p
                                         dangerouslySetInnerHTML={{
-                                            __html: description || excerpt,
+                                            __html: description ?? excerpt,
                                         }}
                                     />
                                     {!!thumbnail && (
-                                        <Img
-                                            fixed={
-                                                thumbnail.childImageSharp.fixed
-                                            }
-                                        />
+                                        <StyledThumbnail>
+                                            <Img
+                                                fixed={
+                                                    thumbnail.childImageSharp
+                                                        .fixed
+                                                }
+                                                style={{
+                                                    width: '100%',
+                                                    height: '100%',
+                                                }}
+                                            />
+                                        </StyledThumbnail>
                                     )}
                                 </section>
                             </div>
@@ -91,7 +99,34 @@ const StyledPostPreview = styled.article<{ thumbnail: boolean }>`
     p {
         width: ${(props) => (props.thumbnail ? 'calc(100% - 15rem)' : '100%')};
         line-height: 2.25rem;
-        text-align: justify;
         font-size: 1.5rem;
+
+        ${mediaQuery('xs')`
+            display: -webkit-box;
+            -webkit-line-clamp: 5;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        `}
+
+        ${mediaQuery('md')`
+            display: inherit;
+            -webkit-line-clamp: inherit;
+            -webkit-box-orient: inherit;
+            overflow: inherit;
+            text-overflow: inherit;
+        `}
     }
+`;
+
+const StyledThumbnail = styled.div`
+    ${mediaQuery('xs')`
+        width: 10rem;
+        height: 10rem;
+    `}
+
+    ${mediaQuery('md')`
+        width: 12.5rem;
+        height: 12.5rem;
+    `}
 `;

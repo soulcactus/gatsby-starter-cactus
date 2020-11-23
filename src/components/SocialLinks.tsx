@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import GithubIcon from '@components/icons/Github';
 import FacebookIcon from '@components/icons/Facebook';
 import TwitterIcon from '@components/icons/Twitter';
+import mediaQuery from '@styles/mediaQuery';
 import { SocialLinksProps } from '@interfaces/components/socialLinks';
 
 export default function SocialLinks(props: SocialLinksProps) {
@@ -38,7 +39,13 @@ export default function SocialLinks(props: SocialLinksProps) {
 }
 
 const StyledSocialLinks = styled.ul`
-    margin: 0.5rem 0 0;
+    ${mediaQuery('xs')`
+        margin: 1rem 0 0;
+    `}
+
+    ${mediaQuery('md')`
+        margin: 0.5rem 0 0;
+    `}
 
     li {
         display: inline-block;
