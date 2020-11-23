@@ -10,7 +10,7 @@ export const justifiedBoxStyles = css`
     justify-content: space-between;
 `;
 
-export const size = (width: string, height?: string) => css`
+export const $size = (width: string, height?: string) => css`
     height: ${height ?? width};
     width: ${width};
 `;

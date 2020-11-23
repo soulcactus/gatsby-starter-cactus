@@ -3,7 +3,7 @@ import { CgClose } from 'react-icons/cg';
 import { FiSearch } from 'react-icons/fi';
 import styled from 'styled-components';
 
-import { size } from '@styles/mixins';
+import { $size } from '@styles/mixins';
 
 export default function Search() {
     const [focusState, setFocus] = useState(false);
@@ -82,7 +82,7 @@ const StyledSearch = styled.div`
 
     button {
         position: absolute;
-        ${size('2.5rem')};
+        ${$size('2.5rem')};
 
         &:first-child {
             left: 0;
@@ -107,7 +107,7 @@ const StyledSearch = styled.div`
     }
 
     input {
-        ${size('0', '2.5rem')};
+        ${$size('0', '2.5rem')};
         border: 0;
         padding: 0 0 0 2.5rem;
         background: transparent;

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import { THEME } from '@constants/enums';
 import { ThemeSwitchProps } from '@interfaces/components/themeSwitch';
-import { size } from '@styles/mixins';
+import { $size } from '@styles/mixins';
 
 export default function ThemeSwitch(props: ThemeSwitchProps) {
     const { darkTheme, handleChange } = props;
@@ -40,7 +40,7 @@ const StyledSwitch = styled.button`
             display: none;
 
             & + div {
-                ${size('2.52rem')};
+                ${$size('2.52rem')};
                 position: relative;
                 border-radius: 50%;
                 box-shadow: inset 0.8rem -0.8rem 0 0 #212f3d;
@@ -50,7 +50,7 @@ const StyledSwitch = styled.button`
 
                 &::before {
                     content: '';
-                    ${size('inherit')};
+                    ${$size('inherit')};
                     position: absolute;
                     top: 0;
                     left: 0;
@@ -60,7 +60,7 @@ const StyledSwitch = styled.button`
 
                 &::after {
                     content: '';
-                    ${size('0.56rem')};
+                    ${$size('0.56rem')};
                     position: absolute;
                     top: 50%;
                     left: 50%;

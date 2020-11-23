@@ -8,6 +8,7 @@ import Search from '@components/Search';
 import ThemeSwitch from '@components/ThemeSwitch';
 import { LayoutProps } from '@interfaces/components/layout';
 import GlobalStyles from '@styles/global';
+import mediaQuery from '@styles/mediaQuery';
 import theme from '@styles/theme';
 
 export default function Layout(props: LayoutProps) {
@@ -46,6 +47,11 @@ export default function Layout(props: LayoutProps) {
 }
 
 export const StyledLayout = styled.div`
+    width: auto;
     max-width: 78rem;
     margin: 0 auto;
+
+    ${mediaQuery('xs')`
+        width: calc((100% - 4rem));
+    `}
 `;

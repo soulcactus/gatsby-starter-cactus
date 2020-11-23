@@ -2,7 +2,7 @@ import { Link } from 'gatsby';
 import styled from 'styled-components';
 
 import { HeaderProps } from '@interfaces/components/header';
-import { justifiedBoxStyles, size } from '@styles/mixins';
+import { $size, justifiedBoxStyles } from '@styles/mixins';
 
 export default function Header(props: HeaderProps) {
     const { children, title } = props;
@@ -21,7 +21,7 @@ export default function Header(props: HeaderProps) {
 
 const StyledHeader = styled.header`
     ${justifiedBoxStyles};
-    ${size('100%', '10rem')};
+    ${$size('100%', '10rem')};
     margin: 0 0 5rem;
     padding: 0 0 0.8rem;
 
