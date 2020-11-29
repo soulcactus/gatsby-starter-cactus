@@ -28,6 +28,5 @@ const StyledHeader = styled.header`
     h1 {
         font-size: ${(props) => props.theme.fontSize.title};
         font-weight: bolder;
-        letter-spacing: -0.1rem;
     }
 `;
