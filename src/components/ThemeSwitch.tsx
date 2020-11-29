@@ -36,7 +36,7 @@ export default function ThemeSwitch(props: ThemeSwitchProps) {
 }
 
 const StyledSwitch = styled.button`
-    ${$size('5rem', '2.5rem')};
+    ${$size('5.5rem', '3rem')};
 
     label {
         display: block;
@@ -63,11 +63,11 @@ const StyledSwitch = styled.button`
         position: absolute;
         top: 0;
         left: 0;
-        ${$size('2.5rem')};
+        ${$size('3rem')};
         border-radius: 50%;
         background: ${(props) => props.theme.backgrounds.light};
         box-shadow: 3px 3px 5px rgba(0, 9, 52, 0.25), -2px -3px 2px white;
-        font-size: 1.8rem;
+        font-size: 2rem;
         color: #868686;
         transition: left 200ms linear;
     }

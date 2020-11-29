@@ -35,7 +35,7 @@ export default function Layout(props: LayoutProps) {
                         <>
                             {/*<Bio darkTheme={darkThemeState} />*/}
                             <Category categories={categories as string[]} />
-                            <Search />
+                            {/*<Search />*/}
                         </>
                     )}
                     <main>{children}</main>
