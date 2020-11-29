@@ -48,7 +48,7 @@
     "react-scroll": "^1.8.1",
     "styled-components": "^5.2.1",
     "styled-reset": "^4.3.0",
-    "typeface-lobster": "^1.1.13",
+    "typeface-inter": "^1.1.13",
     "typeface-spoqa-han-sans2": "^2.1.2",
     "typescript": "^4.1.2"
   },
