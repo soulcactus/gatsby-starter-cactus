@@ -1,9 +1,6 @@
 import { Link } from 'gatsby';
 import styled from 'styled-components';
 
-import GithubIcon from '@components/icons/Github';
-import FacebookIcon from '@components/icons/Facebook';
-import TwitterIcon from '@components/icons/Twitter';
 import mediaQuery from '@styles/mediaQuery';
 import { SocialLinksProps } from '@interfaces/components/socialLinks';
 
@@ -15,23 +12,17 @@ export default function SocialLinks(props: SocialLinksProps) {
         <StyledSocialLinks>
             {!!github && (
                 <li>
-                    <Link to="/">
-                        <GithubIcon darkTheme={darkTheme} />
-                    </Link>
+                    <Link to="/"></Link>
                 </li>
             )}
             {!!facebook && (
                 <li>
-                    <Link to="/">
-                        <FacebookIcon />
-                    </Link>
+                    <Link to="/"></Link>
                 </li>
             )}
             {!!twitter && (
                 <li>
-                    <Link to="/">
-                        <TwitterIcon />
-                    </Link>
+                    <Link to="/"></Link>
                 </li>
             )}
         </StyledSocialLinks>

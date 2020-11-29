@@ -1,11 +1,14 @@
 import Helmet from 'react-helmet';
+import { MdWbSunny } from 'react-icons/md';
+import { RiMoonFill } from 'react-icons/ri';
 import styled from 'styled-components';
 
 import { THEME } from '@constants/enums';
 import { ThemeSwitchProps } from '@interfaces/components/themeSwitch';
-import { $size } from '@styles/mixins';
+import { $size, normalBoxStyles } from '@styles/mixins';
 
 export default function ThemeSwitch(props: ThemeSwitchProps) {
+    // TODO: change props name darkTheme to isDarkTheme
     const { darkTheme, handleChange } = props;
     const switchTitle = `Active ${darkTheme ? THEME.LIGHT : THEME.DARK} Theme`;
 
@@ -25,7 +28,7 @@ export default function ThemeSwitch(props: ThemeSwitchProps) {
             >
                 <label>
                     <input onChange={handleChange} type="checkbox" />
-                    <div />
+                    <div>{darkTheme ? <RiMoonFill /> : <MdWbSunny />}</div>
                 </label>
             </StyledSwitch>
         </>
@@ -33,63 +36,43 @@ export default function ThemeSwitch(props: ThemeSwitchProps) {
 }
 
 const StyledSwitch = styled.button`
+    ${$size('5rem', '2.5rem')};
+
     label {
+        display: block;
+        position: relative;
+        ${$size('100%')};
+        border-radius: 10rem;
+        background: ${(props) => props.theme.backgrounds.light};
+        box-shadow: 5px 2px 10px rgba(0, 9, 52, 0.075),
+            inset 4px 4px 4px rgba(0, 9, 52, 0.25), inset 0 -3px 2px white;
         cursor: pointer;
+    }
 
-        input {
-            display: none;
+    input {
+        display: none;
 
-            & + div {
-                ${$size('2.52rem')};
-                position: relative;
-                border-radius: 50%;
-                box-shadow: inset 0.8rem -0.8rem 0 0 #212f3d;
-                transform: scale(1) rotate(-2deg);
-                transition: box-shadow 0.1s ease-in-out 0.075s,
-                    transform 0.1s ease 0.05s;
-
-                &::before {
-                    content: '';
-                    ${$size('inherit')};
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    border-radius: inherit;
-                    transition: background 0.1s ease;
-                }
-
-                &::after {
-                    content: '';
-                    ${$size('0.56rem')};
-                    position: absolute;
-                    top: 50%;
-                    left: 50%;
-                    margin: -0.28rem 0 0 -0.28rem;
-                    border-radius: 50%;
-                    box-shadow: 0 -1.61rem 0 white, 0 1.61rem 0 white,
-                        1.61rem 0 0 white, -1.61rem 0 0 white,
-                        1.05rem 1.05rem 0 white, -1.05rem 1.05rem 0 white,
-                        1.05rem -1.05rem 0 white, -1.05rem -1.05rem 0 white;
-                    transform: scale(0);
-                }
-            }
-
-            &:checked + div {
-                box-shadow: inset 1.6rem -1.6rem 0 0 #212f3d;
-                transform: scale(0.5) rotate(0deg);
-                transition: transform 0.2s ease 0.05s,
-                    box-shadow 0.15s ease-in-out 0.05s;
-
-                &::before {
-                    background: white;
-                    transition: background 0.2s ease 0.05s;
-                }
-
-                &::after {
-                    transform: scale(1.5);
-                    transition: transform 0.2s ease-in-out 0.05s;
-                }
-            }
+        &:checked + div {
+            left: 2.5rem;
+            transition: left 200ms linear;
         }
+    }
+
+    div {
+        ${normalBoxStyles};
+        position: absolute;
+        top: 0;
+        left: 0;
+        ${$size('2.5rem')};
+        border-radius: 50%;
+        background: ${(props) => props.theme.backgrounds.light};
+        box-shadow: 3px 3px 5px rgba(0, 9, 52, 0.25), -2px -3px 2px white;
+        font-size: 1.8rem;
+        color: #868686;
+        transition: left 200ms linear;
+    }
+
+    svg {
+        margin: 0 auto;
     }
 `;

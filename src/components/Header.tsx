@@ -26,7 +26,8 @@ const StyledHeader = styled.header`
     padding: 0 0 0.8rem;
 
     h1 {
-        font-family: ${(props) => props.theme.fontFamily.title};
         font-size: ${(props) => props.theme.fontSize.title};
+        font-weight: bolder;
+        letter-spacing: -0.1rem;
     }
 `;

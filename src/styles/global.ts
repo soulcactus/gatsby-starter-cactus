@@ -14,7 +14,7 @@ const GlobalStyles = createGlobalStyle`
     }
 
     body {
-        background: white;
+        background: ${(props) => props.theme.backgrounds.light};
         word-wrap: break-word;
         word-break: keep-all;
         font-family: ${(props) => props.theme.fontFamily.normal};
@@ -23,7 +23,7 @@ const GlobalStyles = createGlobalStyle`
         transition: background 0.15s ease-in-out 0.05s;
         
         &.dark {
-            background: #171c28;
+            background: ${(props) => props.theme.backgrounds.dark};
         }
     }
     

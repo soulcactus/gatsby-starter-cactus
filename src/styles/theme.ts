@@ -1,14 +1,14 @@
 const theme = {
+    backgrounds: {
+        dark: '#1e1f21',
+        light: '#f8f8f8',
+    },
     colors: {
-        facebook: '#1877f2',
-        github: '#191313',
-        normal: '#212f3d',
-        twitter: '#1da1f2',
-        white: 'white',
+        normal: '#202020',
     },
     fontFamily: {
-        normal: 'Spoqa Han Sans, sans-serif',
-        title: 'Lobster, sans-serif',
+        normal:
+            '-apple-system, BlinkMacSystemFont, Apple SD Gothic Neo, Inter, Noto Sans KR, Segoe UI, Sans-Serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol',
     },
     fontSize: {
         normal: '1.6rem',

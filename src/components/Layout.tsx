@@ -33,7 +33,7 @@ export default function Layout(props: LayoutProps) {
                     </Header>
                     {location.pathname === rootPath && (
                         <>
-                            <Bio darkTheme={darkThemeState} />
+                            {/*<Bio darkTheme={darkThemeState} />*/}
                             <Category categories={categories as string[]} />
                             <Search />
                         </>
