@@ -4,11 +4,17 @@
       "@/*": [
         "./src/*"
       ],
+      "@aliases/*": [
+        "./src/components/*"
+      ],
       "@components/*": [
         "./src/components/*"
       ],
       "@constants/*": [
         "./src/constants/*"
+      ],
+      "@hooks/*": [
+        "./src/hooks/*"
       ],
       "@interfaces/*": [
         "./src/interfaces/*"

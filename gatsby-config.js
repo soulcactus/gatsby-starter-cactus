@@ -5,8 +5,10 @@ module.exports = {
             options: {
                 root: './src',
                 aliases: {
+                    '@aliases': './aliases',
                     '@components': './components',
                     '@constants': './constants',
+                    '@hooks': './hooks',
                     '@interfaces': './interfaces',
                     '@pages': './pages',
                     '@styles': './styles',
@@ -77,7 +79,14 @@ module.exports = {
             },
         },
         'gatsby-plugin-react-helmet',
-        'gatsby-plugin-styled-components',
+        {
+            resolve: 'gatsby-plugin-react-svg',
+            options: {
+                rule: {
+                    include: /assets/, // See below to configure properly
+                },
+            },
+        },
         // this (optional) plugin enables Progressive Web App + Offline functionality
         // To learn more, visit: https://gatsby.dev/offline
         // "gatsby-plugin-offline",
