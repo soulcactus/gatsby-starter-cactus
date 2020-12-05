@@ -1,15 +1,13 @@
 import { Link } from 'gatsby';
-import styled from 'styled-components';
 
-import mediaQuery from '@styles/mediaQuery';
 import { SocialLinksProps } from '@interfaces/components/socialLinks';
 
 export default function SocialLinks(props: SocialLinksProps) {
-    const { darkTheme, list } = props;
+    const { list } = props;
     const { facebook, github, twitter } = list;
 
     return (
-        <StyledSocialLinks>
+        <ul>
             {!!github && (
                 <li>
                     <Link to="/"></Link>
@@ -25,24 +23,24 @@ export default function SocialLinks(props: SocialLinksProps) {
                     <Link to="/"></Link>
                 </li>
             )}
-        </StyledSocialLinks>
+        </ul>
     );
 }
 
-const StyledSocialLinks = styled.ul`
-    ${mediaQuery('xs')`
-        margin: 1rem 0 0;
-    `}
-
-    ${mediaQuery('md')`
-        margin: 0.5rem 0 0;
-    `}
-
-    li {
-        display: inline-block;
-
-        &:not(:last-child) {
-            margin: 0 0.7rem 0 0;
-        }
-    }
-`;
+// const StyledSocialLinks = styled.ul`
+//     ${mediaQueries('xs')`
+//         margin: 1rem 0 0;
+//     `}
+//
+//     ${mediaQueries('md')`
+//         margin: 0.5rem 0 0;
+//     `}
+//
+//     li {
+//         display: inline-block;
+//
+//         &:not(:last-child) {
+//             margin: 0 0.7rem 0 0;
+//         }
+//     }
+// `;

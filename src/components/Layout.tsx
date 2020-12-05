@@ -1,14 +1,11 @@
+import { Global, ThemeProvider } from '@emotion/react';
 import { useCallback, useState } from 'react';
-import styled, { ThemeProvider } from 'styled-components';
 
-import Bio from '@components/Bio';
 import Category from '@components/Category';
 import Header from '@components/Header';
-import Search from '@components/Search';
 import ThemeSwitch from '@components/ThemeSwitch';
 import { LayoutProps } from '@interfaces/components/layout';
-import GlobalStyles from '@styles/global';
-import mediaQuery from '@styles/mediaQuery';
+import globalStyles from '@styles/global';
 import theme from '@styles/theme';
 
 export default function Layout(props: LayoutProps) {
@@ -22,9 +19,9 @@ export default function Layout(props: LayoutProps) {
 
     return (
         <ThemeProvider theme={theme}>
-            <GlobalStyles />
+            <Global styles={globalStyles} />
             <div>
-                <StyledLayout>
+                <div>
                     <Header title={title}>
                         <ThemeSwitch
                             darkTheme={darkThemeState}
@@ -32,26 +29,22 @@ export default function Layout(props: LayoutProps) {
                         />
                     </Header>
                     {location.pathname === rootPath && (
-                        <>
-                            {/*<Bio darkTheme={darkThemeState} />*/}
-                            <Category categories={categories as string[]} />
-                            {/*<Search />*/}
-                        </>
+                        <Category categories={categories as string[]} />
                     )}
                     <main>{children}</main>
                     <footer>©Soulcactus</footer>
-                </StyledLayout>
+                </div>
             </div>
         </ThemeProvider>
     );
 }
 
-export const StyledLayout = styled.div`
-    width: auto;
-    max-width: 78rem;
-    margin: 0 auto;
-
-    ${mediaQuery('xs')`
-        width: calc((100% - 4rem));
-    `}
-`;
+// export const StyledLayout = styled.div`
+//     width: auto;
+//     max-width: 78rem;
+//     margin: 0 auto;
+//
+//     ${mediaQueries('xs')`
+//         width: calc((100% - 4rem));
+//     `}
+// `;

@@ -1,11 +1,8 @@
 import { useStaticQuery, graphql, Link } from 'gatsby';
 import Image from 'gatsby-image';
-import styled from 'styled-components';
 
 import SocialLinks from '@components/SocialLinks';
 import { BioProps } from '@interfaces/components/bio';
-import mediaQuery from '@styles/mediaQuery';
-import { justifiedBoxStyles } from '@styles/mixins';
 
 export default function Bio(props: BioProps) {
     const { darkTheme } = props;
@@ -39,7 +36,7 @@ export default function Bio(props: BioProps) {
     const { name, summary } = author;
 
     return (
-        <StyledBio>
+        <div>
             <Image
                 alt={name}
                 fixed={data.avatar.childImageSharp.fixed}
@@ -51,7 +48,7 @@ export default function Bio(props: BioProps) {
                     minWidth: '7rem',
                 }}
             />
-            <StyledProfile>
+            <div>
                 <div>
                     <span>
                         <Link to="/about">{name}</Link>
@@ -61,62 +58,62 @@ export default function Bio(props: BioProps) {
                 {!!Object.values(social).length && (
                     <SocialLinks darkTheme={darkTheme} list={social} />
                 )}
-            </StyledProfile>
-        </StyledBio>
+            </div>
+        </div>
     );
 }
 
-const StyledBio = styled.div`
-    ${justifiedBoxStyles};
-`;
-
-const StyledProfile = styled.div`
-    display: flex;
-    flex-basis: calc(100% - 8.5rem);
-    margin: -0.4rem 0 0;
-
-    div {
-        ${mediaQuery('xs')`
-           max-width: 100%;
-        `}
-
-        ${mediaQuery('md')`
-           max-width: 50rem;
-        `}
-    }
-
-    span {
-        display: block;
-
-        &:first-child {
-            font-size: 1.8rem;
-            font-weight: bold;
-            letter-spacing: -0.1rem;
-
-            ${mediaQuery('xs')`
-                margin: 0 0 0.2rem;
-            `}
-
-            ${mediaQuery('md')`
-                margin: 0 0 0.4rem;
-            `}
-        }
-
-        &:last-child {
-            line-height: 1.8rem;
-            font-size: 1.2rem;
-        }
-    }
-
-    ${mediaQuery('xs')`
-        align-items: flex-start;
-        flex-direction: column;
-        justify-content: flex-start;
-    `}
-
-    ${mediaQuery('md')`
-        align-items: center;
-        flex-direction: row;
-        justify-content: space-between;
-    `}
-`;
+// const StyledBio = styled.div`
+//     ${justifiedBoxStyles};
+// `;
+//
+// const StyledProfile = styled.div`
+//     display: flex;
+//     flex-basis: calc(100% - 8.5rem);
+//     margin: -0.4rem 0 0;
+//
+//     div {
+//         ${mediaQueries('xs')`
+//            max-width: 100%;
+//         `}
+//
+//         ${mediaQueries('md')`
+//            max-width: 50rem;
+//         `}
+//     }
+//
+//     span {
+//         display: block;
+//
+//         &:first-child {
+//             font-size: 1.8rem;
+//             font-weight: bold;
+//             letter-spacing: -0.1rem;
+//
+//             ${mediaQueries('xs')`
+//                 margin: 0 0 0.2rem;
+//             `}
+//
+//             ${mediaQueries('md')`
+//                 margin: 0 0 0.4rem;
+//             `}
+//         }
+//
+//         &:last-child {
+//             line-height: 1.8rem;
+//             font-size: 1.2rem;
+//         }
+//     }
+//
+//     ${mediaQueries('xs')`
+//         align-items: flex-start;
+//         flex-direction: column;
+//         justify-content: flex-start;
+//     `}
+//
+//     ${mediaQueries('md')`
+//         align-items: center;
+//         flex-direction: row;
+//         justify-content: space-between;
+//     `}
+// `;

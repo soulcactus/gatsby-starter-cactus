@@ -1,10 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import * as Scroll from 'react-scroll';
-import styled from 'styled-components';
 
 import { CategoryProps } from '@interfaces/components/category';
-import { $size, normalBoxStyles } from '@styles/mixins';
 
 const scroller = Scroll.scroller;
 const Element = Scroll.Element;
@@ -60,7 +58,7 @@ export default function Category(props: CategoryProps) {
     }, [categoryState]);
 
     return (
-        <StyledCategory id="categoryContainer" ref={containerRef}>
+        <div id="categoryContainer" ref={containerRef}>
             <button
                 aria-label="Show Previous Category Posts"
                 onClick={handlePrevious}
@@ -70,7 +68,7 @@ export default function Category(props: CategoryProps) {
             </button>
             <ul role="tablist">
                 <li role="tab">
-                    <StyledElement name={!!categoryState ? null : 'on'}>
+                    <Element name={!!categoryState ? null : 'on'}>
                         <button
                             aria-label="Show All Category Posts"
                             className={!!categoryState ? null : 'on'}
@@ -79,11 +77,11 @@ export default function Category(props: CategoryProps) {
                         >
                             All
                         </button>
-                    </StyledElement>
+                    </Element>
                 </li>
                 {categories?.map((item, index) => (
                     <li key={index} role="tab">
-                        <StyledElement name={!!categoryState ? null : 'on'}>
+                        <Element name={!!categoryState ? null : 'on'}>
                             <button
                                 aria-label={`Show ${item} Category Posts`}
                                 className={
@@ -94,7 +92,7 @@ export default function Category(props: CategoryProps) {
                             >
                                 {item}
                             </button>
-                        </StyledElement>
+                        </Element>
                     </li>
                 ))}
             </ul>
@@ -105,85 +103,85 @@ export default function Category(props: CategoryProps) {
             >
                 <FiChevronRight />
             </button>
-        </StyledCategory>
+        </div>
     );
 }
 
-const StyledCategory = styled.nav`
-    ${normalBoxStyles};
-    position: relative;
-    ${$size('100%', '5rem')};
-    margin: 1.5rem 0 2rem;
-    border-top: 0.1rem solid #ddd;
-    border-bottom: 0.1rem solid #ddd;
-    background: #fdfdfd;
-    white-space: nowrap;
-    overflow-x: scroll;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-
-    &::-webkit-scrollbar {
-        display: none;
-    }
-
-    > button {
-        position: sticky;
-        min-width: 3rem;
-        height: 3rem;
-        border-radius: 50%;
-        box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.15);
-        background: white;
-        line-height: 1rem;
-        font-size: 1.8rem;
-        color: #999;
-
-        &:first-child {
-            left: 0;
-            padding-right: 0.2rem;
-        }
-
-        &:last-child {
-            right: 0;
-            padding-left: 0.2rem;
-        }
-
-        &:hover {
-            color: #333;
-            transition: color 0.2s linear;
-        }
-    }
-
-    ul {
-        display: flex;
-        height: 100%;
-        margin: 0 2rem;
-    }
-
-    li {
-        height: 100%;
-
-        button {
-            ${$size('100%')};
-            padding: 0 2rem;
-            font-size: 1.4rem;
-
-            &.on {
-                border-bottom: 0.3rem solid #666;
-                font-weight: bold;
-            }
-
-            &:not(.on) {
-                color: #999;
-            }
-
-            &:not(.on):hover {
-                color: inherit;
-                transition: color 0.2s linear;
-            }
-        }
-    }
-`;
-
-const StyledElement = styled(Element)`
-    height: 100%;
-`;
+// const StyledCategory = styled.nav`
+//     ${normalBoxStyles};
+//     position: relative;
+//     ${$size('100%', '5rem')};
+//     margin: 1.5rem 0 2rem;
+//     border-top: 0.1rem solid #ddd;
+//     border-bottom: 0.1rem solid #ddd;
+//     background: #fdfdfd;
+//     white-space: nowrap;
+//     overflow-x: scroll;
+//     -ms-overflow-style: none;
+//     scrollbar-width: none;
+//
+//     &::-webkit-scrollbar {
+//         display: none;
+//     }
+//
+//     > button {
+//         position: sticky;
+//         min-width: 3rem;
+//         height: 3rem;
+//         border-radius: 50%;
+//         box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.15);
+//         background: white;
+//         line-height: 1rem;
+//         font-size: 1.8rem;
+//         color: #999;
+//
+//         &:first-child {
+//             left: 0;
+//             padding-right: 0.2rem;
+//         }
+//
+//         &:last-child {
+//             right: 0;
+//             padding-left: 0.2rem;
+//         }
+//
+//         &:hover {
+//             color: #333;
+//             transition: color 0.2s linear;
+//         }
+//     }
+//
+//     ul {
+//         display: flex;
+//         height: 100%;
+//         margin: 0 2rem;
+//     }
+//
+//     li {
+//         height: 100%;
+//
+//         button {
+//             ${$size('100%')};
+//             padding: 0 2rem;
+//             font-size: 1.4rem;
+//
+//             &.on {
+//                 border-bottom: 0.3rem solid #666;
+//                 font-weight: bold;
+//             }
+//
+//             &:not(.on) {
+//                 color: #999;
+//             }
+//
+//             &:not(.on):hover {
+//                 color: inherit;
+//                 transition: color 0.2s linear;
+//             }
+//         }
+//     }
+// `;
+//
+// const StyledElement = styled(Element)`
+//     height: 100%;
+// `;
