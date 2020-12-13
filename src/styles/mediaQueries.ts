@@ -1,11 +1,14 @@
 import facepaint from 'facepaint';
 
 export const breakpoints = {
+    xs: 0,
+    sm: 375,
     md: 768,
     lg: 1280,
+    xl: 1440,
 };
 
-export const breakpointsArray = [768, 1280];
+export const breakpointsArray = [0, 375, 768, 1280, 1440];
 
 export const media = (device: string) => {
     const breakpointsArray = Object.keys(breakpoints).map((key) => [

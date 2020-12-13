@@ -1,7 +1,7 @@
 import { ChangeEvent } from 'react';
 
-import { DarkTheme } from '@interfaces/commons';
+import { IsDarkTheme } from '@interfaces/commons';
 
-export interface ThemeSwitchProps extends DarkTheme {
+export interface ThemeSwitchProps extends IsDarkTheme {
     handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }

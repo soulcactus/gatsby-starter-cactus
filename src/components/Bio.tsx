@@ -1,17 +1,19 @@
+import styled from '@emotion/styled';
 import { useStaticQuery, graphql, Link } from 'gatsby';
 import Image from 'gatsby-image';
 
 import SocialLinks from '@components/SocialLinks';
 import { BioProps } from '@interfaces/components/bio';
+import { normalBoxStyles } from '@styles/modules';
 
 export default function Bio(props: BioProps) {
-    const { darkTheme } = props;
+    const { isDarkTheme } = props;
 
     const data = useStaticQuery(graphql`
         query BioQuery {
             avatar: file(absolutePath: { regex: "/profile.png/" }) {
                 childImageSharp {
-                    fixed(width: 70, height: 70) {
+                    fixed(width: 80, height: 80) {
                         ...GatsbyImageSharpFixed
                     }
                 }
@@ -36,84 +38,53 @@ export default function Bio(props: BioProps) {
     const { name, summary } = author;
 
     return (
-        <div>
+        <StyledBio>
             <Image
                 alt={name}
                 fixed={data.avatar.childImageSharp.fixed}
                 imgStyle={{
                     border: '0.1rem solid #ddd',
-                    borderRadius: '100%',
+                    borderRadius: '50%',
                 }}
                 style={{
-                    minWidth: '7rem',
+                    minWidth: '8rem',
+                    margin: '0 1.5rem 0 0',
+                    borderRadius: '50%',
                 }}
             />
             <div>
-                <div>
-                    <span>
-                        <Link to="/about">{name}</Link>
-                    </span>
-                    <span>{summary}</span>
-                </div>
+                <b>
+                    <Link to="/about">{name}</Link>
+                </b>
+                <span>{summary}</span>
                 {!!Object.values(social).length && (
-                    <SocialLinks darkTheme={darkTheme} list={social} />
+                    <SocialLinks isDarkTheme={isDarkTheme} list={social} />
                 )}
             </div>
-        </div>
+        </StyledBio>
     );
 }
 
-// const StyledBio = styled.div`
-//     ${justifiedBoxStyles};
-// `;
-//
-// const StyledProfile = styled.div`
-//     display: flex;
-//     flex-basis: calc(100% - 8.5rem);
-//     margin: -0.4rem 0 0;
-//
-//     div {
-//         ${mediaQueries('xs')`
-//            max-width: 100%;
-//         `}
-//
-//         ${mediaQueries('md')`
-//            max-width: 50rem;
-//         `}
-//     }
-//
-//     span {
-//         display: block;
-//
-//         &:first-child {
-//             font-size: 1.8rem;
-//             font-weight: bold;
-//             letter-spacing: -0.1rem;
-//
-//             ${mediaQueries('xs')`
-//                 margin: 0 0 0.2rem;
-//             `}
-//
-//             ${mediaQueries('md')`
-//                 margin: 0 0 0.4rem;
-//             `}
-//         }
-//
-//         &:last-child {
-//             line-height: 1.8rem;
-//             font-size: 1.2rem;
-//         }
-//     }
-//
-//     ${mediaQueries('xs')`
-//         align-items: flex-start;
-//         flex-direction: column;
-//         justify-content: flex-start;
-//     `}
-//
-//     ${mediaQueries('md')`
-//         align-items: center;
-//         flex-direction: row;
-//         justify-content: space-between;
-//     `}
-// `;
+const StyledBio = styled.div`
+    ${normalBoxStyles};
+    min-width: 33rem;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    background: ${(props) => props.theme.backgrounds.light};
+    box-shadow: 0.3rem 0.3rem 0.5rem rgba(0, 9, 52, 0.07),
+        -0.5rem -0.5rem 0.5rem white;
+
+    div {
+        padding-bottom: 1rem;
+        font-size: 1.5rem;
+    }
+
+    b {
+        display: block;
+        line-height: 2.5rem;
+    }
+
+    span {
+        font-size: 1.2rem;
+    }
+`;

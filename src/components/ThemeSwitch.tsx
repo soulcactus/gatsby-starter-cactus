@@ -1,71 +1,83 @@
+import styled from '@emotion/styled';
 import Helmet from 'react-helmet';
 import { MdWbSunny } from 'react-icons/md';
 import { RiMoonFill } from 'react-icons/ri';
 
 import { THEME } from '@constants/enums';
 import { ThemeSwitchProps } from '@interfaces/components/themeSwitch';
+import { $size } from '@styles/mixins';
+import { normalBoxStyles } from '@styles/modules';
 
 export default function ThemeSwitch(props: ThemeSwitchProps) {
-    const { darkTheme, handleChange } = props;
-    const switchTitle = `Active ${darkTheme ? THEME.LIGHT : THEME.DARK} Theme`;
+    const { handleChange, isDarkTheme } = props;
+
+    const switchTitle = `Active ${
+        isDarkTheme ? THEME.LIGHT : THEME.DARK
+    } Theme`;
 
     return (
         <>
-            {darkTheme && (
+            {isDarkTheme && (
                 <Helmet
                     bodyAttributes={{
                         class: 'dark',
                     }}
                 />
             )}
-            <button aria-label={switchTitle} title={switchTitle} type="button">
+            <StyledSwitch
+                aria-label={switchTitle}
+                title={switchTitle}
+                type="button"
+            >
                 <label>
                     <input onChange={handleChange} type="checkbox" />
-                    <div>{darkTheme ? <RiMoonFill /> : <MdWbSunny />}</div>
+                    <div>{isDarkTheme ? <RiMoonFill /> : <MdWbSunny />}</div>
                 </label>
-            </button>
+            </StyledSwitch>
         </>
     );
 }
 
-// const StyledSwitch = styled.button`
-//     ${$size('5.5rem', '3rem')};
-//
-//     label {
-//         display: block;
-//         position: relative;
-//         ${$size('100%')};
-//         border-radius: 10rem;
-//         background: ${(props) => props.theme.backgrounds.light};
-//         box-shadow: 5px 2px 10px rgba(0, 9, 52, 0.075),
-//             inset 4px 4px 4px rgba(0, 9, 52, 0.25), inset 0 -3px 2px white;
-//         cursor: pointer;
-//     }
-//
-//     input {
-//         display: none;
-//
-//         &:checked + div {
-//             left: 2.5rem;
-//             transition: left 200ms linear;
-//         }
-//     }
-//
-//     div {
-//         ${normalBoxStyles};
-//         position: absolute;
-//         top: 0;
-//         left: 0;
-//         ${$size('3rem')};
-//         border-radius: 50%;
-//         background: ${(props) => props.theme.backgrounds.light};
-//         box-shadow: 3px 3px 5px rgba(0, 9, 52, 0.25), -2px -3px 2px white;
-//         font-size: 2rem;
-//         color: #868686;
-//         transition: left 200ms linear;
-//     }
-//
-//     svg {
-//         margin: 0 auto;
-//     }
-// `;
+const StyledSwitch = styled.button`
+    ${$size('5.5rem', '3rem')};
+
+    label {
+        display: block;
+        position: relative;
+        ${$size('100%')};
+        border-radius: 10rem;
+        background: ${(props) => props.theme.backgrounds.light};
+        box-shadow: 0.5rem 0.2rem 1rem rgba(0, 9, 52, 0.075),
+            inset 0.4rem 0.4rem 0.4rem rgba(0, 9, 52, 0.25),
+            inset 0 -0.3rem 0.2rem white;
+        cursor: pointer;
+    }
+
+    input {
+        display: none;
+
+        &:checked + div {
+            left: 2.5rem;
+            transition: left 200ms linear;
+        }
+    }
+
+    div {
+        ${normalBoxStyles};
+        position: absolute;
+        top: 0;
+        left: 0;
+        ${$size('3rem')};
+        border-radius: 50%;
+        background: ${(props) => props.theme.backgrounds.light};
+        box-shadow: 0.3rem 0.3rem 0.5rem rgba(0, 9, 52, 0.25),
+            -0.3rem -0.3rem 0.5rem white;
+        font-size: 2rem;
+        color: #868686;
+        transition: left 200ms linear;
+    }
+
+    svg {
+        margin: 0 auto;
+    }
+`;

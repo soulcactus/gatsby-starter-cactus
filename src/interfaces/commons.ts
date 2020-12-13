@@ -1,5 +1,5 @@
-export interface DarkTheme {
-    darkTheme: boolean;
+export interface IsDarkTheme {
+    isDarkTheme: boolean;
 }
 
 export interface PostData {

@@ -1,3 +1,3 @@
-import { DarkTheme } from '@interfaces/commons';
+import { IsDarkTheme } from '@interfaces/commons';
 
-export interface BioProps extends DarkTheme {}
+export interface BioProps extends IsDarkTheme {}
