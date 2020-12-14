@@ -46,7 +46,7 @@ const StyledSocialLinks = styled.ul`
         font-size: 2rem;
         color: #868686;
         box-shadow: 0.3rem 0.3rem 0.5rem rgba(0, 9, 52, 0.25),
-            -0.3rem -0.3rem 0.5rem white;
+            -0.3rem -0.3rem 0.3rem white;
 
         &:not(:last-child) {
             margin: 0 1rem 0 0;

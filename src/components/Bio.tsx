@@ -50,6 +50,7 @@ export default function Bio(props: BioProps) {
                     minWidth: '8rem',
                     margin: '0 1.5rem 0 0',
                     borderRadius: '50%',
+                    overflow: 'hidden',
                 }}
             />
             <div>
@@ -67,7 +68,6 @@ export default function Bio(props: BioProps) {
 
 const StyledBio = styled.div`
     ${normalBoxStyles};
-    min-width: 33rem;
     border-radius: 1rem;
     padding: 1.5rem;
     background: ${(props) => props.theme.backgrounds.light};
@@ -81,10 +81,12 @@ const StyledBio = styled.div`
 
     b {
         display: block;
-        line-height: 2.5rem;
+        margin: 0 0 0.5rem;
+        font-size: 1.5rem;
     }
 
     span {
         font-size: 1.2rem;
+        color: #777;
     }
 `;

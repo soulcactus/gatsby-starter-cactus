@@ -1,8 +1,11 @@
+import styled from '@emotion/styled';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import * as Scroll from 'react-scroll';
 
 import { CategoryProps } from '@interfaces/components/category';
+import { $size } from '@styles/mixins';
+import { normalBoxStyles } from '@styles/modules';
 
 const scroller = Scroll.scroller;
 const Element = Scroll.Element;
@@ -47,9 +50,9 @@ export default function Category(props: CategoryProps) {
             offset:
                 -container.scrollWidth +
                 previousWidth -
-                (220 -
+                (180 -
                     Math.floor(categoryItems[categoryState].clientWidth / 2)) +
-                (780 - container.clientWidth) / 2,
+                (700 - container.clientWidth) / 2,
             horizontal: true,
             ignoreCancelEvents: true,
             smooth: 'linear',
@@ -58,7 +61,7 @@ export default function Category(props: CategoryProps) {
     }, [categoryState]);
 
     return (
-        <div id="categoryContainer" ref={containerRef}>
+        <StyledCategory id="categoryContainer" ref={containerRef}>
             <button
                 aria-label="Show Previous Category Posts"
                 onClick={handlePrevious}
@@ -68,7 +71,7 @@ export default function Category(props: CategoryProps) {
             </button>
             <ul role="tablist">
                 <li role="tab">
-                    <Element name={!!categoryState ? null : 'on'}>
+                    <StyledElement name={!!categoryState ? null : 'on'}>
                         <button
                             aria-label="Show All Category Posts"
                             className={!!categoryState ? null : 'on'}
@@ -77,11 +80,11 @@ export default function Category(props: CategoryProps) {
                         >
                             All
                         </button>
-                    </Element>
+                    </StyledElement>
                 </li>
                 {categories?.map((item, index) => (
                     <li key={index} role="tab">
-                        <Element name={!!categoryState ? null : 'on'}>
+                        <StyledElement name={!!categoryState ? null : 'on'}>
                             <button
                                 aria-label={`Show ${item} Category Posts`}
                                 className={
@@ -92,7 +95,7 @@ export default function Category(props: CategoryProps) {
                             >
                                 {item}
                             </button>
-                        </Element>
+                        </StyledElement>
                     </li>
                 ))}
             </ul>
@@ -103,85 +106,94 @@ export default function Category(props: CategoryProps) {
             >
                 <FiChevronRight />
             </button>
-        </div>
+        </StyledCategory>
     );
 }
 
-// const StyledCategory = styled.nav`
-//     ${normalBoxStyles};
-//     position: relative;
-//     ${$size('100%', '5rem')};
-//     margin: 1.5rem 0 2rem;
-//     border-top: 0.1rem solid #ddd;
-//     border-bottom: 0.1rem solid #ddd;
-//     background: #fdfdfd;
-//     white-space: nowrap;
-//     overflow-x: scroll;
-//     -ms-overflow-style: none;
-//     scrollbar-width: none;
-//
-//     &::-webkit-scrollbar {
-//         display: none;
-//     }
-//
-//     > button {
-//         position: sticky;
-//         min-width: 3rem;
-//         height: 3rem;
-//         border-radius: 50%;
-//         box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.15);
-//         background: white;
-//         line-height: 1rem;
-//         font-size: 1.8rem;
-//         color: #999;
-//
-//         &:first-child {
-//             left: 0;
-//             padding-right: 0.2rem;
-//         }
-//
-//         &:last-child {
-//             right: 0;
-//             padding-left: 0.2rem;
-//         }
-//
-//         &:hover {
-//             color: #333;
-//             transition: color 0.2s linear;
-//         }
-//     }
-//
-//     ul {
-//         display: flex;
-//         height: 100%;
-//         margin: 0 2rem;
-//     }
-//
-//     li {
-//         height: 100%;
-//
-//         button {
-//             ${$size('100%')};
-//             padding: 0 2rem;
-//             font-size: 1.4rem;
-//
-//             &.on {
-//                 border-bottom: 0.3rem solid #666;
-//                 font-weight: bold;
-//             }
-//
-//             &:not(.on) {
-//                 color: #999;
-//             }
-//
-//             &:not(.on):hover {
-//                 color: inherit;
-//                 transition: color 0.2s linear;
-//             }
-//         }
-//     }
-// `;
-//
-// const StyledElement = styled(Element)`
-//     height: 100%;
-// `;
+const StyledCategory = styled.nav`
+    ${normalBoxStyles};
+    position: relative;
+    ${$size('100%', '5rem')};
+    margin: 2rem 0 2rem;
+    border-radius: 0.5rem;
+    background: ${(props) => props.theme.backgrounds.light};
+    box-shadow: 0.3rem 0.3rem 0.5rem rgba(0, 9, 52, 0.1),
+        -0.5rem -0.5rem 0.5rem white;
+    white-space: nowrap;
+    overflow-x: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    > button {
+        position: sticky;
+        min-width: 3rem;
+        height: 3rem;
+        //border: 0.1rem solid #f6f6f6;
+        border-radius: 50%;
+        //background: linear-gradient(145deg, #ffffff, #e9e9e9);
+        line-height: 1.2rem;
+        font-size: 2rem;
+        color: #868686;
+        //box-shadow: 0.3rem 0.3rem 0.5rem rgba(0, 9, 52, 0.325),
+        //    -0.3rem -0.3rem 0.3rem white;
+        background: linear-gradient(145deg, #ffffff, #eaeaea);
+        box-shadow: 3px 3px 5px rgba(0, 9, 52, 0.25), -2px -2px 2px #ffffff;
+
+        &:first-child {
+            left: 0;
+
+            svg {
+                margin-right: 0.2rem;
+            }
+        }
+
+        &:last-child {
+            right: 0;
+
+            svg {
+                margin-left: 0.2rem;
+            }
+        }
+    }
+
+    ul {
+        display: flex;
+        align-items: center;
+        height: 100%;
+        margin: 0 2rem;
+    }
+
+    li {
+        &:not(:last-child) {
+            padding: 0 1rem 0 0;
+        }
+
+        button {
+            ${$size('100%', '3rem')};
+            border-radius: 3rem;
+            padding: 0 2rem 0.2rem;
+            background: ${(props) => props.theme.backgrounds.light};
+            line-height: unset;
+            font-size: 1.2rem;
+            color: #999;
+            box-shadow: 0.3rem 0.3rem 0.5rem rgba(0, 9, 52, 0.07),
+                -0.5rem -0.5rem 0.5rem white;
+
+            &.on {
+                font-weight: bold;
+                color: #777;
+                box-shadow: 0.5rem 0.2rem 1rem rgba(0, 9, 52, 0.075),
+                    inset 0.4rem 0.4rem 0.4rem rgba(0, 9, 52, 0.175),
+                    inset 0 -0.4rem 0.2rem white;
+            }
+        }
+    }
+`;
+
+const StyledElement = styled(Element)`
+    height: 100%;
+`;

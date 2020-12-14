@@ -49,7 +49,7 @@ const StyledSwitch = styled.button`
         background: ${(props) => props.theme.backgrounds.light};
         box-shadow: 0.5rem 0.2rem 1rem rgba(0, 9, 52, 0.075),
             inset 0.4rem 0.4rem 0.4rem rgba(0, 9, 52, 0.25),
-            inset 0 -0.3rem 0.2rem white;
+            inset 0 -0.4rem 0.2rem white;
         cursor: pointer;
     }
 
@@ -71,7 +71,7 @@ const StyledSwitch = styled.button`
         border-radius: 50%;
         background: ${(props) => props.theme.backgrounds.light};
         box-shadow: 0.3rem 0.3rem 0.5rem rgba(0, 9, 52, 0.25),
-            -0.3rem -0.3rem 0.5rem white;
+            -0.3rem -0.3rem 0.3rem white;
         font-size: 2rem;
         color: #868686;
         transition: left 200ms linear;
