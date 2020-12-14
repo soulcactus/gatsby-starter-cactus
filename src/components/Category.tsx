@@ -137,7 +137,7 @@ const StyledCategory = styled.nav`
         //background: linear-gradient(145deg, #ffffff, #e9e9e9);
         line-height: 1.2rem;
         font-size: 2rem;
-        color: #868686;
+        color: #797979;
         //box-shadow: 0.3rem 0.3rem 0.5rem rgba(0, 9, 52, 0.325),
         //    -0.3rem -0.3rem 0.3rem white;
         background: linear-gradient(145deg, #ffffff, #eaeaea);
@@ -178,14 +178,14 @@ const StyledCategory = styled.nav`
             padding: 0 2rem 0.2rem;
             background: ${(props) => props.theme.backgrounds.light};
             line-height: unset;
-            font-size: 1.2rem;
-            color: #999;
+            font-size: 1.3rem;
+            color: #797979;
             box-shadow: 0.3rem 0.3rem 0.5rem rgba(0, 9, 52, 0.07),
                 -0.5rem -0.5rem 0.5rem white;
 
             &.on {
                 font-weight: bold;
-                color: #777;
+                color: #333;
                 box-shadow: 0.5rem 0.2rem 1rem rgba(0, 9, 52, 0.075),
                     inset 0.4rem 0.4rem 0.4rem rgba(0, 9, 52, 0.175),
                     inset 0 -0.4rem 0.2rem white;

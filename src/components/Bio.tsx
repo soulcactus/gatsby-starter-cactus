@@ -81,12 +81,14 @@ const StyledBio = styled.div`
 
     b {
         display: block;
-        margin: 0 0 0.5rem;
-        font-size: 1.5rem;
+        margin: 0.5rem 0 0.75rem;
+        color: #333333;
+        font-size: 1.6rem;
+        font-weight: bolder;
     }
 
     span {
-        font-size: 1.2rem;
-        color: #777;
+        font-size: 1.3rem;
+        color: #797979;
     }
 `;

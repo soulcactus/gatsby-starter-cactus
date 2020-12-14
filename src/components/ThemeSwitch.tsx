@@ -73,7 +73,7 @@ const StyledSwitch = styled.button`
         box-shadow: 0.3rem 0.3rem 0.5rem rgba(0, 9, 52, 0.25),
             -0.3rem -0.3rem 0.3rem white;
         font-size: 2rem;
-        color: #868686;
+        color: #797979;
         transition: left 200ms linear;
     }
 
