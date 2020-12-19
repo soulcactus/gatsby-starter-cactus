@@ -5,11 +5,14 @@ import Helmet from 'react-helmet';
 import Bio from '@components/Bio';
 import Category from '@components/Category';
 import Header from '@components/Header';
+import InfiniteScroll from '@components/InfiniteScroll';
+import Search from '@components/Search';
 import ThemeSwitch from '@components/ThemeSwitch';
 import { useTheme } from '@hooks/index';
 import { LayoutProps } from '@interfaces/components/layout';
 import globalStyles from '@styles/global';
 import theme from '@styles/theme';
+import { justifiedBoxStyles, justifySpaceBetween } from '@styles/modules';
 
 export default function Layout(props: LayoutProps) {
     const { categories, children, title } = props;
@@ -34,11 +37,24 @@ export default function Layout(props: LayoutProps) {
                             isDarkTheme={themeState}
                         />
                     </Header>
-                    <Bio isDarkTheme={themeState} />
                     {location.pathname === rootPath && (
-                        <Category categories={categories as string[]} />
+                        <>
+                            <Bio isDarkTheme={themeState} />
+                            <Category categories={categories as string[]} />
+                            <StyledToolbar>
+                                <div>
+                                    <InfiniteScroll />
+                                </div>
+                                <Search />
+                            </StyledToolbar>
+                        </>
                     )}
-                    <main>{children}</main>
+                    <main>
+                        {children}
+                        {location.pathname !== rootPath && (
+                            <Bio isDarkTheme={themeState} />
+                        )}
+                    </main>
                     <footer>©Soulcactus</footer>
                 </div>
             </StyledLayout>
@@ -51,4 +67,8 @@ export const StyledLayout = styled.div`
     max-width: 74rem;
     margin: 0 auto;
     padding: 0 2rem;
+`;
+
+export const StyledToolbar = styled.div`
+    ${justifiedBoxStyles}
 `;

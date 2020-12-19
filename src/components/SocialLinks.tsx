@@ -51,6 +51,12 @@ const StyledSocialLinks = styled.ul`
         &:not(:last-child) {
             margin: 0 1rem 0 0;
         }
+
+        &:active {
+            box-shadow: 0.5rem 0.2rem 1rem rgba(0, 9, 52, 0.075),
+                inset 0.4rem 0.4rem 0.4rem rgba(0, 9, 52, 0.25),
+                inset 0 -0.4rem 0.2rem white;
+        }
     }
 
     svg {

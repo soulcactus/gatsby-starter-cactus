@@ -114,7 +114,7 @@ const StyledCategory = styled.nav`
     ${normalBoxStyles};
     position: relative;
     ${$size('100%', '5rem')};
-    margin: 2rem 0 2rem;
+    margin: 2rem 0 3rem;
     border-radius: 0.5rem;
     background: ${(props) => props.theme.backgrounds.light};
     box-shadow: 0.3rem 0.3rem 0.5rem rgba(0, 9, 52, 0.1),
@@ -132,16 +132,16 @@ const StyledCategory = styled.nav`
         position: sticky;
         min-width: 3rem;
         height: 3rem;
-        //border: 0.1rem solid #f6f6f6;
         border-radius: 50%;
-        //background: linear-gradient(145deg, #ffffff, #e9e9e9);
         line-height: 1.2rem;
         font-size: 2rem;
         color: #797979;
-        //box-shadow: 0.3rem 0.3rem 0.5rem rgba(0, 9, 52, 0.325),
-        //    -0.3rem -0.3rem 0.3rem white;
         background: linear-gradient(145deg, #ffffff, #eaeaea);
         box-shadow: 3px 3px 5px rgba(0, 9, 52, 0.25), -2px -2px 2px #ffffff;
+
+        &:active {
+            background: #f5f5f5;
+        }
 
         &:first-child {
             left: 0;
@@ -183,6 +183,7 @@ const StyledCategory = styled.nav`
             box-shadow: 0.3rem 0.3rem 0.5rem rgba(0, 9, 52, 0.07),
                 -0.5rem -0.5rem 0.5rem white;
 
+            &:active,
             &.on {
                 font-weight: bold;
                 color: #333;

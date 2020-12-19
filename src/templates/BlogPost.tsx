@@ -24,9 +24,6 @@ export default function BlogPost({ data, pageContext }: any) {
                 </header>
                 <section dangerouslySetInnerHTML={{ __html: html }} />
                 <hr />
-                <footer>
-                    <Bio />
-                </footer>
             </article>
             <nav>
                 <ul>

@@ -54,9 +54,7 @@ export default function Bio(props: BioProps) {
                 }}
             />
             <div>
-                <b>
-                    <Link to="/about">{name}</Link>
-                </b>
+                <b>{name}</b>
                 <span>{summary}</span>
                 {!!Object.values(social).length && (
                     <SocialLinks isDarkTheme={isDarkTheme} list={social} />

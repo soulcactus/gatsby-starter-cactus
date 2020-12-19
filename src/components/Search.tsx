@@ -1,6 +1,9 @@
+import styled from '@emotion/styled';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { CgClose } from 'react-icons/cg';
+import { IoIosCloseCircle } from 'react-icons/io';
 import { FiSearch } from 'react-icons/fi';
+import { $size } from '@styles/mixins';
+import { normalBoxStyles } from '@styles/modules';
 
 export default function Search() {
     const [focusState, setFocus] = useState(false);
@@ -15,12 +18,9 @@ export default function Search() {
         setFocus(!focusState);
     }, [focusState]);
 
-    const handleKeyword = useCallback(
-        (e) => {
-            setKeyword(focusState ? e.target.value : '');
-        },
-        [focusState],
-    );
+    const handleKeyword = useCallback((e) => {
+        setKeyword(e.target.value);
+    }, []);
 
     const handleReset = useCallback(() => {
         setKeyword('');
@@ -34,7 +34,7 @@ export default function Search() {
 
     return (
         <div>
-            <div>
+            <StyledSearch>
                 <button
                     aria-label="Toggle Search Form"
                     className={focusState ? 'opened' : null}
@@ -43,91 +43,69 @@ export default function Search() {
                 >
                     <FiSearch />
                 </button>
-                <input
-                    aria-label="Search Posts"
-                    className={focusState ? 'opened' : null}
-                    onChange={handleKeyword}
-                    ref={searchRef}
-                    type="text"
-                    value={keywordState}
-                />
+                <div>
+                    <input
+                        aria-label="Search Posts"
+                        className={focusState ? 'opened' : null}
+                        onChange={handleKeyword}
+                        ref={searchRef}
+                        type="text"
+                        value={keywordState}
+                    />
+                </div>
                 {!!keywordState && (
                     <button
                         aria-label="Reset Search Keyword"
                         onClick={handleReset}
                         type="button"
                     >
-                        <CgClose />
+                        <IoIosCloseCircle />
                     </button>
                 )}
-            </div>
+            </StyledSearch>
         </div>
     );
 }
 
-// const StyledSearch = styled.div`
-//     position: relative;
-//     height: 2.5rem;
-//     margin: 0 0 4rem;
-//     text-align: right;
-//
-//     div {
-//         width: 100%;
-//     }
-//
-//     button {
-//         position: absolute;
-//         ${$size('2.5rem')};
-//
-//         &:first-child {
-//             right: 0;
-//             border-radius: 50%;
-//             padding: 0 0 0 0.1rem;
-//             background: #171c28;
-//             line-height: 1.2rem;
-//             font-size: 1.8rem;
-//             color: white;
-//
-//             &.opened {
-//                 padding: 0;
-//                 background: inherit;
-//                 color: #171c28;
-//                 transition: right 100ms ease-in;
-//
-//                 ${mediaQueries('xs')`
-//                      right: calc(100% - 2.5rem);
-//                 `}
-//
-//                 ${mediaQueries('md')`
-//                      right: calc(18rem - 2.5rem);
-//                 `}
-//             }
-//         }
-//
-//         &:last-child {
-//             right: 0;
-//             padding: 0.2rem 0 0;
-//         }
-//     }
-//
-//     input {
-//         ${$size('0', '2.5rem')};
-//         border: 0;
-//         padding: 0 0 0 2.5rem;
-//         background: transparent;
-//         font-size: 1.4rem;
-//
-//         &.opened {
-//             border-bottom: 0.1rem solid #171c28;
-//             transition: width 100ms ease-in;
-//
-//             ${mediaQueries('xs')`
-//                 width: 100%;
-//             `}
-//
-//             ${mediaQueries('md')`
-//                 width: 18rem;
-//             `}
-//         }
-//     }
-// `;
+const StyledSearch = styled.div`
+    position: relative;
+    ${$size('15.6rem', '3.6rem')};
+
+    div {
+        ${normalBoxStyles}
+        ${$size('100%')};
+        border-radius: 10rem;
+        box-shadow: 0.3rem 0.3rem 0.5rem rgba(0, 9, 52, 0.07),
+            -0.5rem -0.5rem 0.5rem white;
+    }
+
+    button {
+        position: absolute;
+        font-size: 1.6rem;
+        color: #797979;
+
+        &:first-child {
+            top: 0.8rem;
+            left: 1.2rem;
+        }
+
+        &:last-child {
+            top: 0.8rem;
+            right: 1rem;
+        }
+    }
+
+    input {
+        ${$size('15rem', '3rem')};
+        margin: 0 auto;
+        padding: 0.2rem 2.5rem 0 2.8rem;
+        border-radius: 10rem;
+        background: #f8f8f8;
+        box-shadow: 0.5rem 0.2rem 1rem rgba(0, 9, 52, 0.075),
+            inset 0.4rem 0.4rem 0.4rem rgba(0, 9, 52, 0.175),
+            inset 0 -0.4rem 0.2rem white;
+        box-sizing: border-box;
+        font-size: 1.4rem;
+        color: #797979;
+    }
+`;

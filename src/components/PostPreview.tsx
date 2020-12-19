@@ -1,14 +1,17 @@
+import styled from '@emotion/styled';
 import { Link } from 'gatsby';
 import Img from 'gatsby-image';
 
 import { PostPreviewProps } from '@interfaces/components/postPreview';
+import { $size } from '@styles/mixins';
+import { media } from '@styles/mediaQueries';
 
 export default function PostPreview(props: PostPreviewProps) {
     const { posts } = props;
 
     return (
-        <>
-            {posts.map((item) => {
+        <StyledPostPreview>
+            {posts.map((item, index) => {
                 const node = item.node;
                 const { excerpt, frontmatter } = node;
                 const { slug } = node.fields;
@@ -22,13 +25,24 @@ export default function PostPreview(props: PostPreviewProps) {
                 } = frontmatter;
 
                 return (
-                    <Link to={slug}>
-                        <article key={slug}>
+                    <Link to={slug} key={index}>
+                        <StyledPostArticle hasThumbnail={!!thumbnail}>
+                            {!!thumbnail && (
+                                <StyledThumbnail>
+                                    <Img
+                                        fixed={thumbnail.childImageSharp.fixed}
+                                        style={{
+                                            width: '100%',
+                                            height: '100%',
+                                            border: '0.1rem solid #ddd',
+                                            borderRadius: '0.5rem',
+                                        }}
+                                    />
+                                </StyledThumbnail>
+                            )}
                             <div>
                                 <header>
                                     <h3>{title ?? slug}</h3>
-                                    <span>{category}</span>
-                                    <small>{date}</small>
                                 </header>
                                 <section>
                                     <p
@@ -36,94 +50,100 @@ export default function PostPreview(props: PostPreviewProps) {
                                             __html: description ?? excerpt,
                                         }}
                                     />
-                                    {!!thumbnail && (
-                                        <div>
-                                            <Img
-                                                fixed={
-                                                    thumbnail.childImageSharp
-                                                        .fixed
-                                                }
-                                                style={{
-                                                    width: '100%',
-                                                    height: '100%',
-                                                }}
-                                            />
-                                        </div>
-                                    )}
                                 </section>
+                                <footer>
+                                    <span>{category}</span>
+                                    <small>{date}</small>
+                                </footer>
                             </div>
-                        </article>
+                        </StyledPostArticle>
                     </Link>
                 );
             })}
-        </>
+        </StyledPostPreview>
     );
 }
 
-// const StyledPostPreview = styled.article<{ thumbnail: boolean }>`
-//     margin: 0 0 7rem;
-//
-//     header {
-//         margin: 0 0 1.5rem;
-//     }
-//
-//     h3 {
-//         margin: 0 0 1rem;
-//         font-size: 2rem;
-//         font-weight: bold;
-//     }
-//
-//     span {
-//         display: inline-block;
-//         margin: 0 0.75rem 0 0;
-//         border: 0.1rem solid #ddd;
-//         border-radius: 0.5rem;
-//         padding: 0.4rem 0.75rem 0.7rem;
-//         background: #f5f5f5;
-//         font-size: 1.2rem;
-//         font-weight: bold;
-//         color: #666;
-//     }
-//
-//     small {
-//         font-size: 1.2rem;
-//     }
-//
-//     section {
-//         ${justifiedBoxStyles};
-//     }
-//
-//     p {
-//         width: ${(props) => (props.thumbnail ? 'calc(100% - 15rem)' : '100%')};
-//         line-height: 2.25rem;
-//         font-size: 1.5rem;
-//
-//         ${mediaQueries('xs')`
-//             display: -webkit-box;
-//             -webkit-line-clamp: 5;
-//             -webkit-box-orient: vertical;
-//             overflow: hidden;
-//             text-overflow: ellipsis;
-//         `}
-//
-//         ${mediaQueries('md')`
-//             display: inherit;
-//             -webkit-line-clamp: inherit;
-//             -webkit-box-orient: inherit;
-//             overflow: inherit;
-//             text-overflow: inherit;
-//         `}
-//     }
-// `;
-//
-// const StyledThumbnail = styled.div`
-//     ${mediaQueries('xs')`
-//         width: 10rem;
-//         height: 10rem;
-//     `}
-//
-//     ${mediaQueries('md')`
-//         width: 12.5rem;
-//         height: 12.5rem;
-//     `}
-// `;
+const StyledPostPreview = styled.div`
+    article {
+        margin: 3rem 0 0;
+
+        &:first-child {
+            margin: 2rem 0 0;
+        }
+    }
+`;
+
+const StyledPostArticle = styled.article<{ hasThumbnail: boolean }>`
+    display: flex;
+    flex-direction: column;
+    margin: 3rem 0 0;
+    border-radius: 1rem;
+    padding: 2.5rem 2rem;
+    background: ${(props) => props.theme.backgrounds.light};
+    box-shadow: 0.3rem 0.3rem 0.5rem rgba(0, 9, 52, 0.07),
+        -0.5rem -0.5rem 0.5rem white;
+
+    ${media('md')} {
+        flex-direction: initial;
+        justify-content: space-between;
+    }
+
+    &:active {
+        box-shadow: 0.1rem 0.1rem 0.2rem rgba(0, 9, 52, 0.05),
+            -0.2rem -0.2rem 0.2rem white;
+    }
+
+    div {
+        &:last-child {
+            flex-basis: ${(props) =>
+                props.hasThumbnail ? 'calc(100% - 13rem)' : '100%'};
+        }
+    }
+
+    h3 {
+        margin: ${(props) =>
+            props.hasThumbnail ? '1.2rem 0 1rem' : '0 0 1rem'};
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: #333;
+
+        ${media('md')} {
+            margin: 0 0 1rem;
+        }
+    }
+
+    p {
+        line-height: 2rem;
+        font-size: 1.4rem;
+        color: #797979;
+    }
+
+    footer {
+        margin: 1rem 0 0;
+        font-size: 1.3rem;
+    }
+
+    span {
+        font-weight: bold;
+        color: #333;
+    }
+
+    small {
+        color: #999;
+
+        &::before {
+            content: '|';
+            margin: 0 0.5rem;
+            font-size: 1rem;
+        }
+    }
+`;
+
+const StyledThumbnail = styled.div`
+    ${$size('100%', '18rem')};
+
+    ${media('md')} {
+        ${$size('11rem')};
+    }
+`;
