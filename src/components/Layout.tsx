@@ -2,26 +2,24 @@ import { Global, ThemeProvider } from '@emotion/react';
 import styled from '@emotion/styled';
 import Helmet from 'react-helmet';
 
-import Bio from '@components/Bio';
-import Category from '@components/Category';
 import Header from '@components/Header';
-import InfiniteScroll from '@components/InfiniteScroll';
-import Search from '@components/Search';
 import ThemeSwitch from '@components/ThemeSwitch';
-import { useTheme } from '@hooks/index';
 import { LayoutProps } from '@interfaces/components/layout';
 import globalStyles from '@styles/global';
 import theme from '@styles/theme';
-import { justifiedBoxStyles, justifySpaceBetween } from '@styles/modules';
+import { justifiedBoxStyles } from '@styles/modules';
 
 export default function Layout(props: LayoutProps) {
-    const { categories, children, title } = props;
-    const rootPath = `${__PATH_PREFIX__}/`;
-    const [themeState, handleTheme] = useTheme(false);
+    const { children, handleTheme, isDarkTheme, title } = props;
+    // const rootPath = `${__PATH_PREFIX__}/`;
 
     return (
         <ThemeProvider theme={theme}>
-            <Helmet>
+            <Helmet
+                bodyAttributes={{
+                    class: 'light',
+                }}
+            >
                 <link
                     href="//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css"
                     rel="stylesheet"
@@ -30,33 +28,14 @@ export default function Layout(props: LayoutProps) {
             </Helmet>
             <Global styles={globalStyles} />
             <StyledLayout>
-                <div>
-                    <Header title={title}>
-                        <ThemeSwitch
-                            handleChange={handleTheme}
-                            isDarkTheme={themeState}
-                        />
-                    </Header>
-                    {location.pathname === rootPath && (
-                        <>
-                            <Bio isDarkTheme={themeState} />
-                            <Category categories={categories as string[]} />
-                            <StyledToolbar>
-                                <div>
-                                    <InfiniteScroll />
-                                </div>
-                                <Search />
-                            </StyledToolbar>
-                        </>
-                    )}
-                    <main>
-                        {children}
-                        {location.pathname !== rootPath && (
-                            <Bio isDarkTheme={themeState} />
-                        )}
-                    </main>
-                    <footer>©Soulcactus</footer>
-                </div>
+                <Header title={title}>
+                    <ThemeSwitch
+                        handleChange={handleTheme}
+                        isDarkTheme={isDarkTheme}
+                    />
+                </Header>
+                {children}
+                <StyledFooter>©Soulcactus</StyledFooter>
             </StyledLayout>
         </ThemeProvider>
     );
@@ -71,4 +50,11 @@ export const StyledLayout = styled.div`
 
 export const StyledToolbar = styled.div`
     ${justifiedBoxStyles}
+`;
+
+export const StyledFooter = styled.footer`
+    padding: 3.5rem 0;
+    text-align: center;
+    font-size: 1.2rem;
+    color: #333;
 `;

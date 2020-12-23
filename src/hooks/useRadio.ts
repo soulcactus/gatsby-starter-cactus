@@ -1,10 +1,10 @@
 import { useCallback, useState } from 'react';
 
-const useTheme = (initialState: boolean) => {
+const useRadio = (initialState: string) => {
     const [state, setter] = useState(initialState);
-    const handler = useCallback((e) => setter(e.target.checked), []);
+    const handler = useCallback((e) => setter(e.target.id), []);
 
     return [state, handler] as const;
 };
 
-export default useTheme;
+export default useRadio;

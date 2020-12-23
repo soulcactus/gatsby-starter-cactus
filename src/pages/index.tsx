@@ -1,23 +1,47 @@
 import { graphql } from 'gatsby';
 
-import Layout from '@components/Layout';
+import Bio from '@components/Bio';
+import Layout, { StyledToolbar } from '@components/Layout';
 import PostPreview from '@components/PostPreview';
 import SEO from '@components/SEO';
 import { BlogIndexProps } from '@interfaces/pages/blogIndex';
+import Category from '@components/Category';
+import ViewPosts from '@components/ViewPosts';
+import Search from '@components/Search';
+import { useRadio, useTheme } from '@hooks/index';
 
 const BlogIndex = (props: BlogIndexProps) => {
     const { data } = props;
     const siteTitle = data.site.siteMetadata.title;
     const posts = data.allMarkdownRemark.edges;
+    const [themeState, handleTheme] = useTheme(false);
+    const [viewPageState, handleViewPage] = useRadio('infiniteScroll');
+    const isInfiniteScroll = viewPageState === 'infiniteScroll';
 
     const categories = Array.from(
         new Set(posts.map((item) => item.node.frontmatter.category).sort()),
     );
 
     return (
-        <Layout categories={categories} title={siteTitle}>
+        <Layout
+            categories={categories}
+            handleTheme={handleTheme}
+            isDarkTheme={themeState}
+            title={siteTitle}
+        >
             <SEO title="All posts" />
-            <PostPreview posts={posts} />
+            <Bio />
+            <Category categories={categories as string[]} />
+            <StyledToolbar>
+                <ViewPosts
+                    isInfiniteScroll={isInfiniteScroll}
+                    handleChange={handleViewPage}
+                />
+                <Search />
+            </StyledToolbar>
+            <main>
+                <PostPreview posts={posts} />
+            </main>
         </Layout>
     );
 };

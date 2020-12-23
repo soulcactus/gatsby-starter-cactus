@@ -1,14 +1,11 @@
 import styled from '@emotion/styled';
-import { useStaticQuery, graphql, Link } from 'gatsby';
+import { useStaticQuery, graphql } from 'gatsby';
 import Image from 'gatsby-image';
 
 import SocialLinks from '@components/SocialLinks';
-import { BioProps } from '@interfaces/components/bio';
 import { normalBoxStyles } from '@styles/modules';
 
-export default function Bio(props: BioProps) {
-    const { isDarkTheme } = props;
-
+export default function Bio() {
     const data = useStaticQuery(graphql`
         query BioQuery {
             avatar: file(absolutePath: { regex: "/profile.png/" }) {
@@ -57,7 +54,7 @@ export default function Bio(props: BioProps) {
                 <b>{name}</b>
                 <span>{summary}</span>
                 {!!Object.values(social).length && (
-                    <SocialLinks isDarkTheme={isDarkTheme} list={social} />
+                    <SocialLinks list={social} />
                 )}
             </div>
         </StyledBio>
@@ -68,19 +65,16 @@ const StyledBio = styled.div`
     ${normalBoxStyles};
     border-radius: 1rem;
     padding: 1.5rem;
-    background: ${(props) => props.theme.backgrounds.light};
-    box-shadow: 0.3rem 0.3rem 0.5rem rgba(0, 9, 52, 0.07),
-        -0.5rem -0.5rem 0.5rem white;
+    box-shadow: var(--box-shadow-color-1);
 
     div {
-        padding-bottom: 1rem;
+        padding: 0 0 1rem;
         font-size: 1.5rem;
     }
 
     b {
         display: block;
         margin: 0.5rem 0 0.75rem;
-        color: #333333;
         font-size: 1.6rem;
         font-weight: bolder;
     }

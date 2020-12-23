@@ -20,7 +20,7 @@ export default function ThemeSwitch(props: ThemeSwitchProps) {
             {isDarkTheme && (
                 <Helmet
                     bodyAttributes={{
-                        class: 'dark',
+                        class: isDarkTheme ? 'dark' : 'light',
                     }}
                 />
             )}

@@ -10,7 +10,7 @@ export default function PostPreview(props: PostPreviewProps) {
     const { posts } = props;
 
     return (
-        <StyledPostPreview>
+        <>
             {posts.map((item, index) => {
                 const node = item.node;
                 const { excerpt, frontmatter } = node;
@@ -60,29 +60,18 @@ export default function PostPreview(props: PostPreviewProps) {
                     </Link>
                 );
             })}
-        </StyledPostPreview>
+        </>
     );
 }
-
-const StyledPostPreview = styled.div`
-    article {
-        margin: 3rem 0 0;
-
-        &:first-child {
-            margin: 2rem 0 0;
-        }
-    }
-`;
 
 const StyledPostArticle = styled.article<{ hasThumbnail: boolean }>`
     display: flex;
     flex-direction: column;
-    margin: 3rem 0 0;
+    margin: 2rem 0 3.5rem;
     border-radius: 1rem;
     padding: 2.5rem 2rem;
     background: ${(props) => props.theme.backgrounds.light};
-    box-shadow: 0.3rem 0.3rem 0.5rem rgba(0, 9, 52, 0.07),
-        -0.5rem -0.5rem 0.5rem white;
+    box-shadow: var(--box-shadow-color-1);
 
     ${media('md')} {
         flex-direction: initial;
@@ -97,19 +86,19 @@ const StyledPostArticle = styled.article<{ hasThumbnail: boolean }>`
     div {
         &:last-child {
             flex-basis: ${(props) =>
-                props.hasThumbnail ? 'calc(100% - 13rem)' : '100%'};
+                props.hasThumbnail ? 'calc(100% - 13.1rem)' : '100%'};
         }
     }
 
     h3 {
-        margin: ${(props) =>
-            props.hasThumbnail ? '1.2rem 0 1rem' : '0 0 1rem'};
+        margin: ${(props) => (props.hasThumbnail ? '1.2rem 0' : '0 0 1.2rem')};
+        line-height: 2.3rem;
         font-size: 1.8rem;
         font-weight: bold;
         color: #333;
 
         ${media('md')} {
-            margin: 0 0 1rem;
+            margin: -0.35rem 0 1rem;
         }
     }
 
@@ -144,6 +133,6 @@ const StyledThumbnail = styled.div`
     ${$size('100%', '18rem')};
 
     ${media('md')} {
-        ${$size('11rem')};
+        ${$size('11.1rem')};
     }
 `;

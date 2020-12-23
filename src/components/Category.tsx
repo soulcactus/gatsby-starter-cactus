@@ -180,8 +180,7 @@ const StyledCategory = styled.nav`
             line-height: unset;
             font-size: 1.3rem;
             color: #797979;
-            box-shadow: 0.3rem 0.3rem 0.5rem rgba(0, 9, 52, 0.07),
-                -0.5rem -0.5rem 0.5rem white;
+            box-shadow: var(--box-shadow-color-1);
 
             &:active,
             &.on {

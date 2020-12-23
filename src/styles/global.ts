@@ -6,6 +6,14 @@ import { CustomTheme } from '@styles/theme';
 export const globalStyles = (props: CustomTheme) => css`
     ${reset};
 
+    body.light {
+        --background-color: #f8f8f8;
+        --font-color-normal: #333;
+        --font-color-gray: #797979;
+        --box-shadow-color-1: 0.3rem 0.3rem 0.5rem rgba(0, 9, 52, 0.07),
+            -0.5rem -0.5rem 0.5rem white;
+    }
+
     * {
         box-sizing: border-box;
     }
@@ -16,17 +24,13 @@ export const globalStyles = (props: CustomTheme) => css`
     }
 
     body {
-        background: ${props.backgrounds.light};
+        background: var(--background-color);
         word-wrap: break-word;
         word-break: keep-all;
-        font-family: ${props.fontFamily.normal};
-        font-size: ${props.fontSize.normal};
-        color: ${props.colors.normal};
-        transition: background 0.15s ease-in-out 0.05s;
-
-        &.dark {
-            background: ${props.backgrounds.dark};
-        }
+        font-family: -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo',
+            'Spoqa Han Sans Neo', 'Segoe UI', sans-serif, 'Apple Color Emoji',
+            'Segoe UI Emoji', 'Segoe UI Symbol';
+        color: var(--font-color-normal);
     }
 
     a {

@@ -1,6 +1,4 @@
-import { IsDarkTheme } from '@interfaces/commons';
-
-export interface SocialLinksProps extends IsDarkTheme {
+export interface SocialLinksProps {
     list: {
         facebook: string;
         github: string;

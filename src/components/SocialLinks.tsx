@@ -3,10 +3,9 @@ import { Link } from 'gatsby';
 
 import { SiFacebook, SiGithub, SiTwitter } from 'react-icons/si';
 import { SocialLinksProps } from '@interfaces/components/socialLinks';
-import { normalBoxStyles } from '@styles/modules';
 
 export default function SocialLinks(props: SocialLinksProps) {
-    const { isDarkTheme, list } = props;
+    const { list } = props;
     const { facebook, github, twitter } = list;
 
     return (

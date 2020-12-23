@@ -75,8 +75,7 @@ const StyledSearch = styled.div`
         ${normalBoxStyles}
         ${$size('100%')};
         border-radius: 10rem;
-        box-shadow: 0.3rem 0.3rem 0.5rem rgba(0, 9, 52, 0.07),
-            -0.5rem -0.5rem 0.5rem white;
+        box-shadow: var(--box-shadow-color-1);
     }
 
     button {

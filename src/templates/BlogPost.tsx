@@ -17,32 +17,35 @@ export default function BlogPost({ data, pageContext }: any) {
     return (
         <Layout title={siteTitle}>
             <SEO description={description || excerpt} title={title} />
-            <article>
-                <header>
-                    <h1>{title}</h1>
-                    <p>{date}</p>
-                </header>
-                <section dangerouslySetInnerHTML={{ __html: html }} />
-                <hr />
-            </article>
-            <nav>
-                <ul>
-                    <li>
-                        {!!previous && (
-                            <Link to={previousSlug} rel="prev">
-                                ← {previousTitle}
-                            </Link>
-                        )}
-                    </li>
-                    <li>
-                        {!!next && (
-                            <Link to={nextSlug} rel="next">
-                                {nextTitle} →
-                            </Link>
-                        )}
-                    </li>
-                </ul>
-            </nav>
+            <main>
+                <article>
+                    <header>
+                        <h1>{title}</h1>
+                        <p>{date}</p>
+                    </header>
+                    <section dangerouslySetInnerHTML={{ __html: html }} />
+                    <hr />
+                </article>
+                <nav>
+                    <ul>
+                        <li>
+                            {!!previous && (
+                                <Link to={previousSlug} rel="prev">
+                                    ← {previousTitle}
+                                </Link>
+                            )}
+                        </li>
+                        <li>
+                            {!!next && (
+                                <Link to={nextSlug} rel="next">
+                                    {nextTitle} →
+                                </Link>
+                            )}
+                        </li>
+                    </ul>
+                </nav>
+                <Bio />
+            </main>
         </Layout>
     );
 }
