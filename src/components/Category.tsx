@@ -25,12 +25,12 @@ export default function Category(props: CategoryProps) {
     useEffect(() => {
         const container = containerRef.current;
         const categoryList = container.querySelector('ul');
-        const categoryItems = categoryList.querySelectorAll('li');
-        let previousWidth = 0;
+        const categoryItems = categoryList.querySelectorAll('div');
+        let previousWidth = 50;
 
         categoryItems.forEach((item: any, index: number) => {
             if (index < categoryState) {
-                previousWidth += item.clientWidth;
+                previousWidth += item.clientWidth + 10;
             }
         });
 
@@ -38,12 +38,14 @@ export default function Category(props: CategoryProps) {
             containerId: 'categoryContainer',
             delay: 50,
             duration: 120,
-            offset:
-                -container.scrollWidth +
-                previousWidth -
-                (185 -
-                    Math.floor(categoryItems[categoryState].clientWidth / 2)) +
-                (700 - container.clientWidth) / 2,
+            offset: -(
+                container.scrollWidth -
+                previousWidth +
+                ((container.clientWidth -
+                    categoryItems[categoryState].clientWidth) /
+                    2 -
+                    120)
+            ),
             horizontal: true,
             ignoreCancelEvents: true,
             smooth: 'linear',
@@ -157,7 +159,7 @@ const StyledCategory = styled.nav`
 
     li {
         &:not(:last-child) {
-            padding: var(--size-0-10-0-0);
+            margin: var(--size-0-10-0-0);
         }
 
         button {
