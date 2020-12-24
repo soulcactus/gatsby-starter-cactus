@@ -68,7 +68,7 @@
   },
   "scripts": {
     "build": "gatsby build",
-    "develop": "gatsby develop --host=192.168.0.15 --port=8000",
+    "develop": "gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "start": "yarn run develop",
     "serve": "gatsby serve",
