@@ -22,13 +22,12 @@ export default function Header(props: HeaderProps) {
 
 const StyledHeader = styled.header`
     ${justifiedBoxStyles};
-    ${$size('100%', '10rem')};
-    margin: 0 0 5rem;
-    padding: 0 0 0.8rem;
+    ${$size('var(--size-percent-100)', 'var(--size-100)')};
+    margin: var(--size-0-0-50);
+    padding: var(--size-0-0-8);
 
     h1 {
-        font-size: ${(props) => props.theme.fontSize.title};
-        font-weight: bolder;
-        color: #333333;
+        font-size: var(--size-30);
+        font-weight: bold;
     }
 `;

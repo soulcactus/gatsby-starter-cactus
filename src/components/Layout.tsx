@@ -6,8 +6,8 @@ import Header from '@components/Header';
 import ThemeSwitch from '@components/ThemeSwitch';
 import { LayoutProps } from '@interfaces/components/layout';
 import globalStyles from '@styles/global';
-import theme from '@styles/theme';
 import { justifiedBoxStyles } from '@styles/modules';
+import theme from '@styles/theme';
 
 export default function Layout(props: LayoutProps) {
     const { children, handleTheme, isDarkTheme, title } = props;
@@ -42,10 +42,10 @@ export default function Layout(props: LayoutProps) {
 }
 
 export const StyledLayout = styled.div`
-    width: 100%;
-    max-width: 74rem;
-    margin: 0 auto;
-    padding: 0 2rem;
+    width: var(--size-percent-100);
+    max-width: var(--size-740);
+    margin: var(--margin-auto);
+    padding: var(--size-0-20);
 `;
 
 export const StyledToolbar = styled.div`
@@ -53,8 +53,7 @@ export const StyledToolbar = styled.div`
 `;
 
 export const StyledFooter = styled.footer`
-    padding: 3.5rem 0;
+    padding: var(--size-35-0);
     text-align: center;
-    font-size: 1.2rem;
-    color: #333;
+    font-size: var(--size-12);
 `;

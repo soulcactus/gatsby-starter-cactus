@@ -15,6 +15,7 @@ export default function ThemeSwitch(props: ThemeSwitchProps) {
         isDarkTheme ? THEME.LIGHT : THEME.DARK
     } Theme`;
 
+    // TODO: theme class to constants
     return (
         <>
             {isDarkTheme && (
@@ -39,17 +40,14 @@ export default function ThemeSwitch(props: ThemeSwitchProps) {
 }
 
 const StyledSwitch = styled.button`
-    ${$size('5.5rem', '3rem')};
+    ${$size('var(--size-55)', 'var(--size-30)')};
 
     label {
         display: block;
         position: relative;
-        ${$size('100%')};
-        border-radius: 10rem;
-        background: ${(props) => props.theme.backgrounds.light};
-        box-shadow: 0.5rem 0.2rem 1rem rgba(0, 9, 52, 0.075),
-            inset 0.4rem 0.4rem 0.4rem rgba(0, 9, 52, 0.25),
-            inset 0 -0.4rem 0.2rem white;
+        ${$size('var(--size-percent-100)')};
+        border-radius: var(--size-100);
+        box-shadow: var(--box-shadow-color-7);
         cursor: pointer;
     }
 
@@ -57,27 +55,25 @@ const StyledSwitch = styled.button`
         display: none;
 
         &:checked + div {
-            left: 2.5rem;
-            transition: left 200ms linear;
+            left: var(--size-25);
+            transition: var(--transition-left-linear);
         }
     }
 
     div {
         ${normalBoxStyles};
         position: absolute;
-        top: 0;
-        left: 0;
-        ${$size('3rem')};
-        border-radius: 50%;
-        background: ${(props) => props.theme.backgrounds.light};
-        box-shadow: 0.3rem 0.3rem 0.5rem rgba(0, 9, 52, 0.25),
-            -0.3rem -0.3rem 0.3rem white;
-        font-size: 2rem;
-        color: #797979;
-        transition: left 200ms linear;
+        top: var(--size-0);
+        left: var(--size-0);
+        ${$size('var(--size-30)')};
+        border-radius: var(--size-percent-50);
+        font-size: var(--size-20);
+        color: var(--color-sub-text-1);
+        box-shadow: var(--box-shadow-color-6);
+        transition: var(--transition-left-linear);
     }
 
     svg {
-        margin: 0 auto;
+        margin: var(--margin-auto);
     }
 `;

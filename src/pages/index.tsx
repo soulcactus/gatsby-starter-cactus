@@ -1,14 +1,14 @@
 import { graphql } from 'gatsby';
 
 import Bio from '@components/Bio';
+import Category from '@components/Category';
 import Layout, { StyledToolbar } from '@components/Layout';
 import PostPreview from '@components/PostPreview';
-import SEO from '@components/SEO';
-import { BlogIndexProps } from '@interfaces/pages/blogIndex';
-import Category from '@components/Category';
-import ViewPosts from '@components/ViewPosts';
 import Search from '@components/Search';
+import SEO from '@components/SEO';
+import ViewPosts from '@components/ViewPosts';
 import { useRadio, useTheme } from '@hooks/index';
+import { BlogIndexProps } from '@interfaces/pages/blogIndex';
 
 const BlogIndex = (props: BlogIndexProps) => {
     const { data } = props;

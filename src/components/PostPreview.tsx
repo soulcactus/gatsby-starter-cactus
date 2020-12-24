@@ -18,8 +18,8 @@ export default function PostPreview(props: PostPreviewProps) {
 
                 const {
                     category,
-                    date,
                     description,
+                    date,
                     thumbnail,
                     title,
                 } = frontmatter;
@@ -32,10 +32,10 @@ export default function PostPreview(props: PostPreviewProps) {
                                     <Img
                                         fixed={thumbnail.childImageSharp.fixed}
                                         style={{
-                                            width: '100%',
-                                            height: '100%',
-                                            border: '0.1rem solid #ddd',
-                                            borderRadius: '0.5rem',
+                                            width: 'var(--size-percent-100)',
+                                            height: 'var(--size-percent-100)',
+                                            border: 'var(--border-1)',
+                                            borderRadius: 'var(--size-5)',
                                         }}
                                     />
                                 </StyledThumbnail>
@@ -67,10 +67,9 @@ export default function PostPreview(props: PostPreviewProps) {
 const StyledPostArticle = styled.article<{ hasThumbnail: boolean }>`
     display: flex;
     flex-direction: column;
-    margin: 2rem 0 3.5rem;
-    border-radius: 1rem;
-    padding: 2.5rem 2rem;
-    background: ${(props) => props.theme.backgrounds.light};
+    margin: var(--size-20-0-35);
+    border-radius: var(--size-10);
+    padding: var(--size-25-20);
     box-shadow: var(--box-shadow-color-1);
 
     ${media('md')} {
@@ -79,60 +78,60 @@ const StyledPostArticle = styled.article<{ hasThumbnail: boolean }>`
     }
 
     &:active {
-        box-shadow: 0.1rem 0.1rem 0.2rem rgba(0, 9, 52, 0.05),
-            -0.2rem -0.2rem 0.2rem white;
+        box-shadow: var(--box-shadow-color-5);
     }
 
     div {
         &:last-child {
             flex-basis: ${(props) =>
-                props.hasThumbnail ? 'calc(100% - 13.1rem)' : '100%'};
+                props.hasThumbnail
+                    ? 'var(--size-calc-percent-100-minus-thirteen-point-one)'
+                    : 'var(--size-percent-100)'};
         }
     }
 
     h3 {
-        margin: ${(props) => (props.hasThumbnail ? '1.2rem 0' : '0 0 1.2rem')};
-        line-height: 2.3rem;
-        font-size: 1.8rem;
+        margin: ${(props) =>
+            props.hasThumbnail ? 'var(--size-12-0)' : 'var(--size-0-0-12)'};
+        line-height: var(--size-23);
+        font-size: var(--size-18);
         font-weight: bold;
-        color: #333;
 
         ${media('md')} {
-            margin: -0.35rem 0 1rem;
+            margin: var(--size-minus-3-point-5-0-10);
         }
     }
 
     p {
-        line-height: 2rem;
-        font-size: 1.4rem;
-        color: #797979;
+        line-height: var(--size-20);
+        font-size: var(--size-14);
+        color: var(--color-sub-text-1);
     }
 
     footer {
-        margin: 1rem 0 0;
-        font-size: 1.3rem;
+        margin: var(--size-10-0-0);
+        font-size: var(--size-13);
     }
 
     span {
         font-weight: bold;
-        color: #333;
     }
 
     small {
-        color: #999;
+        color: var(--color-sub-text-2);
 
         &::before {
             content: '|';
-            margin: 0 0.5rem;
-            font-size: 1rem;
+            margin: var(--size-0-5);
+            font-size: var(--size-10);
         }
     }
 `;
 
 const StyledThumbnail = styled.div`
-    ${$size('100%', '18rem')};
+    ${$size('var(--size-percent-100)', 'var(--size-180)')};
 
     ${media('md')} {
-        ${$size('11.1rem')};
+        ${$size('var(--size-111)')};
     }
 `;

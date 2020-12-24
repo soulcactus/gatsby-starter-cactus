@@ -40,13 +40,13 @@ export default function Bio() {
                 alt={name}
                 fixed={data.avatar.childImageSharp.fixed}
                 imgStyle={{
-                    border: '0.1rem solid #ddd',
-                    borderRadius: '50%',
+                    border: 'var(--border-1)',
+                    borderRadius: 'var(--size-percent-50)',
                 }}
                 style={{
-                    minWidth: '8rem',
-                    margin: '0 1.5rem 0 0',
-                    borderRadius: '50%',
+                    minWidth: 'var(--size-80)',
+                    margin: 'var(--size-0-15-0-0)',
+                    borderRadius: 'var(--size-percent-50)',
                     overflow: 'hidden',
                 }}
             />
@@ -63,24 +63,24 @@ export default function Bio() {
 
 const StyledBio = styled.div`
     ${normalBoxStyles};
-    border-radius: 1rem;
-    padding: 1.5rem;
+    border-radius: var(--size-10);
+    padding: var(--size-15);
     box-shadow: var(--box-shadow-color-1);
 
     div {
-        padding: 0 0 1rem;
-        font-size: 1.5rem;
+        padding: var(--size-0-0-10);
+        font-size: var(--size-15);
     }
 
     b {
         display: block;
-        margin: 0.5rem 0 0.75rem;
-        font-size: 1.6rem;
-        font-weight: bolder;
+        margin: var(--size-5-0-7-point-5);
+        font-size: var(--size-16);
+        font-weight: bold;
     }
 
     span {
-        font-size: 1.3rem;
-        color: #797979;
+        font-size: var(--size-13);
+        color: var(--color-sub-text-1);
     }
 `;

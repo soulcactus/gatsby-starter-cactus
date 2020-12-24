@@ -1,5 +1,6 @@
 import facepaint from 'facepaint';
 
+// TODO: check
 export const breakpoints = {
     xs: 0,
     sm: 375,

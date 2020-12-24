@@ -1,67 +1,41 @@
 import styled from '@emotion/styled';
-import { useCallback, useEffect, useRef, useState } from 'react';
-import { IoIosCloseCircle } from 'react-icons/io';
+import { useRef } from 'react';
 import { FiSearch } from 'react-icons/fi';
+import { IoIosCloseCircle } from 'react-icons/io';
+
+import { useInput } from '@hooks/index';
 import { $size } from '@styles/mixins';
 import { normalBoxStyles } from '@styles/modules';
 
 export default function Search() {
-    const [focusState, setFocus] = useState(false);
-    const [keywordState, setKeyword] = useState('');
     const searchRef = useRef(null);
-
-    const handleFocus = useCallback(() => {
-        if (focusState) {
-            setKeyword('');
-        }
-
-        setFocus(!focusState);
-    }, [focusState]);
-
-    const handleKeyword = useCallback((e) => {
-        setKeyword(e.target.value);
-    }, []);
-
-    const handleReset = useCallback(() => {
-        setKeyword('');
-    }, []);
-
-    useEffect(() => {
-        if (focusState) {
-            searchRef.current.focus();
-        }
-    }, [focusState]);
+    const [keywordState, handleKeyword, handleResetKeyword] = useInput('');
 
     return (
         <div>
             <StyledSearch>
-                <button
-                    aria-label="Toggle Search Form"
-                    className={focusState ? 'opened' : null}
-                    onClick={handleFocus}
-                    type="button"
-                >
-                    <FiSearch />
-                </button>
                 <div>
+                    <label htmlFor="search">
+                        <FiSearch />
+                    </label>
                     <input
                         aria-label="Search Posts"
-                        className={focusState ? 'opened' : null}
+                        id="search"
                         onChange={handleKeyword}
                         ref={searchRef}
                         type="text"
                         value={keywordState}
                     />
+                    {!!keywordState && (
+                        <button
+                            aria-label="Reset Search Keyword"
+                            onClick={handleResetKeyword}
+                            type="button"
+                        >
+                            <IoIosCloseCircle />
+                        </button>
+                    )}
                 </div>
-                {!!keywordState && (
-                    <button
-                        aria-label="Reset Search Keyword"
-                        onClick={handleReset}
-                        type="button"
-                    >
-                        <IoIosCloseCircle />
-                    </button>
-                )}
             </StyledSearch>
         </div>
     );
@@ -69,42 +43,40 @@ export default function Search() {
 
 const StyledSearch = styled.div`
     position: relative;
-    ${$size('15.6rem', '3.6rem')};
+    ${$size('var(--size-156)', 'var(--size-36)')};
 
     div {
         ${normalBoxStyles}
-        ${$size('100%')};
-        border-radius: 10rem;
+        ${$size('var(--size-percent-100)')};
+        border-radius: var(--size-100);
         box-shadow: var(--box-shadow-color-1);
+    }
+
+    // TODO: style module
+    label {
+        position: absolute;
+        top: var(--size-11);
+        left: var(--size-12);
+        font-size: var(--size-16);
+        color: var(--color-sub-text-1);
     }
 
     button {
         position: absolute;
-        font-size: 1.6rem;
-        color: #797979;
-
-        &:first-child {
-            top: 0.8rem;
-            left: 1.2rem;
-        }
-
-        &:last-child {
-            top: 0.8rem;
-            right: 1rem;
-        }
+        top: var(--size-8);
+        right: var(--size-10);
+        font-size: var(--size-16);
+        color: var(--color-sub-text-1);
     }
 
     input {
-        ${$size('15rem', '3rem')};
-        margin: 0 auto;
-        padding: 0.2rem 2.5rem 0 2.8rem;
-        border-radius: 10rem;
-        background: #f8f8f8;
-        box-shadow: 0.5rem 0.2rem 1rem rgba(0, 9, 52, 0.075),
-            inset 0.4rem 0.4rem 0.4rem rgba(0, 9, 52, 0.175),
-            inset 0 -0.4rem 0.2rem white;
+        ${$size('var(--size-150)', 'var(--size-30)')};
+        margin: var(--margin-auto);
+        border-radius: var(--size-100);
+        padding: var(--size-2-25-0-28);
+        font-size: var(--size-14);
+        color: var(--color-sub-text-1);
         box-sizing: border-box;
-        font-size: 1.4rem;
-        color: #797979;
+        box-shadow: var(--box-shadow-color-4);
     }
 `;

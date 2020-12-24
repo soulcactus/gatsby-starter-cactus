@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import { Link } from 'gatsby';
-
 import { SiFacebook, SiGithub, SiTwitter } from 'react-icons/si';
+
 import { SocialLinksProps } from '@interfaces/components/socialLinks';
 
 export default function SocialLinks(props: SocialLinksProps) {
@@ -36,29 +36,26 @@ export default function SocialLinks(props: SocialLinksProps) {
 }
 
 const StyledSocialLinks = styled.ul`
-    margin: 1rem 0 0;
+    margin: var(--size-10-0-0);
 
     li {
         display: inline-block;
-        border-radius: 50%;
-        padding: 0.3rem 0.5rem;
-        font-size: 2rem;
-        color: #797979;
-        box-shadow: 0.3rem 0.3rem 0.5rem rgba(0, 9, 52, 0.25),
-            -0.3rem -0.3rem 0.3rem white;
+        border-radius: var(--size-percent-50);
+        padding: var(--size-3-5);
+        font-size: var(--size-20);
+        color: var(--color-sub-text-1);
+        box-shadow: var(--box-shadow-color-6);
 
         &:not(:last-child) {
-            margin: 0 1rem 0 0;
+            margin: var(--size-0-10-0-0);
         }
 
         &:active {
-            box-shadow: 0.5rem 0.2rem 1rem rgba(0, 9, 52, 0.075),
-                inset 0.4rem 0.4rem 0.4rem rgba(0, 9, 52, 0.25),
-                inset 0 -0.4rem 0.2rem white;
+            box-shadow: var(--box-shadow-color-7);
         }
     }
 
     svg {
-        margin: 0.2rem 0 0;
+        margin: var(--size-2-0-0);
     }
 `;

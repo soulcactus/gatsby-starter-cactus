@@ -1,8 +1,9 @@
 import styled from '@emotion/styled';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import * as Scroll from 'react-scroll';
 
+import { useCategory } from '@hooks/index';
 import { CategoryProps } from '@interfaces/components/category';
 import { $size } from '@styles/mixins';
 import { normalBoxStyles } from '@styles/modules';
@@ -12,24 +13,14 @@ const Element = Scroll.Element;
 
 export default function Category(props: CategoryProps) {
     const { categories } = props;
-    const [categoryState, setCategory] = useState(0);
     const containerRef = useRef(null);
 
-    const handleCategory = useCallback((index) => {
-        setCategory(index);
-    }, []);
-
-    const handlePrevious = useCallback(() => {
-        if (categoryState !== 0) {
-            setCategory(categoryState - 1);
-        }
-    }, [categoryState]);
-
-    const handleNext = useCallback(() => {
-        if (categoryState !== categories?.length) {
-            setCategory(categoryState + 1);
-        }
-    }, [categories, categoryState]);
+    const [
+        categoryState,
+        handleCategory,
+        handlePrevious,
+        handleNext,
+    ] = useCategory(0, categories);
 
     useEffect(() => {
         const container = containerRef.current;
@@ -113,15 +104,13 @@ export default function Category(props: CategoryProps) {
 const StyledCategory = styled.nav`
     ${normalBoxStyles};
     position: relative;
-    ${$size('100%', '5rem')};
-    margin: 2rem 0 3rem;
-    border-radius: 0.5rem;
-    background: ${(props) => props.theme.backgrounds.light};
-    box-shadow: 0.3rem 0.3rem 0.5rem rgba(0, 9, 52, 0.1),
-        -0.5rem -0.5rem 0.5rem white;
+    ${$size('var(--size-percent-100)', 'var(--size-50)')};
+    margin: var(--size-20-0-30);
+    border-radius: var(--size-5);
     white-space: nowrap;
-    overflow-x: scroll;
+    overflow: scroll auto;
     -ms-overflow-style: none;
+    box-shadow: var(--box-shadow-color-2);
     scrollbar-width: none;
 
     &::-webkit-scrollbar {
@@ -130,70 +119,67 @@ const StyledCategory = styled.nav`
 
     > button {
         position: sticky;
-        min-width: 3rem;
-        height: 3rem;
-        border-radius: 50%;
-        line-height: 1.2rem;
-        font-size: 2rem;
-        color: #797979;
-        background: linear-gradient(145deg, #ffffff, #eaeaea);
-        box-shadow: 3px 3px 5px rgba(0, 9, 52, 0.25), -2px -2px 2px #ffffff;
+        min-width: var(--size-30);
+        height: var(--size-30);
+        border-radius: var(--size-percent-50);
+        background: var(--color-gradient);
+        line-height: var(--size-12);
+        font-size: var(--size-20);
+        color: var(--color-sub-text-1);
+        box-shadow: var(--box-shadow-color-3);
 
         &:active {
-            background: #f5f5f5;
+            background: var(--color-active);
         }
 
         &:first-child {
-            left: 0;
+            left: var(--size-0);
 
             svg {
-                margin-right: 0.2rem;
+                margin: var(--size-0-2-0-0);
             }
         }
 
         &:last-child {
-            right: 0;
+            right: var(--size-0);
 
             svg {
-                margin-left: 0.2rem;
+                margin: var(--size-0-0-0-2);
             }
         }
     }
 
     ul {
-        display: flex;
-        align-items: center;
-        height: 100%;
-        margin: 0 2rem;
+        ${normalBoxStyles};
+        height: var(--size-percent-100);
+        margin: var(--size-0-20);
     }
 
     li {
         &:not(:last-child) {
-            padding: 0 1rem 0 0;
+            padding: var(--size-0-10-0-0);
         }
 
         button {
-            ${$size('100%', '3rem')};
-            border-radius: 3rem;
-            padding: 0 2rem 0.2rem;
-            background: ${(props) => props.theme.backgrounds.light};
+            ${$size('var(--size-percent-100)', 'var(--size-30)')};
+            border-radius: var(--size-30);
+            padding: var(--size-0-20-2);
+            background: var(--color-main);
             line-height: unset;
-            font-size: 1.3rem;
-            color: #797979;
+            font-size: var(--size-13);
+            color: var(--color-sub-text-1);
             box-shadow: var(--box-shadow-color-1);
 
             &:active,
             &.on {
                 font-weight: bold;
-                color: #333;
-                box-shadow: 0.5rem 0.2rem 1rem rgba(0, 9, 52, 0.075),
-                    inset 0.4rem 0.4rem 0.4rem rgba(0, 9, 52, 0.175),
-                    inset 0 -0.4rem 0.2rem white;
+                color: var(--color-text);
+                box-shadow: var(--box-shadow-color-4);
             }
         }
     }
 `;
 
 const StyledElement = styled(Element)`
-    height: 100%;
+    height: var(--size-percent-100);
 `;
