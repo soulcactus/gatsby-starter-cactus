@@ -41,7 +41,7 @@ export default function Category(props: CategoryProps) {
             offset:
                 -container.scrollWidth +
                 previousWidth -
-                (180 -
+                (185 -
                     Math.floor(categoryItems[categoryState].clientWidth / 2)) +
                 (700 - container.clientWidth) / 2,
             horizontal: true,
