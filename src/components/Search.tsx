@@ -74,6 +74,7 @@ const StyledSearch = styled.div`
         margin: var(--margin-auto);
         border-radius: var(--size-100);
         padding: var(--size-2-25-0-28);
+        background: transparent;
         font-size: var(--size-14);
         color: var(--color-sub-text-1);
         box-sizing: border-box;
