@@ -104,6 +104,7 @@ export const globalStyles = (props: CustomTheme) => css`
         font-family: -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo',
             'Spoqa Han Sans Neo', 'Segoe UI', sans-serif, 'Apple Color Emoji',
             'Segoe UI Emoji', 'Segoe UI Symbol';
+        font-size: var(--size-16);
         color: var(--color-text);
     }
 
