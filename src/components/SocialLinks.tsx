@@ -46,7 +46,7 @@ const StyledSocialLinks = styled.ul`
         color: var(--color-sub-text-1);
         box-shadow: var(--box-shadow-color-6);
 
-        &:not(:last-child) {
+        &:not(:last-of-type) {
             margin: var(--size-0-10-0-0);
         }
 

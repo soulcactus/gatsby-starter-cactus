@@ -1,7 +1,10 @@
 import styled from '@emotion/styled';
 import { ImInfinite, ImPagebreak } from 'react-icons/im';
 
-import { ViewPostsProps } from '@interfaces/components/viewPosts';
+import {
+    StyledViewPostsLabelArgs,
+    ViewPostsProps,
+} from '@interfaces/components/viewPosts';
 import { $size } from '@styles/mixins';
 import { justifiedBoxStyles, normalBoxStyles } from '@styles/modules';
 
@@ -13,6 +16,7 @@ export default function ViewPosts(props: ViewPostsProps) {
             <StyledViewPostsLabel
                 htmlFor="infiniteScroll"
                 isInfiniteScroll={isInfiniteScroll}
+                tabIndex={0}
             >
                 <input
                     id="infiniteScroll"
@@ -26,6 +30,7 @@ export default function ViewPosts(props: ViewPostsProps) {
             <StyledViewPostsLabel
                 htmlFor="pagination"
                 isInfiniteScroll={!isInfiniteScroll}
+                tabIndex={0}
             >
                 <input
                     id="pagination"
@@ -45,8 +50,7 @@ export const StyledViewPosts = styled.div`
     width: var(--size-70);
 `;
 
-// TODO: make interface
-export const StyledViewPostsLabel = styled.label<{ isInfiniteScroll: boolean }>`
+export const StyledViewPostsLabel = styled.label<StyledViewPostsLabelArgs>`
     ${normalBoxStyles};
     ${$size('var(--size-30)')};
     border-radius: var(--size-5);

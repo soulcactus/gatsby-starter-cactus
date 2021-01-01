@@ -1,6 +1,9 @@
-import { ChangeEvent } from 'react';
+import { HandleChangeInputElement } from '@interfaces/commons';
 
-export interface ViewPostsProps {
-    handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
+export interface StyledViewPostsLabelArgs {
     isInfiniteScroll: boolean;
 }
+
+export interface ViewPostsProps
+    extends HandleChangeInputElement,
+        StyledViewPostsLabelArgs {}

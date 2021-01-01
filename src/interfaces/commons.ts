@@ -1,3 +1,10 @@
+import { ChangeEvent } from 'react';
+import { FixedObject } from 'gatsby-image';
+
+export interface HandleChangeInputElement {
+    handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
+}
+
 export interface IsDarkTheme {
     isDarkTheme: boolean;
 }
@@ -12,8 +19,11 @@ export interface PostData {
             category: string;
             date: string;
             description: string;
-            // TODO: replace type any
-            thumbnail?: any;
+            thumbnail?: {
+                childImageSharp: {
+                    fixed: FixedObject;
+                };
+            };
             title: string;
         };
     };

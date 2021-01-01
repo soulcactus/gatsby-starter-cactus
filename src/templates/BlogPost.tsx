@@ -1,11 +1,12 @@
 import { Link, graphql } from 'gatsby';
+import { PageContext } from 'gatsby/internal';
 
 import Bio from '@components/Bio';
 import Layout from '@components/Layout';
 import SEO from '@components/SEO';
 
-// TODO: replace type any
-export default function BlogPost({ data, pageContext }: any) {
+export default function BlogPost(props: PageContext) {
+    const { data, pageContext } = props;
     const post = data.markdownRemark;
     const siteTitle = data.site.siteMetadata.title;
     const { previous, next } = pageContext;

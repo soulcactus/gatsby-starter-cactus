@@ -134,7 +134,7 @@ const StyledCategory = styled.nav`
             background: var(--color-active);
         }
 
-        &:first-child {
+        &:first-of-type {
             left: var(--size-0);
 
             svg {
@@ -142,7 +142,7 @@ const StyledCategory = styled.nav`
             }
         }
 
-        &:last-child {
+        &:last-of-type {
             right: var(--size-0);
 
             svg {
@@ -158,7 +158,7 @@ const StyledCategory = styled.nav`
     }
 
     li {
-        &:not(:last-child) {
+        &:not(:last-of-type) {
             margin: var(--size-0-10-0-0);
         }
 

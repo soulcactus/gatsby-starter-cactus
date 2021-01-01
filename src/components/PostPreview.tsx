@@ -82,7 +82,7 @@ const StyledPostArticle = styled.article<{ hasThumbnail: boolean }>`
     }
 
     div {
-        &:last-child {
+        &:last-of-type {
             flex-basis: ${(props) =>
                 props.hasThumbnail
                     ? 'var(--size-calc-percent-100-minus-thirteen-point-one)'

@@ -15,13 +15,12 @@ export default function ThemeSwitch(props: ThemeSwitchProps) {
         isDarkTheme ? THEME.LIGHT : THEME.DARK
     } Theme`;
 
-    // TODO: theme class to constants
     return (
         <>
             {isDarkTheme && (
                 <Helmet
                     bodyAttributes={{
-                        class: isDarkTheme ? 'dark' : 'light',
+                        class: isDarkTheme ? THEME.DARK : THEME.LIGHT,
                     }}
                 />
             )}

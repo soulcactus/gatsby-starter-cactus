@@ -5,7 +5,7 @@ import { IoIosCloseCircle } from 'react-icons/io';
 
 import { useInput } from '@hooks/index';
 import { $size } from '@styles/mixins';
-import { normalBoxStyles } from '@styles/modules';
+import { normalBoxStyles, searchButtonStyles } from '@styles/modules';
 
 export default function Search() {
     const searchRef = useRef(null);
@@ -52,21 +52,16 @@ const StyledSearch = styled.div`
         box-shadow: var(--box-shadow-color-1);
     }
 
-    // TODO: style module
     label {
-        position: absolute;
+        ${searchButtonStyles};
         top: var(--size-11);
         left: var(--size-12);
-        font-size: var(--size-16);
-        color: var(--color-sub-text-1);
     }
 
     button {
-        position: absolute;
+        ${searchButtonStyles};
         top: var(--size-8);
         right: var(--size-10);
-        font-size: var(--size-16);
-        color: var(--color-sub-text-1);
     }
 
     input {
