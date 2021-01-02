@@ -7,20 +7,29 @@ import PostPreview from '@components/PostPreview';
 import Search from '@components/Search';
 import SEO from '@components/SEO';
 import ViewPosts from '@components/ViewPosts';
-import { useRadio, useTheme } from '@hooks/index';
+import { useCategory, useRadio, useTheme } from '@hooks/index';
 import { BlogIndexProps } from '@interfaces/pages/blogIndex';
 
 const BlogIndex = (props: BlogIndexProps) => {
     const { data } = props;
     const siteTitle = data.site.siteMetadata.title;
     const posts = data.allMarkdownRemark.edges;
-    const [themeState, handleTheme] = useTheme(false);
-    const [viewPageState, handleViewPage] = useRadio('infiniteScroll');
-    const isInfiniteScroll = viewPageState === 'infiniteScroll';
 
     const categories = Array.from(
         new Set(posts.map((item) => item.node.frontmatter.category).sort()),
     );
+
+    const [themeState, handleTheme] = useTheme(false);
+    const [viewPageState, handleViewPage] = useRadio('infiniteScroll');
+
+    const [
+        categoryState,
+        handleCategory,
+        handlePrevious,
+        handleNext,
+    ] = useCategory(0, categories);
+
+    const isInfiniteScroll = viewPageState === 'infiniteScroll';
 
     return (
         <Layout
@@ -31,7 +40,13 @@ const BlogIndex = (props: BlogIndexProps) => {
         >
             <SEO title="All posts" />
             <Bio />
-            <Category categories={categories as string[]} />
+            <Category
+                categories={categories as string[]}
+                currentCategory={categoryState}
+                handleChange={handleCategory}
+                handleNext={handleNext}
+                handlePrevious={handlePrevious}
+            />
             <StyledToolbar>
                 <ViewPosts
                     isInfiniteScroll={isInfiniteScroll}

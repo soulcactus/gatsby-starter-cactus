@@ -3,7 +3,6 @@ import { useEffect, useRef } from 'react';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import * as Scroll from 'react-scroll';
 
-import { useCategory } from '@hooks/index';
 import { CategoryProps } from '@interfaces/components/category';
 import { $size } from '@styles/mixins';
 import { normalBoxStyles } from '@styles/modules';
@@ -11,16 +10,15 @@ import { normalBoxStyles } from '@styles/modules';
 const scroller = Scroll.scroller;
 const Element = Scroll.Element;
 
-export default function Category(props: CategoryProps) {
-    const { categories } = props;
-    const containerRef = useRef(null);
-
-    const [
-        categoryState,
-        handleCategory,
-        handlePrevious,
+export default function Category(props) {
+    const {
+        categories,
+        currentCategory,
+        handleChange,
         handleNext,
-    ] = useCategory(0, categories);
+        handlePrevious,
+    } = props;
+    const containerRef = useRef(null);
 
     useEffect(() => {
         const container = containerRef.current;
@@ -29,12 +27,12 @@ export default function Category(props: CategoryProps) {
         let previousWidth = 50;
 
         categoryItems.forEach((item: any, index: number) => {
-            if (index < categoryState) {
+            if (index < currentCategory) {
                 previousWidth += item.clientWidth + 10;
             }
         });
 
-        scroller.scrollTo('on', {
+        scroller.scrollTo('category', {
             containerId: 'categoryContainer',
             delay: 50,
             duration: 120,
@@ -42,7 +40,7 @@ export default function Category(props: CategoryProps) {
                 container.scrollWidth -
                 previousWidth +
                 ((container.clientWidth -
-                    categoryItems[categoryState].clientWidth) /
+                    categoryItems[currentCategory].clientWidth) /
                     2 -
                     120)
             ),
@@ -51,7 +49,7 @@ export default function Category(props: CategoryProps) {
             smooth: 'linear',
             spy: true,
         });
-    }, [categoryState]);
+    }, [currentCategory]);
 
     return (
         <StyledCategory id="categoryContainer" ref={containerRef}>
@@ -64,11 +62,11 @@ export default function Category(props: CategoryProps) {
             </button>
             <ul role="tablist">
                 <li role="tab">
-                    <StyledElement name={!!categoryState ? null : 'on'}>
+                    <StyledElement name="category">
                         <button
                             aria-label="Show All Category Posts"
-                            className={!!categoryState ? null : 'on'}
-                            onClick={() => handleCategory(0)}
+                            className={!!currentCategory ? null : 'active'}
+                            onClick={() => handleChange(0)}
                             type="button"
                         >
                             All
@@ -77,13 +75,15 @@ export default function Category(props: CategoryProps) {
                 </li>
                 {categories?.map((item, index) => (
                     <li key={index} role="tab">
-                        <StyledElement name={!!categoryState ? null : 'on'}>
+                        <StyledElement name="category">
                             <button
                                 aria-label={`Show ${item} Category Posts`}
                                 className={
-                                    categoryState === index + 1 ? 'on' : null
+                                    currentCategory === index + 1
+                                        ? 'active'
+                                        : null
                                 }
-                                onClick={() => handleCategory(index + 1)}
+                                onClick={() => handleChange(index + 1)}
                                 type="button"
                             >
                                 {item}
@@ -173,7 +173,7 @@ const StyledCategory = styled.nav`
             box-shadow: var(--box-shadow-color-1);
 
             &:active,
-            &.on {
+            &.active {
                 font-weight: bold;
                 color: var(--color-text);
                 box-shadow: var(--box-shadow-color-4);
