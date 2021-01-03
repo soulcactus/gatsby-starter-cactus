@@ -1,19 +1,22 @@
 import styled from '@emotion/styled';
-import { Link } from 'gatsby';
 
-import { HeaderProps } from '@interfaces/components/header';
+import * as CATEGORY from '@constants/category';
 import { $size } from '@styles/mixins';
 import { justifiedBoxStyles } from '@styles/modules';
 
-export default function Header(props: HeaderProps) {
-    const { children, title } = props;
+// TODO: add interface
+export default function Header(props) {
+    const { children, handleClick, title } = props;
 
     return (
         <StyledHeader>
             <h1>
-                <Link aria-label="Go to Home" to="/">
+                <button
+                    aria-label="Go to Home"
+                    onClick={() => handleClick(CATEGORY.ALL)}
+                >
                     {title}
-                </Link>
+                </button>
             </h1>
             {children}
         </StyledHeader>
@@ -26,7 +29,7 @@ const StyledHeader = styled.header`
     margin: var(--size-0-0-50);
     padding: var(--size-0-0-8);
 
-    h1 {
+    button {
         font-size: var(--size-30);
         font-weight: bold;
     }

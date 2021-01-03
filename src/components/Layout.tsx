@@ -9,8 +9,9 @@ import globalStyles from '@styles/global';
 import { justifiedBoxStyles } from '@styles/modules';
 import theme from '@styles/theme';
 
-export default function Layout(props: LayoutProps) {
-    const { children, handleTheme, isDarkTheme, title } = props;
+// TODO: add interface
+export default function Layout(props) {
+    const { children, handleCategory, handleTheme, isDarkTheme, title } = props;
     // const rootPath = `${__PATH_PREFIX__}/`;
 
     return (
@@ -28,7 +29,7 @@ export default function Layout(props: LayoutProps) {
             </Helmet>
             <Global styles={globalStyles} />
             <StyledLayout>
-                <Header title={title}>
+                <Header handleClick={handleCategory} title={title}>
                     <ThemeSwitch
                         handleChange={handleTheme}
                         isDarkTheme={isDarkTheme}

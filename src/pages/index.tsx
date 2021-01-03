@@ -47,7 +47,7 @@ const BlogIndex = (props: BlogIndexProps) => {
 
     return (
         <Layout
-            categories={categories}
+            handleCategory={handleCategory}
             handleTheme={handleTheme}
             isDarkTheme={themeState}
             title={siteTitle}

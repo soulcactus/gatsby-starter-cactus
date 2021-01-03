@@ -13,17 +13,18 @@ const useCategory = (initialState: string, categories: string[]) => {
     const [indexState, indexSetter] = useState(0);
 
     const handler = useCallback((item) => {
+        const pathname = location.pathname;
         const category = { category: item };
         const isAll = item === CATEGORY.ALL;
 
         setter(item);
         indexSetter(isAll ? 0 : findCategoryIndex(categories, item));
-        push(isAll ? '' : `?${queryString.stringify(category)}`);
+        push(isAll ? pathname : `?${queryString.stringify(category)}`);
     }, []);
 
     const handlePrevious = useCallback(() => {
         if (indexState === 0) {
-            replace('');
+            replace(location.pathname);
         } else {
             const categoryItem = categories[indexState - 2];
             const category = { category: categoryItem };
@@ -47,8 +48,7 @@ const useCategory = (initialState: string, categories: string[]) => {
     }, [categories, indexState]);
 
     useEffect(() => {
-        const query = queryString.parse(location.search);
-        const category = query.category;
+        const category = queryString.parse(location.search).category;
         const isAll = category === CATEGORY.ALL;
 
         indexSetter(
@@ -58,8 +58,7 @@ const useCategory = (initialState: string, categories: string[]) => {
 
     useEffect(() => {
         const handlePopstate = () => {
-            const query = queryString.parse(location.search);
-            const category = query.category;
+            const category = queryString.parse(location.search).category;
 
             setter((category as string) ?? CATEGORY.ALL);
 
