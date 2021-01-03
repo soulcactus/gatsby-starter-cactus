@@ -1,4 +1,5 @@
 import { graphql } from 'gatsby';
+import queryString from 'query-string';
 
 import Bio from '@components/Bio';
 import Category from '@components/Category';
@@ -7,6 +8,7 @@ import PostPreview from '@components/PostPreview';
 import Search from '@components/Search';
 import SEO from '@components/SEO';
 import ViewPosts from '@components/ViewPosts';
+import * as CATEGORY from '@constants/category';
 import { useCategory, useRadio, useTheme } from '@hooks/index';
 import { BlogIndexProps } from '@interfaces/pages/blogIndex';
 
@@ -24,10 +26,22 @@ const BlogIndex = (props: BlogIndexProps) => {
 
     const [
         categoryState,
+        categoryIndexState,
         handleCategory,
         handlePrevious,
         handleNext,
-    ] = useCategory(0, categories);
+    ] = useCategory(
+        (queryString.parse(location?.search).category as string) ??
+            CATEGORY.ALL,
+        categories,
+    );
+
+    const categorizedPosts =
+        categoryState === CATEGORY.ALL
+            ? posts
+            : posts.filter(
+                  (item) => item.node.frontmatter.category === categoryState,
+              );
 
     const isInfiniteScroll = viewPageState === 'infiniteScroll';
 
@@ -42,7 +56,7 @@ const BlogIndex = (props: BlogIndexProps) => {
             <Bio />
             <Category
                 categories={categories as string[]}
-                currentCategory={categoryState}
+                currentCategory={categoryIndexState}
                 handleChange={handleCategory}
                 handleNext={handleNext}
                 handlePrevious={handlePrevious}
@@ -55,7 +69,7 @@ const BlogIndex = (props: BlogIndexProps) => {
                 <Search />
             </StyledToolbar>
             <main>
-                <PostPreview posts={posts} />
+                <PostPreview posts={categorizedPosts} />
             </main>
         </Layout>
     );

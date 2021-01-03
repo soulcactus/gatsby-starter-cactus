@@ -3,13 +3,14 @@ import { useEffect, useRef } from 'react';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import * as Scroll from 'react-scroll';
 
-import { CategoryProps } from '@interfaces/components/category';
+import * as CATEGORY from '@constants/category';
 import { $size } from '@styles/mixins';
 import { normalBoxStyles } from '@styles/modules';
 
 const scroller = Scroll.scroller;
 const Element = Scroll.Element;
 
+// TODO: add interface
 export default function Category(props) {
     const {
         categories,
@@ -18,6 +19,7 @@ export default function Category(props) {
         handleNext,
         handlePrevious,
     } = props;
+
     const containerRef = useRef(null);
 
     useEffect(() => {
@@ -64,12 +66,12 @@ export default function Category(props) {
                 <li role="tab">
                     <StyledElement name="category">
                         <button
-                            aria-label="Show All Category Posts"
+                            aria-label={`Show ${CATEGORY.ALL} Category Posts`}
                             className={!!currentCategory ? null : 'active'}
-                            onClick={() => handleChange(0)}
+                            onClick={() => handleChange(CATEGORY.ALL)}
                             type="button"
                         >
-                            All
+                            {CATEGORY.ALL}
                         </button>
                     </StyledElement>
                 </li>
@@ -83,7 +85,7 @@ export default function Category(props) {
                                         ? 'active'
                                         : null
                                 }
-                                onClick={() => handleChange(index + 1)}
+                                onClick={() => handleChange(item)}
                                 type="button"
                             >
                                 {item}

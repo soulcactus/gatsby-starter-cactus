@@ -1,25 +1,81 @@
-import { useCallback, useState } from 'react';
+import { push, replace } from 'gatsby-link';
+import { useCallback, useEffect, useState } from 'react';
+import queryString from 'query-string';
 
-const useCategory = (initialState: number, categories: string[]) => {
+import * as CATEGORY from '@constants/category';
+
+// TODO: move function
+const findCategoryIndex = (categories: string[], item: string) =>
+    categories.findIndex((value) => value === item) + 1;
+
+const useCategory = (initialState: string, categories: string[]) => {
     const [state, setter] = useState(initialState);
+    const [indexState, indexSetter] = useState(0);
 
-    const handler = useCallback((index) => {
-        setter(index);
+    const handler = useCallback((item) => {
+        const category = { category: item };
+        const isAll = item === CATEGORY.ALL;
+
+        setter(item);
+        indexSetter(isAll ? 0 : findCategoryIndex(categories, item));
+        push(isAll ? '' : `?${queryString.stringify(category)}`);
     }, []);
 
     const handlePrevious = useCallback(() => {
-        if (state !== 0) {
-            setter(state - 1);
+        if (indexState === 0) {
+            replace('');
+        } else {
+            const categoryItem = categories[indexState - 2];
+            const category = { category: categoryItem };
+            const isAll = indexState === 1;
+
+            setter(isAll ? CATEGORY.ALL : categoryItem);
+            indexSetter(isAll ? 0 : indexState - 1);
+            replace(`?${queryString.stringify(category)}`);
         }
-    }, [state]);
+    }, [indexState]);
 
     const handleNext = useCallback(() => {
-        if (state !== categories?.length) {
-            setter(state + 1);
-        }
-    }, [categories, state]);
+        if (indexState !== categories?.length) {
+            const categoryItem = categories[indexState];
+            const category = { category: categoryItem };
 
-    return [state, handler, handlePrevious, handleNext] as const;
+            setter(categoryItem);
+            indexSetter(indexState + 1);
+            push(`?${queryString.stringify(category)}`);
+        }
+    }, [categories, indexState]);
+
+    useEffect(() => {
+        const query = queryString.parse(location.search);
+        const category = query.category;
+        const isAll = category === CATEGORY.ALL;
+
+        indexSetter(
+            isAll ? 0 : findCategoryIndex(categories, category as string),
+        );
+    }, []);
+
+    useEffect(() => {
+        const handlePopstate = () => {
+            const query = queryString.parse(location.search);
+            const category = query.category;
+
+            setter((category as string) ?? CATEGORY.ALL);
+
+            indexSetter(
+                category === undefined
+                    ? 0
+                    : findCategoryIndex(categories, category as string),
+            );
+        };
+
+        window.addEventListener('popstate', handlePopstate);
+
+        return () => window.removeEventListener('popstate', handlePopstate);
+    }, [state]);
+
+    return [state, indexState, handler, handlePrevious, handleNext] as const;
 };
 
 export default useCategory;
