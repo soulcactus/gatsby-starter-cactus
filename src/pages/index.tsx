@@ -1,4 +1,6 @@
 import { graphql } from 'gatsby';
+import { navigate } from 'gatsby-link';
+import ReactPaginate from 'react-paginate';
 import queryString from 'query-string';
 
 import Bio from '@components/Bio';
@@ -11,8 +13,9 @@ import ViewPosts from '@components/ViewPosts';
 import * as CATEGORY from '@constants/category';
 import { useCategory, useRadio, useTheme } from '@hooks/index';
 import { BlogIndexProps } from '@interfaces/pages/blogIndex';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
+// TODO: refactor
 const BlogIndex = (props: BlogIndexProps) => {
     const { data } = props;
     const siteTitle = data.site.siteMetadata.title;
@@ -23,7 +26,12 @@ const BlogIndex = (props: BlogIndexProps) => {
     );
 
     const [themeState, handleTheme] = useTheme(false);
-    const [viewPageState, handleViewPage] = useRadio('infiniteScroll');
+
+    const [viewPageState, handleViewPage] = useRadio(
+        !!localStorage.getItem('view_post_with_paginate_type')
+            ? 'pagination'
+            : 'infiniteScroll',
+    );
 
     const [
         categoryState,
@@ -39,18 +47,34 @@ const BlogIndex = (props: BlogIndexProps) => {
 
     const isInfiniteScroll = viewPageState === 'infiniteScroll';
 
+    const categorizedPosts =
+        categoryState === CATEGORY.ALL
+            ? posts
+            : posts.filter(
+                  (item) => item.node.frontmatter.category === categoryState,
+              );
+
     const [postsState, setPosts] = useState(
-        isInfiniteScroll ? posts.slice(0, 3) : posts,
+        isInfiniteScroll ? posts.slice(0, 10) : posts.slice(0, 10),
     );
 
+    const [pageState, setPage] = useState(
+        queryString.parse(location.search).page ?? '1',
+    );
+
+    const handlePage = useCallback(({ selected }) => {
+        setPage(`${selected + 1}`);
+    }, []);
+
     useEffect(() => {
-        const categorizedPosts =
-            categoryState === CATEGORY.ALL
-                ? posts
-                : posts.filter(
-                      (item) =>
-                          item.node.frontmatter.category === categoryState,
-                  );
+        localStorage.setItem(
+            'view_post_with_paginate_type',
+            JSON.stringify(!isInfiniteScroll),
+        );
+    }, [viewPageState]);
+
+    useEffect(() => {
+        const parsed = queryString.parse(location.search);
 
         const getCurrentScrollPercentage = () =>
             ((window.scrollY + window.innerHeight) /
@@ -61,20 +85,45 @@ const BlogIndex = (props: BlogIndexProps) => {
             if (getCurrentScrollPercentage() > 90) {
                 setPosts((state) => [
                     ...state,
-                    ...categorizedPosts.slice(state.length, state.length + 3),
+                    ...categorizedPosts.slice(state.length, state.length + 10),
                 ]);
             }
         };
 
         if (isInfiniteScroll) {
-            setPosts([...categorizedPosts.slice(0, 3)]);
+            delete parsed.page;
+            setPosts([...categorizedPosts.slice(0, 10)]);
             window.addEventListener('scroll', handleScroll, false);
-
-            return () => window.removeEventListener('scroll', handleScroll);
         } else {
-            setPosts(categorizedPosts);
+            const currentPage = queryString.parse(location.search).page ?? '1';
+
+            parsed.page = currentPage;
+            setPosts(categorizedPosts.slice(0, 10));
+            setPage(currentPage);
+        }
+
+        navigate(`?${queryString.stringify(parsed)}`);
+
+        if (isInfiniteScroll) {
+            return () => window.removeEventListener('scroll', handleScroll);
         }
     }, [categoryState, viewPageState]);
+
+    useEffect(() => {
+        if (!isInfiniteScroll) {
+            const parsed = queryString.parse(location.search);
+
+            parsed.page = pageState;
+            navigate(`?${queryString.stringify(parsed)}`);
+
+            setPosts(
+                categorizedPosts.slice(
+                    10 * (Number(pageState) - 1),
+                    10 * Number(pageState),
+                ),
+            );
+        }
+    }, [pageState]);
 
     return (
         <Layout
@@ -102,6 +151,16 @@ const BlogIndex = (props: BlogIndexProps) => {
             <main>
                 <PostPreview posts={postsState} />
             </main>
+            {!isInfiniteScroll && (
+                <ReactPaginate
+                    marginPagesDisplayed={0}
+                    nextLabel="next"
+                    onPageChange={handlePage}
+                    pageCount={categorizedPosts.length / 10}
+                    pageRangeDisplayed={4}
+                    previousLabel="prev"
+                />
+            )}
         </Layout>
     );
 };

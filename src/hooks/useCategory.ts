@@ -1,4 +1,4 @@
-import { push, replace } from 'gatsby-link';
+import { navigate, replace } from 'gatsby-link';
 import { useCallback, useEffect, useState } from 'react';
 import queryString from 'query-string';
 
@@ -18,7 +18,7 @@ const useCategory = (initialState: string, categories: string[]) => {
 
         setter(item);
         indexSetter(isAll ? 0 : findCategoryIndex(categories, item));
-        push(isAll ? pathname : `?${queryString.stringify(category)}`);
+        navigate(isAll ? pathname : `?${queryString.stringify(category)}`);
     }, []);
 
     const handlePrevious = useCallback(() => {
@@ -42,7 +42,7 @@ const useCategory = (initialState: string, categories: string[]) => {
 
             setter(categoryItem);
             indexSetter(indexState + 1);
-            push(`?${queryString.stringify(category)}`);
+            navigate(`?${queryString.stringify(category)}`);
         }
     }, [categories, indexState]);
 
