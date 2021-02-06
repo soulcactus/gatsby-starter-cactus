@@ -51,7 +51,7 @@ export default function BlogPost(props: PageContext) {
     );
 }
 
-export const pageQuery = graphql`
+export const blogPostQuery = graphql`
     query BlogPostBySlug($slug: String!) {
         site {
             siteMetadata {

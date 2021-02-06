@@ -12,23 +12,23 @@ export default function SocialLinks(props: SocialLinksProps) {
         <StyledSocialLinks>
             {!!github && (
                 <li>
-                    <Link to={`https://github.com/${github}`}>
+                    <a href={`https://github.com/${github}`}>
                         <SiGithub />
-                    </Link>
+                    </a>
                 </li>
             )}
             {!!facebook && (
                 <li>
-                    <Link to={`https://www.facebook.com/${facebook}`}>
+                    <a href={`https://www.facebook.com/${facebook}`}>
                         <SiFacebook />
-                    </Link>
+                    </a>
                 </li>
             )}
             {!!twitter && (
                 <li>
-                    <Link to={`https://twitter.com/${twitter}`}>
+                    <a href={`https://twitter.com/${twitter}`}>
                         <SiTwitter />
-                    </Link>
+                    </a>
                 </li>
             )}
         </StyledSocialLinks>

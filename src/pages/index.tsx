@@ -11,6 +11,7 @@ import ViewPosts from '@components/ViewPosts';
 import * as CATEGORY from '@constants/category';
 import { useCategory, useRadio, useTheme } from '@hooks/index';
 import { BlogIndexProps } from '@interfaces/pages/blogIndex';
+import { useEffect, useState } from 'react';
 
 const BlogIndex = (props: BlogIndexProps) => {
     const { data } = props;
@@ -36,14 +37,44 @@ const BlogIndex = (props: BlogIndexProps) => {
         categories,
     );
 
-    const categorizedPosts =
-        categoryState === CATEGORY.ALL
-            ? posts
-            : posts.filter(
-                  (item) => item.node.frontmatter.category === categoryState,
-              );
-
     const isInfiniteScroll = viewPageState === 'infiniteScroll';
+
+    const [postsState, setPosts] = useState(
+        isInfiniteScroll ? posts.slice(0, 3) : posts,
+    );
+
+    useEffect(() => {
+        const categorizedPosts =
+            categoryState === CATEGORY.ALL
+                ? posts
+                : posts.filter(
+                      (item) =>
+                          item.node.frontmatter.category === categoryState,
+                  );
+
+        const getCurrentScrollPercentage = () =>
+            ((window.scrollY + window.innerHeight) /
+                document.body.clientHeight) *
+            100;
+
+        const handleScroll = () => {
+            if (getCurrentScrollPercentage() > 90) {
+                setPosts((state) => [
+                    ...state,
+                    ...categorizedPosts.slice(state.length, state.length + 3),
+                ]);
+            }
+        };
+
+        if (isInfiniteScroll) {
+            setPosts([...categorizedPosts.slice(0, 3)]);
+            window.addEventListener('scroll', handleScroll, false);
+
+            return () => window.removeEventListener('scroll', handleScroll);
+        } else {
+            setPosts(categorizedPosts);
+        }
+    }, [categoryState, viewPageState]);
 
     return (
         <Layout
@@ -69,7 +100,7 @@ const BlogIndex = (props: BlogIndexProps) => {
                 <Search />
             </StyledToolbar>
             <main>
-                <PostPreview posts={categorizedPosts} />
+                <PostPreview posts={postsState} />
             </main>
         </Layout>
     );
