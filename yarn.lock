@@ -3276,6 +3276,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/react-paginate@npm:^6.2.1":
+  version: 6.2.1
+  resolution: "@types/react-paginate@npm:6.2.1"
+  dependencies:
+    "@types/react": "*"
+  checksum: d6986c963e213e9f23743af72cd1dc371ad1504cd675d0c08f28dff3c1c75da95ec0bbb5d77dc5b1c8a9666eedc85023997b746d34f9e829fd70d8b382e4831f
+  languageName: node
+  linkType: hard
+
 "@types/react-scroll@npm:^1.8.2":
   version: 1.8.2
   resolution: "@types/react-scroll@npm:1.8.2"
@@ -9922,6 +9931,7 @@ fsevents@~2.1.2:
     "@emotion/styled": ^11.0.0
     "@types/facepaint": ^1.2.1
     "@types/react-helmet": ^6.1.0
+    "@types/react-paginate": ^6.2.1
     "@types/react-scroll": ^1.8.2
     "@typescript-eslint/eslint-plugin": ^4.14.2
     "@typescript-eslint/parser": ^4.14.2
@@ -9956,6 +9966,7 @@ fsevents@~2.1.2:
     react-dom: ^17.0.1
     react-helmet: ^5.2.1
     react-icons: ^3.11.0
+    react-paginate: ^7.0.0
     react-scroll: ^1.8.1
     react-style-reset: ^1.3.2
     typescript: ^4.1.2
@@ -16704,6 +16715,17 @@ fsevents@~2.1.2:
   version: 3.0.4
   resolution: "react-lifecycles-compat@npm:3.0.4"
   checksum: 82176a55ef7526414d770d5e07dc1d28b4c7f20281f22c6f53f3a98df9dbbb5d70c94bebee57b4ea8ccc2eee430b907ca7b564a42fbdd0ed21e7c43bfee35404
+  languageName: node
+  linkType: hard
+
+"react-paginate@npm:^7.0.0":
+  version: 7.0.0
+  resolution: "react-paginate@npm:7.0.0"
+  dependencies:
+    prop-types: ^15.6.1
+  peerDependencies:
+    react: ^16.0.0
+  checksum: a8633dc1cdc806f29d162871f2bb89846a77bc6332cfd4d59e23bee5d4b38f643694460c90e49eae84cd6c5e2964febdd0ecfbdcc23887364b12d37a99743295
   languageName: node
   linkType: hard
 
