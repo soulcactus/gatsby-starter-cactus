@@ -9,8 +9,7 @@ import globalStyles from '@styles/global';
 import { justifiedBoxStyles } from '@styles/modules';
 import theme from '@styles/theme';
 
-// TODO: add interface
-export default function Layout(props) {
+export default function Layout(props: LayoutProps) {
     const { children, handleCategory, handleTheme, isDarkTheme, title } = props;
     // const rootPath = `${__PATH_PREFIX__}/`;
 

@@ -3,6 +3,7 @@ import reset from 'react-style-reset/string';
 
 import { CustomTheme } from '@styles/theme';
 
+// TODO: check
 export const globalStyles = (props: CustomTheme) => css`
     :root {
         --size-0: 0;

@@ -4,14 +4,14 @@ import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import * as Scroll from 'react-scroll';
 
 import * as CATEGORY from '@constants/category';
+import { CategoryProps } from '@interfaces/components/category';
 import { $size } from '@styles/mixins';
 import { normalBoxStyles } from '@styles/modules';
 
 const scroller = Scroll.scroller;
 const Element = Scroll.Element;
 
-// TODO: add interface
-export default function Category(props) {
+export default function Category(props: CategoryProps) {
     const {
         categories,
         currentCategory,

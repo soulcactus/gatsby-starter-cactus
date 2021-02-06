@@ -4,7 +4,6 @@ import queryString from 'query-string';
 
 import * as CATEGORY from '@constants/category';
 
-// TODO: move function
 const findCategoryIndex = (categories: string[], item: string) =>
     categories.findIndex((value) => value === item) + 1;
 

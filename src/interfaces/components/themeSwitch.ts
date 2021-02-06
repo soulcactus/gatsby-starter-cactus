@@ -1,5 +1,3 @@
-import { ChangeEvent } from 'react';
-
 import { HandleChangeInputElement, IsDarkTheme } from '@interfaces/commons';
 
 export interface ThemeSwitchProps

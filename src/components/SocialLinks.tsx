@@ -12,21 +12,21 @@ export default function SocialLinks(props: SocialLinksProps) {
         <StyledSocialLinks>
             {!!github && (
                 <li>
-                    <Link to="/">
+                    <Link to={`https://github.com/${github}`}>
                         <SiGithub />
                     </Link>
                 </li>
             )}
             {!!facebook && (
                 <li>
-                    <Link to="/">
+                    <Link to={`https://www.facebook.com/${facebook}`}>
                         <SiFacebook />
                     </Link>
                 </li>
             )}
             {!!twitter && (
                 <li>
-                    <Link to="/">
+                    <Link to={`https://twitter.com/${twitter}`}>
                         <SiTwitter />
                     </Link>
                 </li>

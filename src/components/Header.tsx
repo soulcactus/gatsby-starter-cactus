@@ -1,11 +1,11 @@
 import styled from '@emotion/styled';
 
 import * as CATEGORY from '@constants/category';
+import { HeaderProps } from '@interfaces/components/header';
 import { $size } from '@styles/mixins';
 import { justifiedBoxStyles } from '@styles/modules';
 
-// TODO: add interface
-export default function Header(props) {
+export default function Header(props: HeaderProps) {
     const { children, handleClick, title } = props;
 
     return (

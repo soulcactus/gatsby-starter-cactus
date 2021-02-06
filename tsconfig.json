@@ -1,5 +1,4 @@
 {
-  "extends": "./tsconfig.paths.json",
   "compilerOptions": {
     "allowJs": true,
     "baseUrl": ".",
@@ -30,6 +29,7 @@
   "exclude": [
     "node_modules"
   ],
+  "extends": "./tsconfig.paths.json",
   "include": [
     "**/*.ts",
     "**/*.tsx"
