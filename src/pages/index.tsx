@@ -79,10 +79,15 @@ const BlogIndex = (props: BlogIndexProps) => {
             );
 
             isViewWithPagination
-                ? (parsedSearch.page = '1')
+                ? setPage(parsedSearch.page)
                 : delete parsedSearch.page;
 
-            replace(`?${queryString.stringify(parsedSearch)}`);
+            if (
+                (isViewWithPagination && parsedSearch.page !== '1') ||
+                !isViewWithPagination
+            ) {
+                replace(`?${queryString.stringify(parsedSearch)}`);
+            }
         };
 
         window.addEventListener('popstate', handlePageMove);
@@ -108,8 +113,10 @@ const BlogIndex = (props: BlogIndexProps) => {
             const currentPageNumber = Number(pageState);
             const parsedSearch = queryString.parse(location.search);
 
-            parsedSearch.page = pageState;
-            navigate(`?${queryString.stringify(parsedSearch)}`);
+            if (pageState !== parsedSearch.page) {
+                parsedSearch.page = pageState;
+                navigate(`?${queryString.stringify(parsedSearch)}`);
+            }
 
             setPosts(
                 categorizedPosts.slice(
@@ -188,6 +195,7 @@ const BlogIndex = (props: BlogIndexProps) => {
             </main>
             {!isInfiniteScroll && (
                 <ReactPaginate
+                    forcePage={Number(pageState) - 1}
                     marginPagesDisplayed={0}
                     nextLabel="next"
                     onPageChange={handlePage}
