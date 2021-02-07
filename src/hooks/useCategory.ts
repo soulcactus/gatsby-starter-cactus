@@ -1,4 +1,4 @@
-import { navigate, replace } from 'gatsby-link';
+import { navigate } from 'gatsby-link';
 import { useCallback, useEffect, useState } from 'react';
 import queryString from 'query-string';
 
@@ -43,7 +43,9 @@ const useCategory = (initialState: string, categories: string[]) => {
         );
 
         if (indexState === 0) {
-            replace(isViewWithPagination ? `${pathname}?page=1` : pathname);
+            navigate(isViewWithPagination ? `${pathname}?page=1` : pathname, {
+                replace: true,
+            });
         } else {
             const categoryItem = categories[indexState - 2];
             const category = { category: categoryItem };
@@ -52,10 +54,11 @@ const useCategory = (initialState: string, categories: string[]) => {
             setter(isAll ? CATEGORY.ALL : categoryItem);
             indexSetter(isAll ? 0 : indexState - 1);
 
-            replace(
+            navigate(
                 isViewWithPagination
                     ? `?${queryString.stringify(category)}&page=1`
                     : `?${queryString.stringify(category)}`,
+                { replace: true },
             );
         }
     }, [indexState]);

@@ -1,5 +1,5 @@
 import { graphql } from 'gatsby';
-import { navigate, replace } from 'gatsby-link';
+import { navigate } from 'gatsby-link';
 import ReactPaginate from 'react-paginate';
 import queryString from 'query-string';
 
@@ -78,16 +78,16 @@ const BlogIndex = (props: BlogIndexProps) => {
                 localStorage.getItem(STORAGES.VIEW_WITH_PAGINATION),
             );
 
-            isViewWithPagination
-                ? setPage(parsedSearch.page)
-                : delete parsedSearch.page;
-
-            if (
-                (isViewWithPagination && parsedSearch.page !== '1') ||
-                !isViewWithPagination
-            ) {
-                replace(`?${queryString.stringify(parsedSearch)}`);
+            if (isViewWithPagination) {
+                setPage(parsedSearch.page ?? '1');
+                parsedSearch.page = parsedSearch.page ?? '1';
+            } else {
+                delete parsedSearch.page;
             }
+
+            navigate(`?${queryString.stringify(parsedSearch)}`, {
+                replace: true,
+            });
         };
 
         window.addEventListener('popstate', handlePageMove);
@@ -104,8 +104,7 @@ const BlogIndex = (props: BlogIndexProps) => {
         );
 
         isInfiniteScroll ? delete parsedSearch.page : (parsedSearch.page = '1');
-
-        replace(`?${queryString.stringify(parsedSearch)}`);
+        navigate(`?${queryString.stringify(parsedSearch)}`, { replace: true });
     }, [viewPageState]);
 
     useEffect(() => {
