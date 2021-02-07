@@ -1,5 +1,5 @@
 import { graphql } from 'gatsby';
-import { navigate } from 'gatsby-link';
+import { navigate, replace } from 'gatsby-link';
 import ReactPaginate from 'react-paginate';
 import queryString from 'query-string';
 
@@ -71,19 +71,45 @@ const BlogIndex = (props: BlogIndexProps) => {
     }, []);
 
     useEffect(() => {
+        const handlePageMove = function () {
+            const parsedSearch = queryString.parse(location.search);
+
+            const isViewWithPagination = JSON.parse(
+                localStorage.getItem(STORAGES.VIEW_WITH_PAGINATION),
+            );
+
+            isViewWithPagination
+                ? (parsedSearch.page = '1')
+                : delete parsedSearch.page;
+
+            replace(`?${queryString.stringify(parsedSearch)}`);
+        };
+
+        window.addEventListener('popstate', handlePageMove);
+
+        return () => window.removeEventListener('popstate', handlePageMove);
+    }, []);
+
+    useEffect(() => {
+        const parsedSearch = queryString.parse(location.search);
+
         localStorage.setItem(
             STORAGES.VIEW_WITH_PAGINATION,
             JSON.stringify(!isInfiniteScroll),
         );
+
+        isInfiniteScroll ? delete parsedSearch.page : (parsedSearch.page = '1');
+
+        replace(`?${queryString.stringify(parsedSearch)}`);
     }, [viewPageState]);
 
     useEffect(() => {
         if (!isInfiniteScroll) {
             const currentPageNumber = Number(pageState);
-            const parsed = queryString.parse(location.search);
+            const parsedSearch = queryString.parse(location.search);
 
-            parsed.page = pageState;
-            navigate(`?${queryString.stringify(parsed)}`);
+            parsedSearch.page = pageState;
+            navigate(`?${queryString.stringify(parsedSearch)}`);
 
             setPosts(
                 categorizedPosts.slice(
@@ -95,8 +121,6 @@ const BlogIndex = (props: BlogIndexProps) => {
     }, [pageState]);
 
     useEffect(() => {
-        const parsed = queryString.parse(location.search);
-
         const getCurrentScrollPercentage = () =>
             ((window.scrollY + window.innerHeight) /
                 document.body.clientHeight) *
@@ -115,14 +139,11 @@ const BlogIndex = (props: BlogIndexProps) => {
         };
 
         if (isInfiniteScroll) {
-            delete parsed.page;
             setPosts([...categorizedPosts.slice(0, postCount)]);
             window.addEventListener('scroll', handleScroll, false);
         } else {
             const currentPage = queryString.parse(location.search).page ?? '1';
             const currentPageNumber = Number(currentPage);
-
-            parsed.page = currentPage;
 
             setPosts(
                 categorizedPosts.slice(
@@ -133,8 +154,6 @@ const BlogIndex = (props: BlogIndexProps) => {
 
             setPage(currentPage);
         }
-
-        navigate(`?${queryString.stringify(parsed)}`);
 
         if (isInfiniteScroll) {
             return () => window.removeEventListener('scroll', handleScroll);

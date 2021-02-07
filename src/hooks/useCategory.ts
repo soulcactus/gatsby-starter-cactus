@@ -29,6 +29,8 @@ const useCategory = (initialState: string, categories: string[]) => {
                 ? isViewWithPagination
                     ? `${pathname}?page=1`
                     : pathname
+                : isViewWithPagination
+                ? `?${queryString.stringify(category)}&page=1`
                 : `?${queryString.stringify(category)}`,
         );
     }, []);
@@ -49,7 +51,12 @@ const useCategory = (initialState: string, categories: string[]) => {
 
             setter(isAll ? CATEGORY.ALL : categoryItem);
             indexSetter(isAll ? 0 : indexState - 1);
-            replace(`?${queryString.stringify(category)}`);
+
+            replace(
+                isViewWithPagination
+                    ? `?${queryString.stringify(category)}&page=1`
+                    : `?${queryString.stringify(category)}`,
+            );
         }
     }, [indexState]);
 
@@ -58,9 +65,18 @@ const useCategory = (initialState: string, categories: string[]) => {
             const categoryItem = categories[indexState];
             const category = { category: categoryItem };
 
+            const isViewWithPagination = JSON.parse(
+                localStorage.getItem(STORAGES.VIEW_WITH_PAGINATION),
+            );
+
             setter(categoryItem);
             indexSetter(indexState + 1);
-            navigate(`?${queryString.stringify(category)}`);
+
+            navigate(
+                isViewWithPagination
+                    ? `?${queryString.stringify(category)}&page=1`
+                    : `?${queryString.stringify(category)}`,
+            );
         }
     }, [categories, indexState]);
 
