@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import { ImInfinite, ImPagebreak } from 'react-icons/im';
 
+import * as VIEWPOSTS from '@constants/viewPosts';
 import {
     StyledViewPostsLabelArgs,
     ViewPostsProps,
@@ -14,13 +15,13 @@ export default function ViewPosts(props: ViewPostsProps) {
     return (
         <StyledViewPosts>
             <StyledViewPostsLabel
-                htmlFor="infiniteScroll"
+                htmlFor={VIEWPOSTS.INFINITE_SCROLL}
                 isInfiniteScroll={isInfiniteScroll}
                 tabIndex={0}
             >
                 <input
-                    id="infiniteScroll"
-                    name="viewPosts"
+                    id={VIEWPOSTS.INFINITE_SCROLL}
+                    name={VIEWPOSTS.VIEW_POSTS}
                     onChange={handleChange}
                     type="radio"
                     checked={isInfiniteScroll}
@@ -28,13 +29,13 @@ export default function ViewPosts(props: ViewPostsProps) {
                 <ImInfinite />
             </StyledViewPostsLabel>
             <StyledViewPostsLabel
-                htmlFor="pagination"
+                htmlFor={VIEWPOSTS.PAGINATION}
                 isInfiniteScroll={!isInfiniteScroll}
                 tabIndex={0}
             >
                 <input
-                    id="pagination"
-                    name="viewPosts"
+                    id={VIEWPOSTS.PAGINATION}
+                    name={VIEWPOSTS.VIEW_POSTS}
                     onChange={handleChange}
                     type="radio"
                     checked={!isInfiniteScroll}

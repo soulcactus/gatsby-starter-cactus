@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import { Link } from 'gatsby';
 import { SiFacebook, SiGithub, SiTwitter } from 'react-icons/si';
 
 import { SocialLinksProps } from '@interfaces/components/socialLinks';

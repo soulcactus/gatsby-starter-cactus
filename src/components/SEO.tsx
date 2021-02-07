@@ -1,6 +1,7 @@
 import { useStaticQuery, graphql } from 'gatsby';
 import { Helmet } from 'react-helmet';
 
+import * as META from '@constants/meta';
 import { SEOProps } from '@interfaces/components/SEO';
 
 export default function SEO(props: SEOProps) {
@@ -22,7 +23,7 @@ export default function SEO(props: SEOProps) {
         `,
     );
 
-    const { description = '', lang = 'en', title } = props;
+    const { description = '', lang = META.LANG, title } = props;
     const metaDescription = description || site.siteMetadata.description;
 
     return (

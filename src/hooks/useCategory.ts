@@ -3,6 +3,7 @@ import { useCallback, useEffect, useState } from 'react';
 import queryString from 'query-string';
 
 import * as CATEGORY from '@constants/category';
+import * as STORAGES from '@constants/storages';
 
 const findCategoryIndex = (categories: string[], item: string) =>
     categories.findIndex((value) => value === item) + 1;
@@ -16,14 +17,31 @@ const useCategory = (initialState: string, categories: string[]) => {
         const category = { category: item };
         const isAll = item === CATEGORY.ALL;
 
+        const isViewWithPagination = JSON.parse(
+            localStorage.getItem(STORAGES.VIEW_WITH_PAGINATION),
+        );
+
         setter(item);
         indexSetter(isAll ? 0 : findCategoryIndex(categories, item));
-        navigate(isAll ? pathname : `?${queryString.stringify(category)}`);
+
+        navigate(
+            isAll
+                ? isViewWithPagination
+                    ? `${pathname}?page=1`
+                    : pathname
+                : `?${queryString.stringify(category)}`,
+        );
     }, []);
 
     const handlePrevious = useCallback(() => {
+        const pathname = location.pathname;
+
+        const isViewWithPagination = JSON.parse(
+            localStorage.getItem(STORAGES.VIEW_WITH_PAGINATION),
+        );
+
         if (indexState === 0) {
-            replace(location.pathname);
+            replace(isViewWithPagination ? `${pathname}?page=1` : pathname);
         } else {
             const categoryItem = categories[indexState - 2];
             const category = { category: categoryItem };

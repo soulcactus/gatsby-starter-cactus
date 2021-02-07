@@ -11,7 +11,6 @@ import theme from '@styles/theme';
 
 export default function Layout(props: LayoutProps) {
     const { children, handleCategory, handleTheme, isDarkTheme, title } = props;
-    // const rootPath = `${__PATH_PREFIX__}/`;
 
     return (
         <ThemeProvider theme={theme}>
