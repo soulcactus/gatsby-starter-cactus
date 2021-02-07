@@ -33,9 +33,7 @@ const usePosts = ({
     }, [pageState]);
 
     useEffect(() => {
-        const isViewWithPagination = JSON.parse(
-            localStorage.getItem(STORAGES.VIEW_WITH_PAGINATION),
-        );
+        const isViewWithPagination = viewPageState === 'pagination';
 
         const getCurrentScrollPercentage = () =>
             ((window.scrollY + window.innerHeight) /
