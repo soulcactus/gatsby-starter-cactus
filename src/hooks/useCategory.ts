@@ -1,5 +1,5 @@
 import { navigate } from 'gatsby-link';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import queryString from 'query-string';
 
 import * as CATEGORY from '@constants/category';
@@ -12,7 +12,7 @@ const useCategory = (initialState: string, categories: string[]) => {
     const [state, setter] = useState(initialState);
     const [indexState, indexSetter] = useState(0);
 
-    const handler = useCallback((item) => {
+    const handler = (item: string) => {
         const pathname = location.pathname;
         const category = { category: item };
         const isAll = item === CATEGORY.ALL;
@@ -33,9 +33,9 @@ const useCategory = (initialState: string, categories: string[]) => {
                 ? `?${queryString.stringify(category)}&page=1`
                 : `?${queryString.stringify(category)}`,
         );
-    }, []);
+    };
 
-    const handlePrevious = useCallback(() => {
+    const handlePrevious = () => {
         const pathname = location.pathname;
 
         const isViewWithPagination = JSON.parse(
@@ -61,9 +61,9 @@ const useCategory = (initialState: string, categories: string[]) => {
                 { replace: true },
             );
         }
-    }, [indexState]);
+    };
 
-    const handleNext = useCallback(() => {
+    const handleNext = () => {
         if (indexState !== categories?.length) {
             const categoryItem = categories[indexState];
             const category = { category: categoryItem };
@@ -81,7 +81,7 @@ const useCategory = (initialState: string, categories: string[]) => {
                     : `?${queryString.stringify(category)}`,
             );
         }
-    }, [categories, indexState]);
+    };
 
     useEffect(() => {
         const category = queryString.parse(location.search).category;

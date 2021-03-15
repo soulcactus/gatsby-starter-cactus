@@ -1,8 +1,9 @@
-import { useCallback, useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 
 const useTheme = (initialState: boolean) => {
     const [state, setter] = useState(initialState);
-    const handler = useCallback((e) => setter(e.target.checked), []);
+    const handler = (e: ChangeEvent<HTMLInputElement>) =>
+        setter(e.target.checked);
 
     return [state, handler] as const;
 };

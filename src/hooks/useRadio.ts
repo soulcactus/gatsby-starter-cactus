@@ -1,8 +1,8 @@
-import { useCallback, useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 
 const useRadio = (initialState: string) => {
     const [state, setter] = useState(initialState);
-    const handler = useCallback((e) => setter(e.target.id), []);
+    const handler = (e: ChangeEvent<HTMLInputElement>) => setter(e.target.id);
 
     return [state, handler] as const;
 };

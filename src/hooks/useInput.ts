@@ -1,15 +1,15 @@
-import { useCallback, useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 
 const useInput = (initialState: string) => {
     const [state, setter] = useState(initialState);
 
-    const handler = useCallback((e) => {
+    const handler = (e: ChangeEvent<HTMLInputElement>) => {
         setter(e.target.value);
-    }, []);
+    };
 
-    const handleReset = useCallback(() => {
+    const handleReset = () => {
         setter('');
-    }, []);
+    };
 
     return [state, handler, handleReset] as const;
 };

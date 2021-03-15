@@ -1,5 +1,5 @@
 import { navigate } from 'gatsby-link';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import queryString from 'query-string';
 
 import * as STORAGES from '@constants/storages';
@@ -7,9 +7,9 @@ import * as STORAGES from '@constants/storages';
 const usePage = (initialState: string | string[]) => {
     const [state, setter] = useState(initialState);
 
-    const handler = useCallback(({ selected }) => {
+    const handler = ({ selected }: { selected: number }) => {
         setter(`${selected + 1}`);
-    }, []);
+    };
 
     useEffect(() => {
         const handlePageMove = function () {
